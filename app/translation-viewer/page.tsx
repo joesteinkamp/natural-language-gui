@@ -1,19 +1,19 @@
 import styles from './page.module.css';
-import { ComponentViewer } from './ComponentViewer';
+import { ComponentViewerBidirectional } from './ComponentViewerBidirectional';
 
 export default function TranslationViewerPage() {
   return (
     <main className={styles.container}>
-      <ComponentViewer>
+      <ComponentViewerBidirectional>
         <header className={styles.header}>
           <div className="flex flex-col gap-2">
-            <h1 className={styles.title}>UI to Markdown</h1>
+            <h1 className={styles.title}>Natural Language Interface</h1>
             <p className={styles.subtitle}>
-              Review and manage your localized content with precision and ease.
+              Bidirectional conversion between GUI components and natural language markdown.
             </p>
           </div>
         </header>
-      </ComponentViewer>
+      </ComponentViewerBidirectional>
     </main>
   );
 }
