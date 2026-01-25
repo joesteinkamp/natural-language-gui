@@ -2263,26 +2263,56 @@ const componentRegistry = {
         ]
     },
     "Calendar": {
-        component: _s(({ mode = "single", ...props })=>{
+        component: _s(({ mode = "single", "nli-markdown": nliMarkdown, ...props })=>{
             _s();
             const [date, setDate] = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"](mode === "range" ? {
                 from: new Date(),
                 to: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$date$2d$fns$2f$addDays$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["addDays"])(new Date(), 7)
             } : new Date());
-            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$nli$2d$core$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Calendar"], {
-                mode: mode,
-                selected: date,
-                onSelect: setDate,
-                className: "rounded-md border",
-                ...props
+            const triggerRef = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"](null);
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"](()=>{
+                if (triggerRef.current) {
+                    // Dispatch input event to trigger markdown update in parent
+                    setTimeout(()=>{
+                        triggerRef.current?.dispatchEvent(new Event('input', {
+                            bubbles: true
+                        }));
+                    }, 0);
+                }
+            }, [
+                date
+            ]);
+            const dataProps = mode === "range" ? {
+                "data-date-from": date?.from?.toISOString(),
+                "data-date-to": date?.to?.toISOString()
+            } : {
+                "data-date-value": date?.toISOString()
+            };
+            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                ref: triggerRef,
+                className: "inline-block",
+                "nli-markdown": nliMarkdown,
+                ...dataProps,
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$nli$2d$core$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Calendar"], {
+                    mode: mode,
+                    selected: date,
+                    onSelect: setDate,
+                    className: "rounded-md border",
+                    ...props
+                }, void 0, false, {
+                    fileName: "[project]/apps/demo/component-registry.tsx",
+                    lineNumber: 121,
+                    columnNumber: 17
+                }, ("TURBOPACK compile-time value", void 0))
             }, void 0, false, {
                 fileName: "[project]/apps/demo/component-registry.tsx",
-                lineNumber: 96,
+                lineNumber: 115,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0));
-        }, "kCEsiw31nhGL8X5uX35kTWlsxvo="),
+        }, "JjOFCgeMu1MdltcETTNNTS8m5C4="),
         props: {
-            mode: "single"
+            mode: "single",
+            "nli-markdown": "Calendar"
         }
     },
     "Checkbox": {
@@ -2294,7 +2324,7 @@ const componentRegistry = {
                         ...props
                     }, void 0, false, {
                         fileName: "[project]/apps/demo/component-registry.tsx",
-                        lineNumber: 114,
+                        lineNumber: 141,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -2303,13 +2333,13 @@ const componentRegistry = {
                         children: label
                     }, void 0, false, {
                         fileName: "[project]/apps/demo/component-registry.tsx",
-                        lineNumber: 115,
+                        lineNumber: 142,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/demo/component-registry.tsx",
-                lineNumber: 113,
+                lineNumber: 140,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
         props: {
@@ -2326,7 +2356,7 @@ const componentRegistry = {
                         children: props.label
                     }, void 0, false, {
                         fileName: "[project]/apps/demo/component-registry.tsx",
-                        lineNumber: 127,
+                        lineNumber: 154,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$nli$2d$core$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CheckboxGroup"], {
@@ -2345,7 +2375,7 @@ const componentRegistry = {
                                         "nli-markdown": "Option One"
                                     }, void 0, false, {
                                         fileName: "[project]/apps/demo/component-registry.tsx",
-                                        lineNumber: 130,
+                                        lineNumber: 157,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -2354,13 +2384,13 @@ const componentRegistry = {
                                         children: "Option One"
                                     }, void 0, false, {
                                         fileName: "[project]/apps/demo/component-registry.tsx",
-                                        lineNumber: 131,
+                                        lineNumber: 158,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/apps/demo/component-registry.tsx",
-                                lineNumber: 129,
+                                lineNumber: 156,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2372,7 +2402,7 @@ const componentRegistry = {
                                         "nli-markdown": "Option Two"
                                     }, void 0, false, {
                                         fileName: "[project]/apps/demo/component-registry.tsx",
-                                        lineNumber: 134,
+                                        lineNumber: 161,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -2381,13 +2411,13 @@ const componentRegistry = {
                                         children: "Option Two"
                                     }, void 0, false, {
                                         fileName: "[project]/apps/demo/component-registry.tsx",
-                                        lineNumber: 135,
+                                        lineNumber: 162,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/apps/demo/component-registry.tsx",
-                                lineNumber: 133,
+                                lineNumber: 160,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2399,7 +2429,7 @@ const componentRegistry = {
                                         "nli-markdown": "Option Three"
                                     }, void 0, false, {
                                         fileName: "[project]/apps/demo/component-registry.tsx",
-                                        lineNumber: 138,
+                                        lineNumber: 165,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -2408,25 +2438,25 @@ const componentRegistry = {
                                         children: "Option Three"
                                     }, void 0, false, {
                                         fileName: "[project]/apps/demo/component-registry.tsx",
-                                        lineNumber: 139,
+                                        lineNumber: 166,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/apps/demo/component-registry.tsx",
-                                lineNumber: 137,
+                                lineNumber: 164,
                                 columnNumber: 12
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/demo/component-registry.tsx",
-                        lineNumber: 128,
+                        lineNumber: 155,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/demo/component-registry.tsx",
-                lineNumber: 126,
+                lineNumber: 153,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
         props: {
@@ -2445,7 +2475,7 @@ const componentRegistry = {
                         children: props.label
                     }, void 0, false, {
                         fileName: "[project]/apps/demo/component-registry.tsx",
-                        lineNumber: 154,
+                        lineNumber: 181,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$nli$2d$core$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ComboBox"], {
@@ -2455,13 +2485,13 @@ const componentRegistry = {
                         ...props
                     }, void 0, false, {
                         fileName: "[project]/apps/demo/component-registry.tsx",
-                        lineNumber: 155,
+                        lineNumber: 182,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/demo/component-registry.tsx",
-                lineNumber: 153,
+                lineNumber: 180,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0));
         }, "nXyUXLCLqjbO8MhWxJGJNfpoKZM="),
@@ -2527,25 +2557,25 @@ const componentRegistry = {
                                         className: "mr-2 h-4 w-4"
                                     }, void 0, false, {
                                         fileName: "[project]/apps/demo/component-registry.tsx",
-                                        lineNumber: 204,
+                                        lineNumber: 231,
                                         columnNumber: 29
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     date ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$date$2d$fns$2f$format$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["format"])(date, "PPP") : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         children: "Pick a date"
                                     }, void 0, false, {
                                         fileName: "[project]/apps/demo/component-registry.tsx",
-                                        lineNumber: 205,
+                                        lineNumber: 232,
                                         columnNumber: 59
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/apps/demo/component-registry.tsx",
-                                lineNumber: 200,
+                                lineNumber: 227,
                                 columnNumber: 25
                             }, ("TURBOPACK compile-time value", void 0))
                         }, void 0, false, {
                             fileName: "[project]/apps/demo/component-registry.tsx",
-                            lineNumber: 199,
+                            lineNumber: 226,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$nli$2d$core$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PopoverContent"], {
@@ -2557,23 +2587,23 @@ const componentRegistry = {
                                 initialFocus: true
                             }, void 0, false, {
                                 fileName: "[project]/apps/demo/component-registry.tsx",
-                                lineNumber: 209,
+                                lineNumber: 236,
                                 columnNumber: 25
                             }, ("TURBOPACK compile-time value", void 0))
                         }, void 0, false, {
                             fileName: "[project]/apps/demo/component-registry.tsx",
-                            lineNumber: 208,
+                            lineNumber: 235,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/apps/demo/component-registry.tsx",
-                    lineNumber: 198,
+                    lineNumber: 225,
                     columnNumber: 17
                 }, ("TURBOPACK compile-time value", void 0))
             }, void 0, false, {
                 fileName: "[project]/apps/demo/component-registry.tsx",
-                lineNumber: 192,
+                lineNumber: 219,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0));
         }, "Eyv8Nu+hkoqVXh2y8tR6Wm/ElI0="),
@@ -2622,7 +2652,7 @@ const componentRegistry = {
                                         className: "mr-2 h-4 w-4"
                                     }, void 0, false, {
                                         fileName: "[project]/apps/demo/component-registry.tsx",
-                                        lineNumber: 262,
+                                        lineNumber: 289,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     date?.from ? date.to ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -2636,18 +2666,18 @@ const componentRegistry = {
                                         children: "Pick a date"
                                     }, void 0, false, {
                                         fileName: "[project]/apps/demo/component-registry.tsx",
-                                        lineNumber: 273,
+                                        lineNumber: 300,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/apps/demo/component-registry.tsx",
-                                lineNumber: 254,
+                                lineNumber: 281,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         }, void 0, false, {
                             fileName: "[project]/apps/demo/component-registry.tsx",
-                            lineNumber: 253,
+                            lineNumber: 280,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$nli$2d$core$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PopoverContent"], {
@@ -2662,23 +2692,23 @@ const componentRegistry = {
                                 numberOfMonths: 2
                             }, void 0, false, {
                                 fileName: "[project]/apps/demo/component-registry.tsx",
-                                lineNumber: 278,
+                                lineNumber: 305,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         }, void 0, false, {
                             fileName: "[project]/apps/demo/component-registry.tsx",
-                            lineNumber: 277,
+                            lineNumber: 304,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/apps/demo/component-registry.tsx",
-                    lineNumber: 252,
+                    lineNumber: 279,
                     columnNumber: 17
                 }, ("TURBOPACK compile-time value", void 0))
             }, void 0, false, {
                 fileName: "[project]/apps/demo/component-registry.tsx",
-                lineNumber: 245,
+                lineNumber: 272,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0));
         }, "a8D+uhZdO2Qmx/rC/tFd86LKSoc="),
@@ -2696,7 +2726,7 @@ const componentRegistry = {
                         children: "Project Goal"
                     }, void 0, false, {
                         fileName: "[project]/apps/demo/component-registry.tsx",
-                        lineNumber: 300,
+                        lineNumber: 327,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$nli$2d$core$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -2706,13 +2736,13 @@ const componentRegistry = {
                         ...props
                     }, void 0, false, {
                         fileName: "[project]/apps/demo/component-registry.tsx",
-                        lineNumber: 301,
+                        lineNumber: 328,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/demo/component-registry.tsx",
-                lineNumber: 299,
+                lineNumber: 326,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
         props: {
@@ -2729,7 +2759,7 @@ const componentRegistry = {
                         children: props.label
                     }, void 0, false, {
                         fileName: "[project]/apps/demo/component-registry.tsx",
-                        lineNumber: 316,
+                        lineNumber: 343,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$nli$2d$core$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RadioGroup"], {
@@ -2745,7 +2775,7 @@ const componentRegistry = {
                                         "nli-markdown": `*${props.label}:* Option One`
                                     }, void 0, false, {
                                         fileName: "[project]/apps/demo/component-registry.tsx",
-                                        lineNumber: 319,
+                                        lineNumber: 346,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -2754,13 +2784,13 @@ const componentRegistry = {
                                         children: "Option One"
                                     }, void 0, false, {
                                         fileName: "[project]/apps/demo/component-registry.tsx",
-                                        lineNumber: 320,
+                                        lineNumber: 347,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/apps/demo/component-registry.tsx",
-                                lineNumber: 318,
+                                lineNumber: 345,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2772,7 +2802,7 @@ const componentRegistry = {
                                         "nli-markdown": `*${props.label}:* Option Two`
                                     }, void 0, false, {
                                         fileName: "[project]/apps/demo/component-registry.tsx",
-                                        lineNumber: 323,
+                                        lineNumber: 350,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -2781,25 +2811,25 @@ const componentRegistry = {
                                         children: "Option Two"
                                     }, void 0, false, {
                                         fileName: "[project]/apps/demo/component-registry.tsx",
-                                        lineNumber: 324,
+                                        lineNumber: 351,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/apps/demo/component-registry.tsx",
-                                lineNumber: 322,
+                                lineNumber: 349,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/demo/component-registry.tsx",
-                        lineNumber: 317,
+                        lineNumber: 344,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/demo/component-registry.tsx",
-                lineNumber: 315,
+                lineNumber: 342,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
         props: {
@@ -2837,7 +2867,7 @@ const componentRegistry = {
                                 placeholder: placeholder
                             }, void 0, false, {
                                 fileName: "[project]/apps/demo/component-registry.tsx",
-                                lineNumber: 361,
+                                lineNumber: 388,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             selectedLabel && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2845,13 +2875,13 @@ const componentRegistry = {
                                 "nli-markdown": selectedLabel
                             }, void 0, false, {
                                 fileName: "[project]/apps/demo/component-registry.tsx",
-                                lineNumber: 364,
+                                lineNumber: 391,
                                 columnNumber: 17
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/demo/component-registry.tsx",
-                        lineNumber: 356,
+                        lineNumber: 383,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$nli$2d$core$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SelectContent"], {
@@ -2860,18 +2890,18 @@ const componentRegistry = {
                                 children: opt.label
                             }, opt.value, false, {
                                 fileName: "[project]/apps/demo/component-registry.tsx",
-                                lineNumber: 369,
+                                lineNumber: 396,
                                 columnNumber: 17
                             }, ("TURBOPACK compile-time value", void 0)))
                     }, void 0, false, {
                         fileName: "[project]/apps/demo/component-registry.tsx",
-                        lineNumber: 367,
+                        lineNumber: 394,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/demo/component-registry.tsx",
-                lineNumber: 344,
+                lineNumber: 371,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0));
         }, "6+lKpLQRZA88KdTnuM9FKhhdod0="),
@@ -2904,7 +2934,7 @@ const componentRegistry = {
                         ...props
                     }, void 0, false, {
                         fileName: "[project]/apps/demo/component-registry.tsx",
-                        lineNumber: 389,
+                        lineNumber: 416,
                         columnNumber: 13
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -2913,13 +2943,13 @@ const componentRegistry = {
                         children: label
                     }, void 0, false, {
                         fileName: "[project]/apps/demo/component-registry.tsx",
-                        lineNumber: 390,
+                        lineNumber: 417,
                         columnNumber: 13
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/demo/component-registry.tsx",
-                lineNumber: 388,
+                lineNumber: 415,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0)),
         props: {
@@ -2930,7 +2960,8 @@ const componentRegistry = {
         component: __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$nli$2d$core$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Textarea"],
         props: {
             placeholder: "Type your message here.",
-            label: "Bio"
+            label: "Bio",
+            defaultValue: "I'm a product designer fueled by a desire to innovate with new technologies through experimentation.\n\nI specialize in bridging design and code to create novel user experiences. In my free time, I enjoy prototyping with emerging frameworks and exploring new interaction paradigms."
         }
     },
     "Toggle": {
@@ -2941,7 +2972,7 @@ const componentRegistry = {
                 children: "Bookmark"
             }, void 0, false, {
                 fileName: "[project]/apps/demo/component-registry.tsx",
-                lineNumber: 408,
+                lineNumber: 436,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0))
     },
@@ -2954,7 +2985,7 @@ const componentRegistry = {
                         children: "Include"
                     }, void 0, false, {
                         fileName: "[project]/apps/demo/component-registry.tsx",
-                        lineNumber: 416,
+                        lineNumber: 444,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$nli$2d$core$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ToggleGroup"], {
@@ -2969,7 +3000,7 @@ const componentRegistry = {
                                 children: "docx"
                             }, void 0, false, {
                                 fileName: "[project]/apps/demo/component-registry.tsx",
-                                lineNumber: 418,
+                                lineNumber: 446,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$nli$2d$core$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ToggleGroupItem"], {
@@ -2979,7 +3010,7 @@ const componentRegistry = {
                                 children: "pdf"
                             }, void 0, false, {
                                 fileName: "[project]/apps/demo/component-registry.tsx",
-                                lineNumber: 421,
+                                lineNumber: 449,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$nli$2d$core$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ToggleGroupItem"], {
@@ -2989,7 +3020,7 @@ const componentRegistry = {
                                 children: "xlsx"
                             }, void 0, false, {
                                 fileName: "[project]/apps/demo/component-registry.tsx",
-                                lineNumber: 424,
+                                lineNumber: 452,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$nli$2d$core$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ToggleGroupItem"], {
@@ -2999,19 +3030,19 @@ const componentRegistry = {
                                 children: "pptx"
                             }, void 0, false, {
                                 fileName: "[project]/apps/demo/component-registry.tsx",
-                                lineNumber: 427,
+                                lineNumber: 455,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/demo/component-registry.tsx",
-                        lineNumber: 417,
+                        lineNumber: 445,
                         columnNumber: 10
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/demo/component-registry.tsx",
-                lineNumber: 415,
+                lineNumber: 443,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0))
     }

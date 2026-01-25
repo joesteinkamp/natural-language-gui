@@ -13,7 +13,7 @@ console.log()
 const markdown = `
 *Email:* john@example.com
 *Password:* secret123
-*Bio:* I'm a software engineer passionate about building great user experiences. I love working with React, TypeScript, and modern web technologies.
+*Bio:* I'm a product designer fueled by a desire to innovate with new technologies through experimentation.\n\nI specialize in bridging design and code to create novel user experiences. In my free time, I enjoy prototyping with emerging frameworks and exploring new interaction paradigms.
 *Remember me:* yes
 *Priority:*
 - High

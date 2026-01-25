@@ -15,7 +15,7 @@ const testMarkdown = `
 *First Name:* John
 *Last Name:* Doe
 *Email:* john.doe@example.com
-*Bio:* I'm a software engineer passionate about building great user experiences with React and TypeScript.
+*Bio:* I'm a product designer fueled by a desire to innovate with new technologies through experimentation.\n\nI specialize in bridging design and code to create novel user experiences. In my free time, I enjoy prototyping with emerging frameworks and exploring new interaction paradigms.
 *Birth Date:* January 15, 1990
 *Notifications:* yes
 *Priority:*

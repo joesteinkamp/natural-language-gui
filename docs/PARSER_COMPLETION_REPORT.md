@@ -186,7 +186,7 @@ Results: 19 passed, 0 failed (19 total)
 ```markdown
 *First Name:* John
 *Email:* john@example.com
-*Bio:* I'm a software engineer passionate about building great user experiences. I love working with React, TypeScript, and modern web technologies.
+*Bio:* I'm a product designer fueled by a desire to innovate with new technologies through experimentation.\n\nI specialize in bridging design and code to create novel user experiences. In my free time, I enjoy prototyping with emerging frameworks and exploring new interaction paradigms.
 *Newsletter:* yes
 *Country:*
 - United States

@@ -85,25 +85,52 @@ export const componentRegistry: Record<string, RegistryEntry> = {
     ]
   },
   "Calendar": {
-    component: ({ mode = "single", ...props }: any) => {
+    component: ({ mode = "single", "nli-markdown": nliMarkdown, ...props }: any) => {
         const [date, setDate] = React.useState<Date | DateRange | undefined>(
             mode === "range" 
                 ? { from: new Date(), to: addDays(new Date(), 7) }
                 : new Date()
         )
+        const triggerRef = React.useRef<HTMLDivElement>(null);
+
+        React.useEffect(() => {
+            if (triggerRef.current) {
+                // Dispatch input event to trigger markdown update in parent
+                setTimeout(() => {
+                    triggerRef.current?.dispatchEvent(new Event('input', { bubbles: true }));
+                }, 0);
+            }
+        }, [date]);
+
+        const dataProps = mode === "range" 
+            ? {
+                "data-date-from": (date as DateRange)?.from?.toISOString(),
+                "data-date-to": (date as DateRange)?.to?.toISOString()
+              }
+            : {
+                "data-date-value": (date as Date)?.toISOString()
+              }
 
         return (
-            <CalendarPrimitive
-                mode={mode}
-                selected={date}
-                onSelect={setDate as any}
-                className="rounded-md border"
-                {...props}
-            />
+            <div 
+                ref={triggerRef} 
+                className="inline-block"
+                nli-markdown={nliMarkdown}
+                {...dataProps}
+            >
+                <CalendarPrimitive
+                    mode={mode}
+                    selected={date}
+                    onSelect={setDate as any}
+                    className="rounded-md border"
+                    {...props}
+                />
+            </div>
         )
     },
     props: {
-        mode: "single" 
+        mode: "single",
+        "nli-markdown": "Calendar"
     }
   },
 
@@ -400,7 +427,8 @@ export const componentRegistry: Record<string, RegistryEntry> = {
     component: Textarea,
     props: {
       placeholder: "Type your message here.",
-      label: "Bio"
+      label: "Bio",
+      defaultValue: "I'm a product designer fueled by a desire to innovate with new technologies through experimentation.\n\nI specialize in bridging design and code to create novel user experiences. In my free time, I enjoy prototyping with emerging frameworks and exploring new interaction paradigms."
     }
   },
   "Toggle": {
