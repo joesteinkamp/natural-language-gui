@@ -1,0 +1,8 @@
+src/
+*.test.ts
+*.test.tsx
+tsconfig.json
+tsup.config.ts
+.turbo/
+node_modules/
+.DS_Store
