@@ -7,7 +7,6 @@ import * as React from "react"
 
 import {
   Button,
-  ButtonGroup,
   Calendar as CalendarPrimitive,
   cn,
 } from "@natural-language-gui/core"
@@ -72,17 +71,6 @@ export const componentRegistry: Record<string, RegistryEntry> = {
     component: Button,
     props: { "nli-markdown": "Start" },
     children: "Start"
-  },
-  "ButtonGroup": {
-    component: ButtonGroup,
-    props: {
-        label: "My Buttons",
-        orientation: "horizontal"
-    },
-    children: [
-            <Button key="1" nli-markdown="Action 1">Action 1</Button>,
-            <Button key="2" nli-markdown="Action 2">Action 2</Button>
-    ]
   },
   "Calendar": {
     component: ({ mode = "single", "nli-markdown": nliMarkdown, ...props }: any) => {

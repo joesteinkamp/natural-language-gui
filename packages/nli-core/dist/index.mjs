@@ -1,5 +1,5 @@
-import * as React14 from 'react';
-import { forwardRef, createElement } from 'react';
+import * as React13 from 'react';
+import { forwardRef, createElement, useState, useRef, useEffect, useCallback } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva } from 'class-variance-authority';
 import { clsx } from 'clsx';
@@ -77,7 +77,7 @@ var buttonVariants = cva(
     }
   }
 );
-var Button = React14.forwardRef(
+var Button = React13.forwardRef(
   (_a, ref) => {
     var _b = _a, { className, variant, size, asChild = false, label } = _b, props = __objRest(_b, ["className", "variant", "size", "asChild", "label"]);
     const Comp = asChild ? Slot : "button";
@@ -92,42 +92,10 @@ var Button = React14.forwardRef(
   }
 );
 Button.displayName = "Button";
-var ButtonGroup = React14.forwardRef(
-  (_a, ref) => {
-    var _b = _a, { className, orientation = "horizontal", label, children } = _b, props = __objRest(_b, ["className", "orientation", "label", "children"]);
-    return /* @__PURE__ */ jsxs(
-      "div",
-      __spreadProps(__spreadValues({
-        ref,
-        className: cn(
-          "flex flex-col gap-2",
-          className
-        )
-      }, props), {
-        children: [
-          label && /* @__PURE__ */ jsx("label", { className: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70", children: label }),
-          /* @__PURE__ */ jsx("div", { className: cn(
-            "flex gap-2",
-            orientation === "vertical" ? "flex-col" : "flex-row"
-          ), children: React14.Children.map(children, (child) => {
-            if (React14.isValidElement(child)) {
-              return React14.cloneElement(child, __spreadValues({
-                label,
-                value: child.props.children
-              }, child.props));
-            }
-            return child;
-          }) })
-        ]
-      })
-    );
-  }
-);
-ButtonGroup.displayName = "ButtonGroup";
-var Input = React14.forwardRef(
+var Input = React13.forwardRef(
   (_a, ref) => {
     var _b = _a, { className, type, label, id } = _b, props = __objRest(_b, ["className", "type", "label", "id"]);
-    const generatedId = React14.useId();
+    const generatedId = React13.useId();
     const componentId = id || generatedId;
     const input = /* @__PURE__ */ jsx(
       "input",
@@ -151,9 +119,9 @@ var Input = React14.forwardRef(
   }
 );
 Input.displayName = "Input";
-var Textarea = React14.forwardRef((_a, ref) => {
+var Textarea = React13.forwardRef((_a, ref) => {
   var _b = _a, { className, label, id } = _b, props = __objRest(_b, ["className", "label", "id"]);
-  const generatedId = React14.useId();
+  const generatedId = React13.useId();
   const componentId = id || generatedId;
   const textarea = /* @__PURE__ */ jsx(
     "textarea",
@@ -177,7 +145,7 @@ var Textarea = React14.forwardRef((_a, ref) => {
   return textarea;
 });
 Textarea.displayName = "Textarea";
-var Switch = React14.forwardRef((_a, ref) => {
+var Switch = React13.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsx(
     SwitchPrimitives.Root,
@@ -220,7 +188,7 @@ var toggleVariants = cva(
     }
   }
 );
-var Toggle = React14.forwardRef((_a, ref) => {
+var Toggle = React13.forwardRef((_a, ref) => {
   var _b = _a, { className, variant, size } = _b, props = __objRest(_b, ["className", "variant", "size"]);
   return /* @__PURE__ */ jsx(
     TogglePrimitive.Root,
@@ -233,11 +201,11 @@ var Toggle = React14.forwardRef((_a, ref) => {
   );
 });
 Toggle.displayName = TogglePrimitive.Root.displayName;
-var ToggleGroupContext = React14.createContext({
+var ToggleGroupContext = React13.createContext({
   size: "default",
   variant: "default"
 });
-var ToggleGroup = React14.forwardRef((_a, ref) => {
+var ToggleGroup = React13.forwardRef((_a, ref) => {
   var _b = _a, { className, variant, size, children } = _b, props = __objRest(_b, ["className", "variant", "size", "children"]);
   return /* @__PURE__ */ jsx(
     ToggleGroupPrimitive.Root,
@@ -250,9 +218,9 @@ var ToggleGroup = React14.forwardRef((_a, ref) => {
   );
 });
 ToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName;
-var ToggleGroupItem = React14.forwardRef((_a, ref) => {
+var ToggleGroupItem = React13.forwardRef((_a, ref) => {
   var _b = _a, { className, children, variant, size } = _b, props = __objRest(_b, ["className", "children", "variant", "size"]);
-  const context = React14.useContext(ToggleGroupContext);
+  const context = React13.useContext(ToggleGroupContext);
   return /* @__PURE__ */ jsx(
     ToggleGroupPrimitive.Item,
     __spreadProps(__spreadValues({
@@ -318,7 +286,7 @@ var Cross2Icon = /* @__PURE__ */ forwardRef(function(_ref, forwardedRef) {
     clipRule: "evenodd"
   }));
 });
-var Checkbox = React14.forwardRef((_a, ref) => {
+var Checkbox = React13.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsx(
     CheckboxPrimitive.Root,
@@ -340,13 +308,13 @@ var Checkbox = React14.forwardRef((_a, ref) => {
   );
 });
 Checkbox.displayName = CheckboxPrimitive.Root.displayName;
-var CheckboxGroupContext = React14.createContext(void 0);
-var CheckboxGroup = React14.forwardRef((_a, ref) => {
+var CheckboxGroupContext = React13.createContext(void 0);
+var CheckboxGroup = React13.forwardRef((_a, ref) => {
   var _b = _a, { className, value, defaultValue, onValueChange, children } = _b, props = __objRest(_b, ["className", "value", "defaultValue", "onValueChange", "children"]);
-  const [internalValue, setInternalValue] = React14.useState(defaultValue || []);
+  const [internalValue, setInternalValue] = React13.useState(defaultValue || []);
   const controlled = value !== void 0;
   const currentValue = controlled ? value : internalValue;
-  const handleValueChange = React14.useCallback(
+  const handleValueChange = React13.useCallback(
     (newValue) => {
       if (!controlled) {
         setInternalValue(newValue);
@@ -367,9 +335,9 @@ var CheckboxGroup = React14.forwardRef((_a, ref) => {
   );
 });
 CheckboxGroup.displayName = "CheckboxGroup";
-var CheckboxGroupItem = React14.forwardRef((_a, ref) => {
+var CheckboxGroupItem = React13.forwardRef((_a, ref) => {
   var _b = _a, { className, value } = _b, props = __objRest(_b, ["className", "value"]);
-  const context = React14.useContext(CheckboxGroupContext);
+  const context = React13.useContext(CheckboxGroupContext);
   if (!context) {
     throw new Error("CheckboxGroupItem must be used within a CheckboxGroup");
   }
@@ -391,7 +359,7 @@ var CheckboxGroupItem = React14.forwardRef((_a, ref) => {
   );
 });
 CheckboxGroupItem.displayName = "CheckboxGroupItem";
-var RadioGroup = React14.forwardRef((_a, ref) => {
+var RadioGroup = React13.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsx(
     RadioGroupPrimitive.Root,
@@ -403,7 +371,7 @@ var RadioGroup = React14.forwardRef((_a, ref) => {
   );
 });
 RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
-var RadioGroupItem = React14.forwardRef((_a, ref) => {
+var RadioGroupItem = React13.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsx(
     RadioGroupPrimitive.Item,
@@ -422,7 +390,7 @@ RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName;
 var Select = SelectPrimitive.Root;
 var SelectGroup = SelectPrimitive.Group;
 var SelectValue = SelectPrimitive.Value;
-var SelectTrigger = React14.forwardRef((_a, ref) => {
+var SelectTrigger = React13.forwardRef((_a, ref) => {
   var _b = _a, { className, children } = _b, props = __objRest(_b, ["className", "children"]);
   return /* @__PURE__ */ jsxs(
     SelectPrimitive.Trigger,
@@ -441,7 +409,7 @@ var SelectTrigger = React14.forwardRef((_a, ref) => {
   );
 });
 SelectTrigger.displayName = SelectPrimitive.Trigger.displayName;
-var SelectScrollUpButton = React14.forwardRef((_a, ref) => {
+var SelectScrollUpButton = React13.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsx(
     SelectPrimitive.ScrollUpButton,
@@ -457,7 +425,7 @@ var SelectScrollUpButton = React14.forwardRef((_a, ref) => {
   );
 });
 SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName;
-var SelectScrollDownButton = React14.forwardRef((_a, ref) => {
+var SelectScrollDownButton = React13.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsx(
     SelectPrimitive.ScrollDownButton,
@@ -473,7 +441,7 @@ var SelectScrollDownButton = React14.forwardRef((_a, ref) => {
   );
 });
 SelectScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayName;
-var SelectContent = React14.forwardRef((_a, ref) => {
+var SelectContent = React13.forwardRef((_a, ref) => {
   var _b = _a, { className, children, position = "popper" } = _b, props = __objRest(_b, ["className", "children", "position"]);
   return /* @__PURE__ */ jsx(SelectPrimitive.Portal, { children: /* @__PURE__ */ jsxs(
     SelectPrimitive.Content,
@@ -504,7 +472,7 @@ var SelectContent = React14.forwardRef((_a, ref) => {
   ) });
 });
 SelectContent.displayName = SelectPrimitive.Content.displayName;
-var SelectLabel = React14.forwardRef((_a, ref) => {
+var SelectLabel = React13.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsx(
     SelectPrimitive.Label,
@@ -515,7 +483,7 @@ var SelectLabel = React14.forwardRef((_a, ref) => {
   );
 });
 SelectLabel.displayName = SelectPrimitive.Label.displayName;
-var SelectItem = React14.forwardRef((_a, ref) => {
+var SelectItem = React13.forwardRef((_a, ref) => {
   var _b = _a, { className, children } = _b, props = __objRest(_b, ["className", "children"]);
   return /* @__PURE__ */ jsxs(
     SelectPrimitive.Item,
@@ -534,7 +502,7 @@ var SelectItem = React14.forwardRef((_a, ref) => {
   );
 });
 SelectItem.displayName = SelectPrimitive.Item.displayName;
-var SelectSeparator = React14.forwardRef((_a, ref) => {
+var SelectSeparator = React13.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsx(
     SelectPrimitive.Separator,
@@ -603,7 +571,7 @@ function Calendar(_a) {
 Calendar.displayName = "Calendar";
 var Popover = PopoverPrimitive.Root;
 var PopoverTrigger = PopoverPrimitive.Trigger;
-var PopoverContent = React14.forwardRef((_a, ref) => {
+var PopoverContent = React13.forwardRef((_a, ref) => {
   var _b = _a, { className, align = "center", sideOffset = 4 } = _b, props = __objRest(_b, ["className", "align", "sideOffset"]);
   return /* @__PURE__ */ jsx(PopoverPrimitive.Portal, { children: /* @__PURE__ */ jsx(
     PopoverPrimitive.Content,
@@ -623,7 +591,7 @@ var Dialog = DialogPrimitive.Root;
 var DialogTrigger = DialogPrimitive.Trigger;
 var DialogPortal = DialogPrimitive.Portal;
 var DialogClose = DialogPrimitive.Close;
-var DialogOverlay = React14.forwardRef((_a, ref) => {
+var DialogOverlay = React13.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsx(
     DialogPrimitive.Overlay,
@@ -637,7 +605,7 @@ var DialogOverlay = React14.forwardRef((_a, ref) => {
   );
 });
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
-var DialogContent = React14.forwardRef((_a, ref) => {
+var DialogContent = React13.forwardRef((_a, ref) => {
   var _b = _a, { className, children } = _b, props = __objRest(_b, ["className", "children"]);
   return /* @__PURE__ */ jsxs(DialogPortal, { children: [
     /* @__PURE__ */ jsx(DialogOverlay, {}),
@@ -696,7 +664,7 @@ var DialogFooter = (_a) => {
   );
 };
 DialogFooter.displayName = "DialogFooter";
-var DialogTitle = React14.forwardRef((_a, ref) => {
+var DialogTitle = React13.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsx(
     DialogPrimitive.Title,
@@ -710,7 +678,7 @@ var DialogTitle = React14.forwardRef((_a, ref) => {
   );
 });
 DialogTitle.displayName = DialogPrimitive.Title.displayName;
-var DialogDescription = React14.forwardRef((_a, ref) => {
+var DialogDescription = React13.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsx(
     DialogPrimitive.Description,
@@ -729,10 +697,10 @@ function ComboBox({
   placeholder = "Select options...",
   "nli-markdown": nliMarkdown
 }) {
-  const [open, setOpen] = React14.useState(false);
-  const [selectedValues, setSelectedValues] = React14.useState(value);
-  const triggerRef = React14.useRef(null);
-  React14.useEffect(() => {
+  const [open, setOpen] = React13.useState(false);
+  const [selectedValues, setSelectedValues] = React13.useState(value);
+  const triggerRef = React13.useRef(null);
+  React13.useEffect(() => {
     setSelectedValues(value);
   }, [value]);
   const handleSelect = (currentValue) => {
@@ -799,7 +767,7 @@ function ComboBox({
     ] }) })
   ] });
 }
-var Command = React14.forwardRef((_a, ref) => {
+var Command = React13.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsx(
     Command$1,
@@ -813,7 +781,7 @@ var Command = React14.forwardRef((_a, ref) => {
   );
 });
 Command.displayName = Command$1.displayName;
-var CommandInput = React14.forwardRef((_a, ref) => {
+var CommandInput = React13.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsxs("div", { className: "flex items-center border-b px-3", "cmdk-input-wrapper": "", children: [
     /* @__PURE__ */ jsx(Search, { className: "mr-2 h-4 w-4 shrink-0 opacity-50" }),
@@ -830,7 +798,7 @@ var CommandInput = React14.forwardRef((_a, ref) => {
   ] });
 });
 CommandInput.displayName = Command$1.Input.displayName;
-var CommandList = React14.forwardRef((_a, ref) => {
+var CommandList = React13.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsx(
     Command$1.List,
@@ -841,7 +809,7 @@ var CommandList = React14.forwardRef((_a, ref) => {
   );
 });
 CommandList.displayName = Command$1.List.displayName;
-var CommandEmpty = React14.forwardRef((props, ref) => /* @__PURE__ */ jsx(
+var CommandEmpty = React13.forwardRef((props, ref) => /* @__PURE__ */ jsx(
   Command$1.Empty,
   __spreadValues({
     ref,
@@ -849,7 +817,7 @@ var CommandEmpty = React14.forwardRef((props, ref) => /* @__PURE__ */ jsx(
   }, props)
 ));
 CommandEmpty.displayName = Command$1.Empty.displayName;
-var CommandGroup = React14.forwardRef((_a, ref) => {
+var CommandGroup = React13.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsx(
     Command$1.Group,
@@ -863,7 +831,7 @@ var CommandGroup = React14.forwardRef((_a, ref) => {
   );
 });
 CommandGroup.displayName = Command$1.Group.displayName;
-var CommandItem = React14.forwardRef((_a, ref) => {
+var CommandItem = React13.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsx(
     Command$1.Item,
@@ -877,6 +845,145 @@ var CommandItem = React14.forwardRef((_a, ref) => {
   );
 });
 CommandItem.displayName = Command$1.Item.displayName;
+function ResizablePane({
+  left,
+  right,
+  initialSplit = 50,
+  minWidth = 200,
+  storageKey = "resizable-pane-split",
+  className,
+  orientation = "horizontal"
+}) {
+  const containerRef = React13.useRef(null);
+  const [isDragging, setIsDragging] = React13.useState(false);
+  const [split, setSplit] = React13.useState(initialSplit);
+  const [isLoaded, setIsLoaded] = React13.useState(false);
+  React13.useEffect(() => {
+    if (typeof window !== "undefined" && storageKey) {
+      const saved = localStorage.getItem(storageKey);
+      if (saved) {
+        const parsed = parseFloat(saved);
+        if (!isNaN(parsed) && parsed > 0 && parsed < 100) {
+          setSplit(parsed);
+        }
+      }
+    }
+    setIsLoaded(true);
+  }, [storageKey]);
+  React13.useEffect(() => {
+    if (isLoaded && typeof window !== "undefined" && storageKey) {
+      localStorage.setItem(storageKey, split.toString());
+    }
+  }, [split, storageKey, isLoaded]);
+  const handleMouseMove = React13.useCallback(
+    (e) => {
+      if (!isDragging || !containerRef.current) return;
+      const container = containerRef.current;
+      const rect = container.getBoundingClientRect();
+      let newSplit;
+      if (orientation === "horizontal") {
+        const offsetX = e.clientX - rect.left;
+        newSplit = offsetX / rect.width * 100;
+      } else {
+        const offsetY = e.clientY - rect.top;
+        newSplit = offsetY / rect.height * 100;
+      }
+      const dimension = orientation === "horizontal" ? rect.width : rect.height;
+      const minPercent = minWidth / dimension * 100;
+      const maxPercent = 100 - minPercent;
+      newSplit = Math.max(minPercent, Math.min(maxPercent, newSplit));
+      setSplit(newSplit);
+    },
+    [isDragging, minWidth, orientation]
+  );
+  const handleMouseUp = React13.useCallback(() => {
+    setIsDragging(false);
+  }, []);
+  React13.useEffect(() => {
+    if (isDragging) {
+      document.addEventListener("mousemove", handleMouseMove);
+      document.addEventListener("mouseup", handleMouseUp);
+      document.body.style.cursor = orientation === "horizontal" ? "col-resize" : "row-resize";
+      document.body.style.userSelect = "none";
+      return () => {
+        document.removeEventListener("mousemove", handleMouseMove);
+        document.removeEventListener("mouseup", handleMouseUp);
+        document.body.style.cursor = "";
+        document.body.style.userSelect = "";
+      };
+    }
+  }, [isDragging, handleMouseMove, handleMouseUp, orientation]);
+  const handleDividerMouseDown = (e) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+  const isHorizontal = orientation === "horizontal";
+  return /* @__PURE__ */ jsxs(
+    "div",
+    {
+      ref: containerRef,
+      className: cn(
+        "flex w-full h-full",
+        isHorizontal ? "flex-row" : "flex-col",
+        className
+      ),
+      children: [
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            className: "overflow-auto",
+            style: {
+              [isHorizontal ? "width" : "height"]: `${split}%`,
+              minWidth: isHorizontal ? minWidth : void 0,
+              minHeight: !isHorizontal ? minWidth : void 0
+            },
+            children: left
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            className: cn(
+              "bg-slate-800 hover:bg-slate-700 transition-colors flex-shrink-0 group",
+              isHorizontal ? "w-1 cursor-col-resize hover:w-1.5" : "h-1 cursor-row-resize hover:h-1.5",
+              isDragging && (isHorizontal ? "bg-blue-500" : "bg-blue-500")
+            ),
+            onMouseDown: handleDividerMouseDown,
+            children: /* @__PURE__ */ jsx(
+              "div",
+              {
+                className: cn(
+                  "flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity",
+                  isHorizontal ? "h-full" : "w-full"
+                ),
+                children: /* @__PURE__ */ jsx(
+                  "div",
+                  {
+                    className: cn(
+                      "bg-slate-600 rounded-full",
+                      isHorizontal ? "w-1 h-8" : "w-8 h-1"
+                    )
+                  }
+                )
+              }
+            )
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            className: "overflow-auto flex-1",
+            style: {
+              minWidth: isHorizontal ? minWidth : void 0,
+              minHeight: !isHorizontal ? minWidth : void 0
+            },
+            children: right
+          }
+        )
+      ]
+    }
+  );
+}
 
 // src/parser/tokenizer.ts
 var PATTERNS = {
@@ -886,12 +993,12 @@ var PATTERNS = {
   BOOLEAN: /^\*([^*:]+?)(?:\s+\[([^\]]+)\])?:\*\s(yes|no)$/,
   // *Label:* or *Label [type]:*
   GROUP_HEADER: /^\*([^*:]+?)(?:\s+\[([^\]]+)\])?:\*\s*$/,
-  // - item text or - *Item:* value or - *Item:* yes/no
+  // [x] item or [ ] item (checkbox-style with state)
+  CHECKBOX_ITEM: /^(\[[ xX]\])\s+(.+)$/,
+  // - item text or - *Item:* value or - *Item:* yes/no (legacy support)
   GROUP_ITEM: /^-\s(.+)$/,
-  // [Action] or [Action] [Another]
-  BUTTON: /^\[.+\]$/,
-  // Plain text (checkbox)
-  PLAIN_TEXT: /^[^*\-\[].*$/,
+  // [Action] or [Action] [Another] (must have content and no space after [)
+  BUTTON: /^\[[^\s\]].+\]$/,
   // Blank line
   BLANK: /^\s*$/
 };
@@ -903,6 +1010,19 @@ function classifyLine(line, lineNumber) {
       type: "BLANK",
       line: trimmed,
       lineNumber
+    };
+  }
+  const checkboxItemMatch = trimmed.match(PATTERNS.CHECKBOX_ITEM);
+  if (checkboxItemMatch) {
+    const checkboxState = checkboxItemMatch[1].trim();
+    const isChecked = checkboxState === "[x]" || checkboxState === "[X]";
+    const label = checkboxItemMatch[2].trim();
+    return {
+      type: "CHECKBOX",
+      line: trimmed,
+      lineNumber,
+      label,
+      value: isChecked ? "true" : "false"
     };
   }
   if (PATTERNS.BUTTON.test(trimmed)) {
@@ -965,14 +1085,6 @@ function classifyLine(line, lineNumber) {
       line: trimmed,
       lineNumber,
       value: itemText.trim()
-    };
-  }
-  if (PATTERNS.PLAIN_TEXT.test(trimmed)) {
-    return {
-      type: "CHECKBOX",
-      line: trimmed,
-      lineNumber,
-      value: trimmed
     };
   }
   return {
@@ -1082,7 +1194,7 @@ function inferGroupType(children, explicitType) {
     return "checkboxgroup";
   }
   const hasFormattedChildren = children.some(
-    (child) => child.value !== void 0 && child.value !== "true"
+    (child) => child.value !== void 0 && child.value !== "true" && child.value !== "false"
   );
   if (hasFormattedChildren) {
     const allYesNo = children.every(
@@ -1105,7 +1217,7 @@ function parseBooleanValue(value) {
 
 // src/parser/ast-builder.ts
 function buildAST(tokens) {
-  var _a, _b;
+  var _a, _b, _c;
   const nodes = [];
   const errors = [];
   let i = 0;
@@ -1143,9 +1255,9 @@ function buildAST(tokens) {
     if (token.type === "CHECKBOX") {
       nodes.push({
         type: "checkbox",
-        label: token.value || "",
-        value: "true",
-        // Checked (since it appears in output)
+        label: token.label || token.value || "",
+        value: token.value || "true",
+        // Use parsed value (true/false) or default to true for legacy
         metadata: {
           lineNumber: token.lineNumber,
           inferredType: false
@@ -1166,6 +1278,17 @@ function buildAST(tokens) {
     }
     if (token.type === "FIELD") {
       const value = token.value || "";
+      const nextToken = tokens[i + 1];
+      if (nextToken && nextToken.type === "GROUP_ITEM") {
+        const groupNode = processFieldWithOptions(tokens, i, errors);
+        if (groupNode) {
+          nodes.push(groupNode);
+          i = ((_c = groupNode.metadata) == null ? void 0 : _c.lastProcessedLine) || i + 1;
+        } else {
+          i++;
+        }
+        continue;
+      }
       const context = {
         hasChildren: false
       };
@@ -1195,6 +1318,54 @@ function buildAST(tokens) {
   }
   return { nodes, errors };
 }
+function processFieldWithOptions(tokens, startIndex, errors) {
+  const fieldToken = tokens[startIndex];
+  if (!fieldToken.label) {
+    errors.push({
+      line: fieldToken.lineNumber,
+      message: `Field missing label: "${fieldToken.line}"`,
+      severity: "error"
+    });
+    return null;
+  }
+  const selectedValue = fieldToken.value || "";
+  const options = [];
+  let i = startIndex + 1;
+  while (i < tokens.length && tokens[i].type === "GROUP_ITEM") {
+    const item = tokens[i];
+    const itemText = item.value || "";
+    options.push(itemText);
+    i++;
+  }
+  if (options.length === 0) {
+    return null;
+  }
+  const componentType = options.length < 6 ? "radiogroup" : "select";
+  const children = options.map((option, index) => {
+    var _a;
+    return {
+      type: "radio",
+      label: option,
+      value: option === selectedValue ? "true" : "false",
+      metadata: {
+        lineNumber: ((_a = tokens[startIndex + 1 + index]) == null ? void 0 : _a.lineNumber) || fieldToken.lineNumber,
+        inferredType: true
+      }
+    };
+  });
+  const groupNode = {
+    type: componentType,
+    label: fieldToken.label,
+    value: selectedValue,
+    children,
+    metadata: {
+      lineNumber: fieldToken.lineNumber,
+      inferredType: !fieldToken.explicitType,
+      lastProcessedLine: i
+    }
+  };
+  return groupNode;
+}
 function processGroup(tokens, startIndex, errors) {
   const headerToken = tokens[startIndex];
   if (!headerToken.label) {
@@ -1207,8 +1378,22 @@ function processGroup(tokens, startIndex, errors) {
   }
   const children = [];
   let i = startIndex + 1;
-  while (i < tokens.length && tokens[i].type === "GROUP_ITEM") {
+  while (i < tokens.length && (tokens[i].type === "GROUP_ITEM" || tokens[i].type === "CHECKBOX")) {
     const item = tokens[i];
+    if (item.type === "CHECKBOX") {
+      children.push({
+        type: "checkbox",
+        label: item.label || item.value || "",
+        value: item.value || "true",
+        // Use parsed checked state
+        metadata: {
+          lineNumber: item.lineNumber,
+          inferredType: true
+        }
+      });
+      i++;
+      continue;
+    }
     const itemText = item.value || "";
     const fieldMatch = itemText.match(/^\*([^*:]+):\*\s(.+)$/);
     if (fieldMatch) {
@@ -1227,7 +1412,7 @@ function processGroup(tokens, startIndex, errors) {
         type: "checkbox",
         label: itemText,
         value: "true",
-        // Checked/selected (since it appears)
+        // Checked/selected (legacy behavior)
         metadata: {
           lineNumber: item.lineNumber,
           inferredType: true
@@ -1269,7 +1454,7 @@ function validateAST(ast) {
   const checkDuplicates = (nodes) => {
     nodes.forEach((node) => {
       var _a;
-      if (node.label) {
+      if (node.label && node.type !== "button") {
         if (labels.has(node.label)) {
           errors.push({
             line: ((_a = node.metadata) == null ? void 0 : _a.lineNumber) || 0,
@@ -1318,7 +1503,7 @@ function generateKey(node, index) {
   return `${node.type}-${label}-${line}-${index}`;
 }
 function mapNodeToProps(node, index) {
-  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q;
+  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o;
   const baseProps = {
     "nli-markdown": node.label
   };
@@ -1386,15 +1571,16 @@ function mapNodeToProps(node, index) {
         key: generateKey(node, index)
       };
     case "radiogroup":
-      const allSelected = (_e = node.children) == null ? void 0 : _e.every((child) => child.value === "true");
-      const selectedItem = !allSelected ? (_f = node.children) == null ? void 0 : _f.find((child) => child.value === "true") : void 0;
-      const defaultValue = allSelected && ((_g = node.children) == null ? void 0 : _g[0]) ? node.children[0].label : (selectedItem == null ? void 0 : selectedItem.label) || void 0;
+      const selectedRadioItem = (_e = node.children) == null ? void 0 : _e.find(
+        (child) => child.value === "true"
+      );
+      const radioDefaultValue = node.value || (selectedRadioItem == null ? void 0 : selectedRadioItem.label) || void 0;
       return {
         type: "radiogroup",
         props: __spreadProps(__spreadValues({}, baseProps), {
-          defaultValue
+          defaultValue: radioDefaultValue
         }),
-        children: (_h = node.children) == null ? void 0 : _h.map((child, i) => ({
+        children: (_f = node.children) == null ? void 0 : _f.map((child, i) => ({
           type: "radio",
           props: {
             "nli-markdown": child.label,
@@ -1405,13 +1591,13 @@ function mapNodeToProps(node, index) {
         key: generateKey(node, index)
       };
     case "select":
-      const allSelectedInSelect = (_i = node.children) == null ? void 0 : _i.every((child) => child.value === "true");
+      const selectDefaultValue = node.value || ((_h = (_g = node.children) == null ? void 0 : _g[0]) == null ? void 0 : _h.label) || void 0;
       return {
         type: "select",
         props: __spreadProps(__spreadValues({}, baseProps), {
-          defaultValue: allSelectedInSelect && ((_j = node.children) == null ? void 0 : _j[0]) ? node.children[0].label : void 0
+          defaultValue: selectDefaultValue
         }),
-        children: (_k = node.children) == null ? void 0 : _k.map((child, i) => ({
+        children: (_i = node.children) == null ? void 0 : _i.map((child, i) => ({
           type: "select-item",
           props: {
             "nli-markdown": child.label,
@@ -1422,14 +1608,14 @@ function mapNodeToProps(node, index) {
         key: generateKey(node, index)
       };
     case "togglegroup":
-      const defaultToggled = ((_l = node.children) == null ? void 0 : _l.filter((child) => parseBooleanValue(child.value || "no")).map((child) => child.label)) || [];
+      const defaultToggled = ((_j = node.children) == null ? void 0 : _j.filter((child) => parseBooleanValue(child.value || "no")).map((child) => child.label)) || [];
       return {
         type: "togglegroup",
         props: __spreadProps(__spreadValues({}, baseProps), {
           type: "multiple",
           defaultValue: defaultToggled
         }),
-        children: (_m = node.children) == null ? void 0 : _m.map((child, i) => ({
+        children: (_k = node.children) == null ? void 0 : _k.map((child, i) => ({
           type: "toggle-item",
           props: {
             "nli-markdown": `*${child.label}:* ${child.value}`,
@@ -1440,13 +1626,13 @@ function mapNodeToProps(node, index) {
         key: generateKey(node, index)
       };
     case "checkboxgroup":
-      const defaultChecked = ((_n = node.children) == null ? void 0 : _n.filter((child) => child.value === "true" || parseBooleanValue(child.value || "no")).map((child) => child.label)) || [];
+      const defaultChecked = ((_l = node.children) == null ? void 0 : _l.filter((child) => child.value === "true" || parseBooleanValue(child.value || "no")).map((child) => child.label)) || [];
       return {
         type: "checkboxgroup",
         props: __spreadProps(__spreadValues({}, baseProps), {
           defaultValue: defaultChecked
         }),
-        children: (_o = node.children) == null ? void 0 : _o.map((child, i) => ({
+        children: (_m = node.children) == null ? void 0 : _m.map((child, i) => ({
           type: "checkbox-item",
           props: {
             "nli-markdown": child.label,
@@ -1457,12 +1643,12 @@ function mapNodeToProps(node, index) {
         key: generateKey(node, index)
       };
     case "combobox":
-      const selectedValues = ((_p = node.children) == null ? void 0 : _p.filter((child) => child.value === "true" || parseBooleanValue(child.value || "no")).map((child) => child.label)) || [];
+      const selectedValues = ((_n = node.children) == null ? void 0 : _n.filter((child) => child.value === "true" || parseBooleanValue(child.value || "no")).map((child) => child.label)) || [];
       return {
         type: "combobox",
         props: __spreadProps(__spreadValues({}, baseProps), {
           label: node.label,
-          options: ((_q = node.children) == null ? void 0 : _q.map((child) => ({
+          options: ((_o = node.children) == null ? void 0 : _o.map((child) => ({
             label: child.label,
             value: child.label
           }))) || [],
@@ -1538,63 +1724,202 @@ function extractValues(components) {
   });
   return values;
 }
-function renderComponent(mapped) {
+function renderComponent(mapped, onComponentChange) {
   const { type, props, children, key } = mapped;
+  const label = props["nli-markdown"];
+  const handleChange = (value) => {
+    if (onComponentChange && label) {
+      console.log("[instantiator] handleChange:", { label, value, type });
+      const stringValue = Array.isArray(value) ? value.join(",") : String(value);
+      onComponentChange(label, stringValue, type);
+    }
+  };
   switch (type) {
-    case "input":
-      return /* @__PURE__ */ jsx(Input, __spreadValues({}, props), key);
-    case "textarea":
-      return /* @__PURE__ */ jsx(Textarea, __spreadValues({}, props), key);
-    case "checkbox":
+    case "input": {
+      const _a = props, { onChange: _unused } = _a, restProps = __objRest(_a, ["onChange"]);
+      return /* @__PURE__ */ jsx(
+        Input,
+        __spreadProps(__spreadValues({}, restProps), {
+          onChange: (e) => {
+            var _a2;
+            handleChange(e.target.value);
+            (_a2 = props.onChange) == null ? void 0 : _a2.call(props, e);
+          }
+        }),
+        key
+      );
+    }
+    case "textarea": {
+      const _b = props, { onChange: _unused } = _b, restProps = __objRest(_b, ["onChange"]);
+      return /* @__PURE__ */ jsx(
+        Textarea,
+        __spreadProps(__spreadValues({}, restProps), {
+          onChange: (e) => {
+            var _a2;
+            handleChange(e.target.value);
+            (_a2 = props.onChange) == null ? void 0 : _a2.call(props, e);
+          }
+        }),
+        key
+      );
+    }
+    case "checkbox": {
+      const _c = props, { onCheckedChange: _unused } = _c, restProps = __objRest(_c, ["onCheckedChange"]);
       return /* @__PURE__ */ jsxs("div", { className: "flex items-center space-x-2", children: [
-        /* @__PURE__ */ jsx(Checkbox, __spreadValues({}, props)),
-        /* @__PURE__ */ jsx("label", { className: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70", children: props["nli-markdown"] })
+        /* @__PURE__ */ jsx(
+          Checkbox,
+          __spreadProps(__spreadValues({}, restProps), {
+            onCheckedChange: (checked) => {
+              var _a2;
+              handleChange(checked);
+              (_a2 = props.onCheckedChange) == null ? void 0 : _a2.call(props, checked);
+            }
+          })
+        ),
+        /* @__PURE__ */ jsx("label", { className: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70", children: label })
       ] }, key);
-    case "switch":
+    }
+    case "switch": {
+      const _d = props, { onCheckedChange: _unused } = _d, restProps = __objRest(_d, ["onCheckedChange"]);
       return /* @__PURE__ */ jsxs("div", { className: "flex items-center space-x-2", children: [
-        /* @__PURE__ */ jsx(Switch, __spreadValues({}, props)),
-        /* @__PURE__ */ jsx("label", { className: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70", children: props["nli-markdown"] })
+        /* @__PURE__ */ jsx(
+          Switch,
+          __spreadProps(__spreadValues({}, restProps), {
+            onCheckedChange: (checked) => {
+              var _a2;
+              handleChange(checked ? "yes" : "no");
+              (_a2 = props.onCheckedChange) == null ? void 0 : _a2.call(props, checked);
+            }
+          })
+        ),
+        /* @__PURE__ */ jsx("label", { className: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70", children: label })
       ] }, key);
+    }
     case "button":
-      return /* @__PURE__ */ jsx(Button, __spreadProps(__spreadValues({}, props), { children: props["nli-markdown"] }), key);
+      return /* @__PURE__ */ jsx(Button, __spreadProps(__spreadValues({}, props), { children: label }), key);
     case "date":
-      return /* @__PURE__ */ jsx(DatePickerComponent, __spreadValues({}, props), key);
+      return /* @__PURE__ */ jsx(
+        DatePickerComponent,
+        __spreadProps(__spreadValues({}, props), {
+          onChange: (value) => {
+            var _a2;
+            handleChange(value);
+            (_a2 = props.onChange) == null ? void 0 : _a2.call(props, value);
+          }
+        }),
+        key
+      );
     case "daterange":
-      return /* @__PURE__ */ jsx(DateRangePickerComponent, __spreadValues({}, props), key);
-    case "radiogroup":
+      return /* @__PURE__ */ jsx(
+        DateRangePickerComponent,
+        __spreadProps(__spreadValues({}, props), {
+          onChange: (value) => {
+            var _a2;
+            handleChange(value);
+            (_a2 = props.onChange) == null ? void 0 : _a2.call(props, value);
+          }
+        }),
+        key
+      );
+    case "radiogroup": {
+      const _e = props, { onValueChange: _unused } = _e, restProps = __objRest(_e, ["onValueChange"]);
       return /* @__PURE__ */ jsxs("div", { className: "space-y-2", children: [
         /* @__PURE__ */ jsx("label", { className: "text-sm font-medium", children: props["nli-markdown"] }),
-        /* @__PURE__ */ jsx(RadioGroup, __spreadProps(__spreadValues({ defaultValue: props.defaultValue }, props), { children: children == null ? void 0 : children.map((child) => /* @__PURE__ */ jsxs("div", { className: "flex items-center space-x-2", children: [
-          /* @__PURE__ */ jsx(RadioGroupItem, __spreadValues({ value: child.props.value }, child.props)),
-          /* @__PURE__ */ jsx("label", { className: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70", children: child.props["nli-markdown"] })
-        ] }, child.key)) }))
+        /* @__PURE__ */ jsx(
+          RadioGroup,
+          __spreadProps(__spreadValues({}, restProps), {
+            defaultValue: props.defaultValue,
+            onValueChange: (value) => {
+              var _a2;
+              handleChange(value);
+              (_a2 = props.onValueChange) == null ? void 0 : _a2.call(props, value);
+            },
+            children: children == null ? void 0 : children.map((child) => /* @__PURE__ */ jsxs("div", { className: "flex items-center space-x-2", children: [
+              /* @__PURE__ */ jsx(RadioGroupItem, __spreadValues({ value: child.props.value }, child.props)),
+              /* @__PURE__ */ jsx("label", { className: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70", children: child.props["nli-markdown"] })
+            ] }, child.key))
+          })
+        )
       ] }, key);
-    case "select":
+    }
+    case "select": {
+      const _f = props, { onValueChange: _unused } = _f, restProps = __objRest(_f, ["onValueChange"]);
       return /* @__PURE__ */ jsxs("div", { className: "space-y-2", children: [
         /* @__PURE__ */ jsx("label", { className: "text-sm font-medium", children: props["nli-markdown"] }),
-        /* @__PURE__ */ jsxs(Select, __spreadProps(__spreadValues({ defaultValue: props.defaultValue }, props), { children: [
-          /* @__PURE__ */ jsx(SelectTrigger, { children: /* @__PURE__ */ jsx(SelectValue, { placeholder: `Select ${props["nli-markdown"]}` }) }),
-          /* @__PURE__ */ jsx(SelectContent, { children: children == null ? void 0 : children.map((child) => /* @__PURE__ */ jsx(SelectItem, __spreadProps(__spreadValues({ value: child.props.value }, child.props), { children: child.props["nli-markdown"] }), child.key)) })
-        ] }))
+        /* @__PURE__ */ jsxs(
+          Select,
+          __spreadProps(__spreadValues({}, restProps), {
+            defaultValue: props.defaultValue,
+            onValueChange: (value) => {
+              var _a2;
+              handleChange(value);
+              (_a2 = props.onValueChange) == null ? void 0 : _a2.call(props, value);
+            },
+            children: [
+              /* @__PURE__ */ jsx(SelectTrigger, { children: /* @__PURE__ */ jsx(SelectValue, { placeholder: `Select ${props["nli-markdown"]}` }) }),
+              /* @__PURE__ */ jsx(SelectContent, { children: children == null ? void 0 : children.map((child) => /* @__PURE__ */ jsx(SelectItem, __spreadProps(__spreadValues({ value: child.props.value }, child.props), { children: child.props["nli-markdown"] }), child.key)) })
+            ]
+          })
+        )
       ] }, key);
-    case "combobox":
+    }
+    case "combobox": {
+      const _g = props, { onChange: _unused } = _g, restProps = __objRest(_g, ["onChange"]);
       return /* @__PURE__ */ jsxs("div", { className: "space-y-2", children: [
         /* @__PURE__ */ jsx("label", { className: "text-sm font-medium", children: props["nli-markdown"] }),
-        /* @__PURE__ */ jsx(ComboBox, __spreadValues({ options: props.options || [] }, props))
+        /* @__PURE__ */ jsx(
+          ComboBox,
+          __spreadProps(__spreadValues({}, restProps), {
+            options: props.options || [],
+            onChange: (value) => {
+              var _a2;
+              handleChange(value);
+              (_a2 = props.onChange) == null ? void 0 : _a2.call(props, value);
+            }
+          })
+        )
       ] }, key);
-    case "togglegroup":
+    }
+    case "togglegroup": {
+      const _h = props, { onValueChange: _unused } = _h, restProps = __objRest(_h, ["onValueChange"]);
       return /* @__PURE__ */ jsxs("div", { className: "space-y-2", "nli-group-label": props["nli-markdown"], children: [
         /* @__PURE__ */ jsx("label", { className: "text-sm font-medium", children: props["nli-markdown"] }),
-        /* @__PURE__ */ jsx(ToggleGroup, __spreadProps(__spreadValues({ type: "multiple", defaultValue: props.defaultValue }, props), { children: children == null ? void 0 : children.map((child) => /* @__PURE__ */ jsx(ToggleGroupItem, __spreadProps(__spreadValues({ value: child.props.value }, child.props), { children: child.props.value }), child.key)) }))
+        /* @__PURE__ */ jsx(
+          ToggleGroup,
+          __spreadProps(__spreadValues({}, restProps), {
+            type: "multiple",
+            defaultValue: props.defaultValue,
+            onValueChange: (value) => {
+              var _a2;
+              handleChange(value);
+              (_a2 = props.onValueChange) == null ? void 0 : _a2.call(props, value);
+            },
+            children: children == null ? void 0 : children.map((child) => /* @__PURE__ */ jsx(ToggleGroupItem, __spreadProps(__spreadValues({ value: child.props.value }, child.props), { children: child.props.value }), child.key))
+          })
+        )
       ] }, key);
-    case "checkboxgroup":
+    }
+    case "checkboxgroup": {
+      const _i = props, { onValueChange: _unused } = _i, restProps = __objRest(_i, ["onValueChange"]);
       return /* @__PURE__ */ jsxs("div", { className: "space-y-2", "nli-group-label": props["nli-markdown"], children: [
         /* @__PURE__ */ jsx("label", { className: "text-sm font-medium", children: props["nli-markdown"] }),
-        /* @__PURE__ */ jsx(CheckboxGroup, __spreadProps(__spreadValues({ defaultValue: props.defaultValue }, props), { children: children == null ? void 0 : children.map((child) => /* @__PURE__ */ jsxs("div", { className: "flex items-center space-x-2", children: [
-          /* @__PURE__ */ jsx(CheckboxGroupItem, __spreadValues({ value: child.props.value }, child.props)),
-          /* @__PURE__ */ jsx("label", { className: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70", children: child.props["nli-markdown"] })
-        ] }, child.key)) }))
+        /* @__PURE__ */ jsx(
+          CheckboxGroup,
+          __spreadProps(__spreadValues({}, restProps), {
+            defaultValue: props.defaultValue,
+            onValueChange: (value) => {
+              var _a2;
+              handleChange(value);
+              (_a2 = props.onValueChange) == null ? void 0 : _a2.call(props, value);
+            },
+            children: children == null ? void 0 : children.map((child) => /* @__PURE__ */ jsxs("div", { className: "flex items-center space-x-2", children: [
+              /* @__PURE__ */ jsx(CheckboxGroupItem, __spreadValues({ value: child.props.value }, child.props)),
+              /* @__PURE__ */ jsx("label", { className: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70", children: child.props["nli-markdown"] })
+            ] }, child.key))
+          })
+        )
       ] }, key);
+    }
     default:
       return null;
   }
@@ -1609,12 +1934,12 @@ function safeParseDate(value) {
 }
 function DatePickerComponent(props) {
   const dateValue = props["data-date-value"];
-  const [date, setDate] = React14.useState(
-    safeParseDate(dateValue)
-  );
-  React14.useEffect(() => {
-    setDate(safeParseDate(dateValue));
-  }, [dateValue]);
+  const date = safeParseDate(dateValue);
+  const handleDateChange = (newDate) => {
+    if (props.onChange && newDate) {
+      props.onChange(format(newDate, "MMMM dd, yyyy"));
+    }
+  };
   return /* @__PURE__ */ jsxs("div", { className: "space-y-2", children: [
     /* @__PURE__ */ jsx("label", { className: "text-sm font-medium", children: props["nli-markdown"] }),
     /* @__PURE__ */ jsxs(Popover, { children: [
@@ -1639,7 +1964,7 @@ function DatePickerComponent(props) {
         {
           mode: "single",
           selected: date,
-          onSelect: setDate,
+          onSelect: handleDateChange,
           initialFocus: true
         }
       ) })
@@ -1649,16 +1974,16 @@ function DatePickerComponent(props) {
 function DateRangePickerComponent(props) {
   const fromValue = props["data-date-from"];
   const toValue = props["data-date-to"];
-  const [dateRange, setDateRange] = React14.useState({
+  const dateRange = {
     from: safeParseDate(fromValue),
     to: safeParseDate(toValue)
-  });
-  React14.useEffect(() => {
-    setDateRange({
-      from: safeParseDate(fromValue),
-      to: safeParseDate(toValue)
-    });
-  }, [fromValue, toValue]);
+  };
+  const handleDateRangeChange = (newRange) => {
+    if (props.onChange && (newRange == null ? void 0 : newRange.from) && (newRange == null ? void 0 : newRange.to)) {
+      const formattedRange = `${format(newRange.from, "MMMM dd, yyyy")} - ${format(newRange.to, "MMMM dd, yyyy")}`;
+      props.onChange(formattedRange);
+    }
+  };
   return /* @__PURE__ */ jsxs("div", { className: "space-y-2", children: [
     /* @__PURE__ */ jsx("label", { className: "text-sm font-medium", children: props["nli-markdown"] }),
     /* @__PURE__ */ jsxs(Popover, { children: [
@@ -1688,7 +2013,7 @@ function DateRangePickerComponent(props) {
         {
           mode: "range",
           selected: dateRange,
-          onSelect: setDateRange,
+          onSelect: handleDateRangeChange,
           numberOfMonths: 2,
           initialFocus: true
         }
@@ -1696,8 +2021,8 @@ function DateRangePickerComponent(props) {
     ] })
   ] });
 }
-function instantiateComponents(components) {
-  return components.map((component) => renderComponent(component)).filter(Boolean);
+function instantiateComponents(components, onComponentChange) {
+  return components.map((component) => renderComponent(component, onComponentChange)).filter(Boolean);
 }
 function InstantiatedForm({
   components,
@@ -1735,6 +2060,55 @@ function parseToComponents(markdown) {
     hasErrors: ast.errors.some((e) => e.severity === "error")
   };
 }
+var parseCache = /* @__PURE__ */ new Map();
+var CACHE_TTL = 5e3;
+var MAX_CACHE_SIZE = 100;
+function hashMarkdown(markdown) {
+  let hash = 0;
+  for (let i = 0; i < markdown.length; i++) {
+    const char = markdown.charCodeAt(i);
+    hash = (hash << 5) - hash + char;
+    hash = hash & hash;
+  }
+  return hash.toString(36);
+}
+function cleanCache() {
+  const now = Date.now();
+  for (const [key, entry] of parseCache.entries()) {
+    if (now - entry.timestamp > CACHE_TTL) {
+      parseCache.delete(key);
+    }
+  }
+  if (parseCache.size > MAX_CACHE_SIZE) {
+    const entries = Array.from(parseCache.entries());
+    entries.sort((a, b) => a[1].timestamp - b[1].timestamp);
+    const toRemove = entries.slice(0, parseCache.size - MAX_CACHE_SIZE);
+    toRemove.forEach(([key]) => parseCache.delete(key));
+  }
+}
+function parseWithCache(markdown, options = {}) {
+  const { skipCache = false } = options;
+  if (skipCache) {
+    return parseToComponents(markdown);
+  }
+  const cacheKey = hashMarkdown(markdown);
+  const cached = parseCache.get(cacheKey);
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+    return cached.result;
+  }
+  const result = parseToComponents(markdown);
+  parseCache.set(cacheKey, {
+    result,
+    timestamp: Date.now()
+  });
+  if (parseCache.size > MAX_CACHE_SIZE) {
+    cleanCache();
+  }
+  return result;
+}
+function clearParseCache() {
+  parseCache.clear();
+}
 var generators = {
   /**
    * Input and Textarea components
@@ -1750,59 +2124,75 @@ var generators = {
    * Format: "*Label:* Month DD, YYYY"
    */
   date: (element, label) => {
+    var _a;
     const dateValue = element.getAttribute("data-date-value");
-    if (!dateValue) return null;
     try {
-      const date = parseISO(dateValue);
-      if (isValid(date)) {
-        return `*${label}:* ${format(date, "MMMM dd, yyyy")}`;
-      } else {
-        return `*${label}:* ${dateValue}`;
+      if (dateValue && dateValue !== "") {
+        const date = parseISO(dateValue);
+        if (isValid(date)) {
+          return `*${label}:* ${format(date, "MMMM dd, yyyy")}`;
+        }
       }
+      const button = element.querySelector("button");
+      const displayText = (_a = button == null ? void 0 : button.textContent) == null ? void 0 : _a.trim();
+      if (displayText && !displayText.includes("Pick a date")) {
+        return `*${label}:* ${displayText.replace(/^\s*\S+\s*/, "")}`;
+      }
+      return `*${label}:* `;
     } catch (error) {
       console.warn("Invalid date format:", dateValue, error);
-      return `*${label}:* ${dateValue}`;
+      return `*${label}:* ${dateValue || ""}`;
     }
   },
   /**
    * Date range picker component
-   * Format: "*Label Date Range:* Month DD, YYYY - Month DD, YYYY"
+   * Format: "*Label:* Month DD, YYYY - Month DD, YYYY"
    */
   dateRange: (element, label) => {
+    var _a;
     const from = element.getAttribute("data-date-from");
     const to = element.getAttribute("data-date-to");
-    if (!from || !to) return null;
     try {
-      const fromDate = parseISO(from);
-      const toDate = parseISO(to);
-      if (isValid(fromDate) && isValid(toDate)) {
-        if (fromDate > toDate) {
-          console.warn("Date range invalid: from date is after to date");
+      if (from && to && from !== "" && to !== "") {
+        const fromDate = parseISO(from);
+        const toDate = parseISO(to);
+        if (isValid(fromDate) && isValid(toDate)) {
+          if (fromDate > toDate) {
+            console.warn("Date range invalid: from date is after to date");
+          }
+          return `*${label}:* ${format(fromDate, "MMMM dd, yyyy")} - ${format(toDate, "MMMM dd, yyyy")}`;
         }
-        return `*${label} Date Range:* ${format(fromDate, "MMMM dd, yyyy")} - ${format(toDate, "MMMM dd, yyyy")}`;
       }
+      const button = element.querySelector("button");
+      const displayText = (_a = button == null ? void 0 : button.textContent) == null ? void 0 : _a.trim();
+      if (displayText && !displayText.includes("Pick a date")) {
+        return `*${label}:* ${displayText.replace(/^\s*\S+\s*/, "")}`;
+      }
+      return `*${label}:* `;
     } catch (error) {
       console.warn("Invalid date range format:", { from, to }, error);
+      return `*${label}:* ${from || ""} - ${to || ""}`;
     }
-    return `*${label}:* ${from} - ${to}`;
   },
   /**
    * Checkbox component
-   * Format: "Label" (only when checked)
-   * Unchecked checkboxes are omitted
+   * Format: "[x] Label" (checked) or "[ ] Label" (unchecked)
+   * Always returns both states to preserve checkbox position in markdown
    */
   checkbox: (element, label) => {
     const state = element.getAttribute("data-state");
-    return state === "checked" ? label : null;
+    const isChecked = state === "checked";
+    return `[${isChecked ? "x" : " "}] ${label}`;
   },
   /**
    * Radio button component
-   * Format: "Label" (only when selected)
-   * Unselected radio buttons are omitted
+   * Format: "[x] Label" (selected) or "[ ] Label" (unselected)
+   * Both states are now shown to preserve component in markdown
    */
   radio: (element, label) => {
     const state = element.getAttribute("data-state");
-    return state === "checked" ? label : null;
+    const isChecked = state === "checked";
+    return `[${isChecked ? "x" : " "}] ${label}`;
   },
   /**
    * Switch component
@@ -1862,7 +2252,934 @@ function generateMarkdownForElement(element, label) {
 function isRegularButton(element) {
   return !!(element && element.tagName === "BUTTON" && element.getAttribute("role") !== "checkbox" && element.getAttribute("role") !== "radio" && element.getAttribute("role") !== "combobox" && element.getAttribute("role") !== "switch" && element.getAttribute("aria-pressed") === null);
 }
+function generateMarkdownFromComponent(component, isInGroup = false) {
+  const label = component.props["nli-markdown"] || component.props.label || "";
+  switch (component.type) {
+    case "input":
+    case "textarea": {
+      const value = component.props.defaultValue || component.props.value || "";
+      return `*${label}:* ${value}`;
+    }
+    case "date": {
+      const dateValue = component.props["data-date-value"] || "";
+      if (dateValue) {
+        try {
+          const date = parseISO(dateValue);
+          if (isValid(date)) {
+            return `*${label}:* ${format(date, "MMMM dd, yyyy")}`;
+          }
+        } catch (e) {
+        }
+      }
+      return `*${label}:* ${dateValue}`;
+    }
+    case "daterange": {
+      const from = component.props["data-date-from"] || "";
+      const to = component.props["data-date-to"] || "";
+      if (from && to) {
+        try {
+          const fromDate = parseISO(from);
+          const toDate = parseISO(to);
+          if (isValid(fromDate) && isValid(toDate)) {
+            return `*${label} Date Range:* ${format(fromDate, "MMMM dd, yyyy")} - ${format(toDate, "MMMM dd, yyyy")}`;
+          }
+        } catch (e) {
+        }
+      }
+      return `*${label}:* ${from} - ${to}`;
+    }
+    case "checkbox": {
+      const checked = component.props.defaultChecked || component.props.checked || component.props.value === "true" || component.props.value === true || false;
+      return `[${checked ? "x" : " "}] ${label}`;
+    }
+    case "radio": {
+      const checked = component.props.defaultChecked || component.props.checked || component.props.value === "true" || component.props.value === true || false;
+      return `[${checked ? "x" : " "}] ${label}`;
+    }
+    case "checkbox-item":
+    case "toggle-item":
+    case "select-item": {
+      return label;
+    }
+    case "switch": {
+      const checked = component.props.defaultChecked || component.props.checked || false;
+      return `*${label}:* ${checked ? "yes" : "no"}`;
+    }
+    case "button":
+      return `[${label}]`;
+    case "select": {
+      const selectedValue = component.props.value || component.props.defaultValue || "";
+      if (component.children && component.children.length > 0) {
+        let markdown = `*${label}:* ${selectedValue}
+`;
+        component.children.forEach((child) => {
+          const optionLabel = child.props["nli-markdown"] || child.props.label || child.props.value || "";
+          markdown += `- ${optionLabel}
+`;
+        });
+        return markdown.trimEnd();
+      }
+      return `*${label}:* ${selectedValue}`;
+    }
+    case "combobox": {
+      let markdown = `*${label}:*
+`;
+      const selectedValues = component.props.value || component.props.defaultValue || [];
+      if (component.children && component.children.length > 0) {
+        component.children.forEach((child) => {
+          const optionLabel = child.props["nli-markdown"] || child.props.label || child.props.value || "";
+          const isSelected = Array.isArray(selectedValues) ? selectedValues.includes(child.props.value) : false;
+          markdown += `[${isSelected ? "x" : " "}] ${optionLabel}
+`;
+        });
+        return markdown.trimEnd();
+      }
+      return `*${label}:* ${Array.isArray(selectedValues) ? selectedValues.join(", ") : selectedValues}`;
+    }
+    case "radiogroup": {
+      const selectedValue = component.props.defaultValue || component.props.value || "";
+      let markdown = `*${label}:* ${selectedValue}
+`;
+      if (component.children) {
+        component.children.forEach((child) => {
+          const optionLabel = child.props["nli-markdown"] || child.props.label || child.props.value || "";
+          markdown += `- ${optionLabel}
+`;
+        });
+      }
+      return markdown.trimEnd();
+    }
+    case "checkboxgroup": {
+      let markdown = `*${label}:*
+`;
+      const selectedValues = component.props.defaultValue || component.props.value || [];
+      if (component.children) {
+        component.children.forEach((child) => {
+          const optionLabel = child.props["nli-markdown"] || child.props.label || child.props.value || "";
+          const isSelected = Array.isArray(selectedValues) ? selectedValues.includes(child.props.value) : false;
+          markdown += `[${isSelected ? "x" : " "}] ${optionLabel}
+`;
+        });
+      }
+      return markdown.trimEnd();
+    }
+    case "togglegroup": {
+      let markdown = `*${label}:*
+`;
+      const selectedValues = component.props.defaultValue || component.props.value || [];
+      if (component.children) {
+        component.children.forEach((child) => {
+          const optionLabel = child.props["nli-markdown"] || child.props.label || child.props.value || "";
+          const isSelected = Array.isArray(selectedValues) ? selectedValues.includes(child.props.value) : false;
+          markdown += `*${optionLabel}:* ${isSelected ? "yes" : "no"}
+`;
+        });
+      }
+      return markdown.trimEnd();
+    }
+    default:
+      return label;
+  }
+}
+function generateMarkdownFromComponents(components) {
+  let markdown = "";
+  for (const component of components) {
+    const componentMarkdown = generateMarkdownFromComponent(component);
+    if (!componentMarkdown) continue;
+    if (component.children) {
+      if (markdown) markdown += "\n";
+      markdown += componentMarkdown;
+    } else {
+      if (markdown) markdown += "\n";
+      markdown += componentMarkdown;
+    }
+  }
+  return markdown.trim();
+}
+function generateMarkdownWithMapping(components) {
+  const mapping = [];
+  const lines = [];
+  components.forEach((component) => {
+    const startLine = lines.length;
+    const componentMarkdown = generateMarkdownFromComponent(component);
+    if (componentMarkdown) {
+      const componentLines = componentMarkdown.split("\n");
+      lines.push(...componentLines);
+      mapping.push({
+        componentKey: component.key,
+        startLine,
+        endLine: lines.length - 1,
+        markdown: componentMarkdown
+      });
+    }
+  });
+  return {
+    markdown: lines.join("\n"),
+    mapping
+  };
+}
+function updateMarkdownIncremental(previousMapping, changedComponents, allComponents) {
+  return generateMarkdownWithMapping(allComponents);
+}
 
-export { Button, ButtonGroup, Calendar, Checkbox, CheckboxGroup, CheckboxGroupItem, ComboBox, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, Input, InstantiatedForm, Popover, PopoverContent, PopoverTrigger, RadioGroup, RadioGroupItem, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Switch, Textarea, Toggle, ToggleGroup, ToggleGroupItem, buildAST, buttonVariants, cn, extractValues, filterBlanks, generateMarkdownForElement, getUnknownTokens, inferComponentType, inferGroupType, instantiateComponents, isBooleanValue, isRegularButton, mapASTToComponents, parse, parseBooleanValue, parseToComponents, toggleVariants, tokenize, validateAST };
+// src/lib/sync-reconciler.ts
+var SyncReconciler = class {
+  constructor(options) {
+    this.options = options;
+    this.syncLock = false;
+    this.updateQueue = [];
+    this.lastProcessedMarkdownSeq = -1;
+    this.lastProcessedGuiSeq = -1;
+    this.currentComponents = [];
+    this.currentMarkdown = "";
+    this.updateCount = 0;
+    this.updateWindowStart = Date.now();
+    this.MAX_UPDATES_PER_SECOND = 10;
+  }
+  /**
+   * Set current state (used for initialization)
+   */
+  setState(components, markdown) {
+    this.currentComponents = components;
+    this.currentMarkdown = markdown;
+  }
+  /**
+   * Reconcile an update from either markdown or GUI
+   */
+  reconcileUpdate(origin, content, sequence) {
+    var _a, _b, _c, _d;
+    if (this.isUpdateRateLimitExceeded()) {
+      console.warn("[SyncReconciler] Update rate limit exceeded, pausing sync");
+      return {
+        shouldUpdateComponents: false,
+        shouldUpdateMarkdown: false,
+        error: new Error("Update rate limit exceeded")
+      };
+    }
+    if (this.syncLock) {
+      this.updateQueue.push({
+        origin,
+        content,
+        sequence,
+        timestamp: Date.now()
+      });
+      return {
+        shouldUpdateComponents: false,
+        shouldUpdateMarkdown: false
+      };
+    }
+    this.syncLock = true;
+    (_b = (_a = this.options).onSyncStatusChange) == null ? void 0 : _b.call(_a, "syncing");
+    try {
+      const result = this.processUpdate(origin, content, sequence);
+      (_d = (_c = this.options).onSyncStatusChange) == null ? void 0 : _d.call(_c, result.error ? "error" : "idle");
+      return result;
+    } finally {
+      this.syncLock = false;
+      this.processQueue();
+    }
+  }
+  /**
+   * Process a single update
+   */
+  processUpdate(origin, content, sequence) {
+    if (origin === "markdown") {
+      return this.processMarkdownUpdate(content, sequence);
+    } else if (origin === "gui") {
+      return this.processGuiUpdate(content, sequence);
+    }
+    return {
+      shouldUpdateComponents: false,
+      shouldUpdateMarkdown: false
+    };
+  }
+  /**
+   * Process an update from markdown editor
+   */
+  processMarkdownUpdate(markdown, sequence) {
+    var _a, _b;
+    if (sequence <= this.lastProcessedMarkdownSeq) {
+      return {
+        shouldUpdateComponents: false,
+        shouldUpdateMarkdown: false
+      };
+    }
+    const markdownDiff = this.options.diffMarkdown(
+      this.currentMarkdown,
+      markdown
+    );
+    if (!markdownDiff.hasChanges) {
+      this.lastProcessedMarkdownSeq = sequence;
+      return {
+        shouldUpdateComponents: false,
+        shouldUpdateMarkdown: false
+      };
+    }
+    try {
+      const parseResult = this.options.parseToComponents(markdown);
+      (_b = (_a = this.options).onParseErrors) == null ? void 0 : _b.call(_a, parseResult.errors);
+      const componentDiff = this.options.diffComponents(
+        this.currentComponents,
+        parseResult.components
+      );
+      if (componentDiff.hasChanges) {
+        this.currentComponents = parseResult.components;
+        this.currentMarkdown = markdown;
+        this.lastProcessedMarkdownSeq = sequence;
+        this.trackUpdate();
+        return {
+          shouldUpdateComponents: true,
+          shouldUpdateMarkdown: false,
+          components: parseResult.components
+        };
+      }
+      this.currentMarkdown = markdown;
+      this.lastProcessedMarkdownSeq = sequence;
+      return {
+        shouldUpdateComponents: false,
+        shouldUpdateMarkdown: false
+      };
+    } catch (error) {
+      console.error("[SyncReconciler] Parse error:", error);
+      return {
+        shouldUpdateComponents: false,
+        shouldUpdateMarkdown: false,
+        error
+      };
+    }
+  }
+  /**
+   * Process an update from GUI interaction
+   */
+  processGuiUpdate(components, sequence) {
+    var _a, _b;
+    if (sequence <= this.lastProcessedGuiSeq) {
+      return {
+        shouldUpdateComponents: false,
+        shouldUpdateMarkdown: false
+      };
+    }
+    const componentDiff = this.options.diffComponents(
+      this.currentComponents,
+      components
+    );
+    if (!componentDiff.hasChanges) {
+      this.lastProcessedGuiSeq = sequence;
+      return {
+        shouldUpdateComponents: false,
+        shouldUpdateMarkdown: false
+      };
+    }
+    try {
+      const newMarkdown = this.options.generateMarkdown(components);
+      (_b = (_a = this.options).onParseErrors) == null ? void 0 : _b.call(_a, []);
+      const markdownDiff = this.options.diffMarkdown(
+        this.currentMarkdown,
+        newMarkdown
+      );
+      if (markdownDiff.hasChanges) {
+        this.currentComponents = components;
+        this.currentMarkdown = newMarkdown;
+        this.lastProcessedGuiSeq = sequence;
+        this.trackUpdate();
+        return {
+          shouldUpdateComponents: false,
+          shouldUpdateMarkdown: true,
+          markdown: newMarkdown
+        };
+      }
+      this.currentComponents = components;
+      this.lastProcessedGuiSeq = sequence;
+      return {
+        shouldUpdateComponents: false,
+        shouldUpdateMarkdown: false
+      };
+    } catch (error) {
+      console.error("[SyncReconciler] Generate error:", error);
+      return {
+        shouldUpdateComponents: false,
+        shouldUpdateMarkdown: false,
+        error
+      };
+    }
+  }
+  /**
+   * Process queued updates
+   */
+  processQueue() {
+    if (this.updateQueue.length === 0) return;
+    const update = this.updateQueue.shift();
+    if (update) {
+      this.reconcileUpdate(update.origin, update.content, update.sequence);
+    }
+  }
+  /**
+   * Track update rate for circuit breaker
+   */
+  trackUpdate() {
+    this.updateCount++;
+    const now = Date.now();
+    if (now - this.updateWindowStart > 1e3) {
+      this.updateCount = 1;
+      this.updateWindowStart = now;
+    }
+  }
+  /**
+   * Check if update rate limit is exceeded
+   */
+  isUpdateRateLimitExceeded() {
+    const now = Date.now();
+    if (now - this.updateWindowStart > 1e3) {
+      this.updateCount = 0;
+      this.updateWindowStart = now;
+      return false;
+    }
+    return this.updateCount >= this.MAX_UPDATES_PER_SECOND;
+  }
+  /**
+   * Get current reconciler state
+   */
+  getState() {
+    return {
+      components: this.currentComponents,
+      markdown: this.currentMarkdown,
+      lastMarkdownSeq: this.lastProcessedMarkdownSeq,
+      lastGuiSeq: this.lastProcessedGuiSeq,
+      queueLength: this.updateQueue.length,
+      isLocked: this.syncLock
+    };
+  }
+  /**
+   * Reset reconciler state
+   */
+  reset() {
+    this.syncLock = false;
+    this.updateQueue = [];
+    this.lastProcessedMarkdownSeq = -1;
+    this.lastProcessedGuiSeq = -1;
+    this.updateCount = 0;
+    this.updateWindowStart = Date.now();
+  }
+};
+function createSyncReconciler(options) {
+  return new SyncReconciler(options);
+}
+
+// src/lib/component-differ.ts
+function diffComponents(oldComponents, newComponents) {
+  const diff = {
+    hasChanges: false,
+    added: [],
+    removed: [],
+    modified: []
+  };
+  if (oldComponents.length !== newComponents.length) {
+    diff.hasChanges = true;
+  }
+  const oldMap = /* @__PURE__ */ new Map();
+  const newMap = /* @__PURE__ */ new Map();
+  oldComponents.forEach((comp) => oldMap.set(comp.key, comp));
+  newComponents.forEach((comp) => newMap.set(comp.key, comp));
+  for (const [key, component] of oldMap) {
+    if (!newMap.has(key)) {
+      diff.removed.push(component);
+      diff.hasChanges = true;
+    }
+  }
+  for (const [key, newComponent] of newMap) {
+    const oldComponent = oldMap.get(key);
+    if (!oldComponent) {
+      diff.added.push(newComponent);
+      diff.hasChanges = true;
+    } else {
+      if (!areComponentsEqual(oldComponent, newComponent)) {
+        diff.modified.push({ oldComponent, newComponent });
+        diff.hasChanges = true;
+      }
+    }
+  }
+  return diff;
+}
+function areComponentsEqual(a, b) {
+  if (a.type !== b.type) return false;
+  if (a.key !== b.key) return false;
+  if (!arePropsEqual(a.props, b.props)) return false;
+  if (!areChildrenEqual(a.children, b.children)) return false;
+  return true;
+}
+function arePropsEqual(a, b) {
+  const aKeys = Object.keys(a).sort();
+  const bKeys = Object.keys(b).sort();
+  if (aKeys.length !== bKeys.length) return false;
+  if (!arraysEqual(aKeys, bKeys)) return false;
+  for (const key of aKeys) {
+    const aVal = a[key];
+    const bVal = b[key];
+    if (typeof aVal !== typeof bVal) return false;
+    if (typeof aVal === "object" && aVal !== null) {
+      if (!deepEqual(aVal, bVal)) return false;
+    } else {
+      if (aVal !== bVal) return false;
+    }
+  }
+  return true;
+}
+function areChildrenEqual(a, b) {
+  if (!a && !b) return true;
+  if (!a || !b) return false;
+  if (a.length !== b.length) return false;
+  for (let i = 0; i < a.length; i++) {
+    if (!areComponentsEqual(a[i], b[i])) return false;
+  }
+  return true;
+}
+function deepEqual(a, b) {
+  if (a === b) return true;
+  if (typeof a !== "object" || typeof b !== "object") {
+    return false;
+  }
+  if (a === null || b === null) {
+    return a === b;
+  }
+  if (Array.isArray(a) && Array.isArray(b)) {
+    if (a.length !== b.length) return false;
+    for (let i = 0; i < a.length; i++) {
+      if (!deepEqual(a[i], b[i])) return false;
+    }
+    return true;
+  }
+  const aKeys = Object.keys(a).sort();
+  const bKeys = Object.keys(b).sort();
+  if (aKeys.length !== bKeys.length) return false;
+  if (!arraysEqual(aKeys, bKeys)) return false;
+  for (const key of aKeys) {
+    if (!deepEqual(a[key], b[key])) return false;
+  }
+  return true;
+}
+function arraysEqual(a, b) {
+  if (a.length !== b.length) return false;
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] !== b[i]) return false;
+  }
+  return true;
+}
+
+// src/lib/markdown-differ.ts
+function normalizeMarkdown(markdown) {
+  return markdown.split("\n").map((line) => line.trimEnd()).join("\n").trimEnd();
+}
+function diffMarkdown(oldMarkdown, newMarkdown, options = {}) {
+  const { normalize = true, detailed = false } = options;
+  const oldNormalized = normalize ? normalizeMarkdown(oldMarkdown) : oldMarkdown;
+  const newNormalized = normalize ? normalizeMarkdown(newMarkdown) : newMarkdown;
+  if (oldNormalized === newNormalized) {
+    return {
+      hasChanges: false,
+      addedLines: [],
+      removedLines: [],
+      modifiedLines: []
+    };
+  }
+  if (!detailed) {
+    return {
+      hasChanges: true,
+      addedLines: [],
+      removedLines: [],
+      modifiedLines: []
+    };
+  }
+  return diffLines(oldNormalized, newNormalized);
+}
+function diffLines(oldMarkdown, newMarkdown) {
+  const oldLines = oldMarkdown.split("\n");
+  const newLines = newMarkdown.split("\n");
+  const diff = {
+    hasChanges: true,
+    addedLines: [],
+    removedLines: [],
+    modifiedLines: []
+  };
+  const maxLength = Math.max(oldLines.length, newLines.length);
+  for (let i = 0; i < maxLength; i++) {
+    const oldLine = oldLines[i];
+    const newLine = newLines[i];
+    if (oldLine === void 0) {
+      diff.addedLines.push(i);
+    } else if (newLine === void 0) {
+      diff.removedLines.push(i);
+    } else if (oldLine !== newLine) {
+      diff.modifiedLines.push({
+        lineNumber: i,
+        oldContent: oldLine,
+        newContent: newLine
+      });
+    }
+  }
+  return diff;
+}
+
+// src/hooks/useBidirectionalSync.ts
+function useBidirectionalSync(options) {
+  const {
+    initialMarkdown = "",
+    initialComponents = [],
+    generateMarkdown,
+    markdownDebounce = 300,
+    guiDebounce = 50,
+    onSyncError,
+    onParseErrors
+  } = options;
+  const [components, setComponents] = useState(initialComponents);
+  const [markdown, setMarkdown] = useState(initialMarkdown);
+  const [lastUpdateOrigin, setLastUpdateOrigin] = useState("init");
+  const [guiSequence, setGuiSequence] = useState(0);
+  const [markdownSequence, setMarkdownSequence] = useState(0);
+  const [syncStatus, setSyncStatus] = useState("idle");
+  const [parseErrors, setParseErrors] = useState([]);
+  const markdownTimeoutRef = useRef(null);
+  const guiTimeoutRef = useRef(null);
+  const reconcilerRef = useRef(
+    createSyncReconciler({
+      parseToComponents: parseWithCache,
+      generateMarkdown,
+      diffComponents,
+      diffMarkdown,
+      onSyncStatusChange: setSyncStatus,
+      onParseErrors: (errors) => {
+        setParseErrors(errors);
+        onParseErrors == null ? void 0 : onParseErrors(errors);
+      }
+    })
+  );
+  useEffect(() => {
+    reconcilerRef.current.setState(initialComponents, initialMarkdown);
+  }, []);
+  const updateMarkdown = useCallback(
+    (newMarkdown) => {
+      if (markdownTimeoutRef.current) {
+        clearTimeout(markdownTimeoutRef.current);
+      }
+      setMarkdown(newMarkdown);
+      setLastUpdateOrigin("markdown");
+      markdownTimeoutRef.current = setTimeout(() => {
+        const newSequence = markdownSequence + 1;
+        setMarkdownSequence(newSequence);
+        const result = reconcilerRef.current.reconcileUpdate(
+          "markdown",
+          newMarkdown,
+          newSequence
+        );
+        if (result.error) {
+          onSyncError == null ? void 0 : onSyncError(result.error);
+        }
+        if (result.shouldUpdateComponents && result.components) {
+          setComponents(result.components);
+        }
+      }, markdownDebounce);
+    },
+    [markdownSequence, markdownDebounce, onSyncError]
+  );
+  const updateComponents = useCallback(
+    (newComponents) => {
+      if (guiTimeoutRef.current) {
+        clearTimeout(guiTimeoutRef.current);
+      }
+      setComponents(newComponents);
+      setLastUpdateOrigin("gui");
+      guiTimeoutRef.current = setTimeout(() => {
+        const newSequence = guiSequence + 1;
+        setGuiSequence(newSequence);
+        const result = reconcilerRef.current.reconcileUpdate(
+          "gui",
+          newComponents,
+          newSequence
+        );
+        if (result.error) {
+          onSyncError == null ? void 0 : onSyncError(result.error);
+        }
+        if (result.shouldUpdateMarkdown && result.markdown) {
+          setMarkdown(result.markdown);
+        }
+      }, guiDebounce);
+    },
+    [guiSequence, guiDebounce, onSyncError]
+  );
+  const reset = useCallback(() => {
+    setComponents(initialComponents);
+    setMarkdown(initialMarkdown);
+    setLastUpdateOrigin("init");
+    setGuiSequence(0);
+    setMarkdownSequence(0);
+    setSyncStatus("idle");
+    setParseErrors([]);
+    reconcilerRef.current.reset();
+    reconcilerRef.current.setState(initialComponents, initialMarkdown);
+  }, [initialComponents, initialMarkdown]);
+  useEffect(() => {
+    return () => {
+      if (markdownTimeoutRef.current) {
+        clearTimeout(markdownTimeoutRef.current);
+      }
+      if (guiTimeoutRef.current) {
+        clearTimeout(guiTimeoutRef.current);
+      }
+    };
+  }, []);
+  return {
+    components,
+    markdown,
+    lastUpdateOrigin,
+    guiSequence,
+    markdownSequence,
+    syncStatus,
+    parseErrors,
+    updateMarkdown,
+    updateComponents,
+    reset
+  };
+}
+
+// src/lib/cursor-manager.ts
+function saveCursorPosition(textareaRef) {
+  const textarea = textareaRef.current;
+  if (!textarea) return null;
+  return {
+    start: textarea.selectionStart,
+    end: textarea.selectionEnd
+  };
+}
+function restoreCursorPosition(textareaRef, position) {
+  if (!position) return;
+  const textarea = textareaRef.current;
+  if (!textarea) return;
+  requestAnimationFrame(() => {
+    try {
+      textarea.setSelectionRange(position.start, position.end);
+    } catch (error) {
+      console.debug("Failed to restore cursor position:", error);
+    }
+  });
+}
+function preserveCursor(textareaRef, updateFn) {
+  const position = saveCursorPosition(textareaRef);
+  updateFn();
+  restoreCursorPosition(textareaRef, position);
+}
+function isActivelyEditing(element) {
+  if (!element) return false;
+  return document.activeElement === element && (element.tagName === "INPUT" || element.tagName === "TEXTAREA" || element.getAttribute("contenteditable") === "true");
+}
+
+// src/lib/markdown-updater.ts
+function parseMarkdownLines(markdown) {
+  const lines = markdown.split("\n");
+  const result = [];
+  let currentGroup = null;
+  lines.forEach((content, index) => {
+    var _a;
+    const lineNumber = index + 1;
+    const trimmed = content.trim();
+    const nextLine = (_a = lines[index + 1]) == null ? void 0 : _a.trim();
+    const hasGroupItems = nextLine == null ? void 0 : nextLine.startsWith("- ");
+    if (trimmed.match(/^\*[^*]+:\*\s+.+$/) && hasGroupItems) {
+      const match = trimmed.match(/^\*([^*]+):\*/);
+      if (match) {
+        const groupLabel = match[1];
+        currentGroup = groupLabel;
+        result.push({
+          content,
+          lineNumber,
+          isComponent: true,
+          componentLabel: groupLabel,
+          isGroupHeader: true,
+          groupLabel
+        });
+        return;
+      }
+    }
+    if (trimmed.match(/^\*[^*]+:\*$/)) {
+      const groupLabel = trimmed.slice(1, -2);
+      currentGroup = groupLabel;
+      result.push({
+        content,
+        lineNumber,
+        isComponent: true,
+        // Treat as component so we can target it
+        componentLabel: groupLabel,
+        // This allows matching "Checkbox Group"
+        isGroupHeader: true,
+        groupLabel
+      });
+      return;
+    }
+    if (currentGroup && (trimmed.startsWith("[x] ") || trimmed.startsWith("[ ] "))) {
+      const itemContent = trimmed.slice(4);
+      const componentLabel2 = extractComponentLabel(itemContent) || itemContent;
+      result.push({
+        content,
+        lineNumber,
+        isComponent: true,
+        componentLabel: componentLabel2,
+        isGroupItem: true,
+        groupLabel: currentGroup
+      });
+      return;
+    }
+    if (currentGroup && trimmed.startsWith("- ")) {
+      const itemContent = trimmed.slice(2);
+      const componentLabel2 = extractComponentLabel(itemContent);
+      result.push({
+        content,
+        lineNumber,
+        isComponent: true,
+        componentLabel: componentLabel2,
+        isGroupItem: true,
+        groupLabel: currentGroup
+      });
+      return;
+    }
+    const componentLabel = extractComponentLabel(trimmed);
+    if (componentLabel) {
+      result.push({
+        content,
+        lineNumber,
+        isComponent: true,
+        componentLabel,
+        isGroupHeader: false,
+        isGroupItem: false
+      });
+      return;
+    }
+    if (!trimmed && currentGroup) {
+      currentGroup = null;
+    }
+    result.push({
+      content,
+      lineNumber,
+      isComponent: false
+    });
+  });
+  return result;
+}
+function extractComponentLabel(line) {
+  const fieldMatch = line.match(/^\*([^*]+):\*/);
+  if (fieldMatch) return fieldMatch[1];
+  if (line.match(/^\[[^\s\]].+\]$/)) {
+    const buttonMatch = line.match(/^\[([^\]]+)\]/);
+    if (buttonMatch) return buttonMatch[1];
+  }
+  if (line.startsWith("[x] ") || line.startsWith("[ ] ")) {
+    return line.slice(4).trim();
+  }
+  if (line && !line.startsWith("*") && !line.startsWith("[")) {
+    return line;
+  }
+  return void 0;
+}
+function updateMarkdownLine(markdown, componentLabel, newValue, componentType) {
+  console.log("[updateMarkdownLine]", { componentLabel, newValue, componentType });
+  const lines = parseMarkdownLines(markdown);
+  console.log("[updateMarkdownLine] Parsed lines:", lines.filter((l) => l.isComponent).map((l) => ({ label: l.componentLabel, type: l.isGroupHeader ? "header" : "component" })));
+  const lineIndex = lines.findIndex(
+    (line2) => line2.isComponent && line2.componentLabel === componentLabel
+  );
+  if (lineIndex === -1) {
+    console.warn(`Component not found in markdown: ${componentLabel}`);
+    console.warn("Looking for:", componentLabel);
+    console.warn("Available components:", lines.filter((l) => l.isComponent).map((l) => l.componentLabel));
+    return markdown;
+  }
+  console.log("[updateMarkdownLine] Found component at line", lineIndex, ":", lines[lineIndex]);
+  const line = lines[lineIndex];
+  if ((componentType === "radiogroup" || componentType === "select") && line.isGroupHeader) {
+    const markdownLines2 = markdown.split("\n");
+    markdownLines2[lineIndex] = `*${componentLabel}:* ${newValue}`;
+    return markdownLines2.join("\n");
+  }
+  if ((componentType === "checkboxgroup" || componentType === "combobox" || componentType === "togglegroup") && line.isGroupHeader) {
+    return updateGroupLines(markdown, lines, lineIndex, newValue, componentType);
+  }
+  const updatedContent = generateComponentLine(
+    componentLabel,
+    newValue,
+    componentType,
+    line.isGroupItem || false
+  );
+  const markdownLines = markdown.split("\n");
+  markdownLines[lineIndex] = updatedContent;
+  return markdownLines.join("\n");
+}
+function updateGroupLines(markdown, parsedLines, headerIndex, newValue, componentType) {
+  const markdownLines = markdown.split("\n");
+  const groupLabel = parsedLines[headerIndex].groupLabel;
+  const selectedValues = Array.isArray(newValue) ? newValue : newValue.split(",").map((v) => v.trim()).filter(Boolean);
+  const groupItemIndices = [];
+  for (let i = headerIndex + 1; i < parsedLines.length; i++) {
+    const line = parsedLines[i];
+    if (line.groupLabel === groupLabel && line.isGroupItem) {
+      groupItemIndices.push(i);
+    } else if (line.groupLabel !== groupLabel) {
+      break;
+    }
+  }
+  groupItemIndices.forEach((i) => {
+    const line = parsedLines[i];
+    const itemLabel = line.componentLabel || "";
+    const isChecked = componentType === "radiogroup" || componentType === "select" ? itemLabel === newValue : selectedValues.includes(itemLabel);
+    markdownLines[i] = `[${isChecked ? "x" : " "}] ${itemLabel}`;
+  });
+  return markdownLines.join("\n");
+}
+function generateComponentLine(label, value, type, isGroupItem) {
+  let line = "";
+  switch (type) {
+    case "input":
+    case "textarea":
+    case "date":
+    case "daterange":
+      line = `*${label}:* ${value}`;
+      break;
+    case "switch":
+      line = `*${label}:* ${value}`;
+      break;
+    case "radiogroup":
+    case "select":
+      line = `*${label}:* ${value}`;
+      break;
+    case "checkbox":
+    case "checkbox-item":
+      const isChecked = value === "true" || String(value) === "true";
+      line = `[${isChecked ? "x" : " "}] ${label}`;
+      break;
+    case "button":
+      line = `[${label}]`;
+      break;
+    default:
+      line = `*${label}:* ${value}`;
+  }
+  if (isGroupItem) {
+    if (type === "checkbox" || type === "checkbox-item") ; else {
+      line = `- ${line}`;
+    }
+  }
+  return line;
+}
+function formatValueForMarkdown(value, type) {
+  switch (type) {
+    case "switch":
+      return value ? "yes" : "no";
+    case "checkbox":
+      return "";
+    // Checkboxes don't have values in markdown
+    case "date":
+    case "daterange":
+      return value || "";
+    default:
+      return String(value || "");
+  }
+}
+
+export { Button, Calendar, Checkbox, CheckboxGroup, CheckboxGroupItem, ComboBox, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, Input, InstantiatedForm, Popover, PopoverContent, PopoverTrigger, RadioGroup, RadioGroupItem, ResizablePane, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Switch, SyncReconciler, Textarea, Toggle, ToggleGroup, ToggleGroupItem, buildAST, buttonVariants, clearParseCache, cn, createSyncReconciler, diffComponents, diffMarkdown, extractValues, filterBlanks, formatValueForMarkdown, generateMarkdownForElement, generateMarkdownFromComponent, generateMarkdownFromComponents, generateMarkdownWithMapping, getUnknownTokens, inferComponentType, inferGroupType, instantiateComponents, isActivelyEditing, isBooleanValue, isRegularButton, mapASTToComponents, normalizeMarkdown, parse, parseBooleanValue, parseMarkdownLines, parseToComponents, parseWithCache, preserveCursor, restoreCursorPosition, saveCursorPosition, toggleVariants, tokenize, updateMarkdownIncremental, updateMarkdownLine, useBidirectionalSync, validateAST };
 //# sourceMappingURL=index.mjs.map
 //# sourceMappingURL=index.mjs.map

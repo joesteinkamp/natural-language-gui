@@ -1,26 +1,24 @@
 
-
 > @natural-language-gui/core@0.2.0 build
 > tsup
 
-[34mCLI[39m Building entry: {"index":"src/index.ts"}
-[34mCLI[39m Using tsconfig: tsconfig.json
-[34mCLI[39m tsup v8.5.1
-[34mCLI[39m Using tsup config: /Users/joe.steinkamp/Documents/GitHub/natural-language-gui/packages/nli-core/tsup.config.ts
-[34mCLI[39m Target: es2017
-[34mCLI[39m Cleaning output folder
-[34mCJS[39m Build start
-[34mESM[39m Build start
+CLI Building entry: {"index":"src/index.ts"}
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+CLI Using tsup config: /Users/joe.steinkamp/Documents/GitHub/natural-language-gui/packages/nli-core/tsup.config.ts
+CLI Target: es2017
+CLI Cleaning output folder
+CJS Build start
+ESM Build start
 dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "dist/index.mjs" was ignored.
 dist/index.js (1:0): Module level directives cause errors when bundled, "use client" in "dist/index.js" was ignored.
-[32mESM[39m [1mdist/index.mjs     [22m[32m68.93 KB[39m
-[32mESM[39m [1mdist/index.mjs.map [22m[32m143.99 KB[39m
-[32mESM[39m ⚡️ Build success in 185ms
-[32mCJS[39m [1mdist/index.js     [22m[32m74.36 KB[39m
-[32mCJS[39m [1mdist/index.js.map [22m[32m144.58 KB[39m
-[32mCJS[39m ⚡️ Build success in 185ms
 DTS Build start
-DTS ⚡️ Build success in 1283ms
-DTS dist/index.d.ts  16.98 KB
-DTS dist/index.d.mts 16.98 KB
-⠙[1G[0K
+ESM dist/index.mjs     107.50 KB
+ESM dist/index.mjs.map 243.17 KB
+ESM ⚡️ Build success in 343ms
+CJS dist/index.js     113.70 KB
+CJS dist/index.js.map 243.79 KB
+CJS ⚡️ Build success in 343ms
+DTS ⚡️ Build success in 1213ms
+DTS dist/index.d.ts  28.38 KB
+DTS dist/index.d.mts 28.38 KB

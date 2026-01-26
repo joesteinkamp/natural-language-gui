@@ -1,5 +1,5 @@
 import styles from './page.module.css';
-import { ComponentViewerBidirectional } from '@/app/translation-viewer/ComponentViewerBidirectional';
+import { ComponentViewerBidirectional } from '@/components/ComponentViewerBidirectional';
 
 export default function Home() {
   return (

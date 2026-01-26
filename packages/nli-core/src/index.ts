@@ -5,7 +5,6 @@
 
 // Component exports
 export * from './components/ui/button'
-export * from './components/ui/button-group'
 export * from './components/ui/input'
 export * from './components/ui/textarea'
 export * from './components/ui/switch'
@@ -21,10 +20,15 @@ export * from './components/ui/dialog'
 
 export * from './components/ui/combo-box'
 
+// Layout components
+export * from './components/ResizablePane'
+
 // Parser exports
 export {
   parse,
   parseToComponents,
+  parseWithCache,
+  clearParseCache,
   tokenize,
   filterBlanks,
   getUnknownTokens,
@@ -48,7 +52,39 @@ export { cn } from './lib/utils'
 export {
   generateMarkdownForElement,
   isRegularButton,
+  generateMarkdownFromComponent,
+  generateMarkdownFromComponents,
+  generateMarkdownWithMapping,
+  updateMarkdownIncremental,
 } from './lib/markdown-generators'
+
+// Bidirectional sync exports
+export { useBidirectionalSync } from './hooks/useBidirectionalSync'
+export type { UseBidirectionalSyncOptions, BidirectionalSyncState } from './hooks/useBidirectionalSync'
+
+export { createSyncReconciler, SyncReconciler } from './lib/sync-reconciler'
+export type { UpdateOrigin, SyncStatus, ReconcilerOptions } from './lib/sync-reconciler'
+
+export { diffComponents } from './lib/component-differ'
+export type { ComponentDiff } from './lib/component-differ'
+
+export { diffMarkdown, normalizeMarkdown } from './lib/markdown-differ'
+export type { MarkdownDiff } from './lib/markdown-differ'
+
+export {
+  saveCursorPosition,
+  restoreCursorPosition,
+  preserveCursor,
+  isActivelyEditing,
+} from './lib/cursor-manager'
+export type { CursorPosition } from './lib/cursor-manager'
+
+export {
+  updateMarkdownLine,
+  formatValueForMarkdown,
+  parseMarkdownLines,
+} from './lib/markdown-updater'
+export type { MarkdownLine } from './lib/markdown-updater'
 
 // Type exports
 export type {

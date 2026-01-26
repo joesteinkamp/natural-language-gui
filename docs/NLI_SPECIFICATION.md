@@ -84,20 +84,32 @@ Subscribe to newsletter
 
 ### Radio Buttons
 
-**Pattern**: `*Group Label:* Selected Option` (only selected option appears)
+**Pattern**: `*Group Label:* Selected Option` followed by option list
 
 **Examples**:
 ```markdown
 *Theme:* Dark Mode
+- Light Mode
+- Dark Mode
+- Auto
+
 *Size:* Large
+- Small
+- Medium
+- Large
+
 *Priority:* High
+- Low
+- Medium
+- High
 ```
 
 **Rules**:
-- Group label in asterisks followed by colon
-- Only the selected option's label appears
-- Unselected options don't appear in output
-- One radio group = one line of markdown
+- Group label in asterisks followed by colon and selected value
+- All available options listed with dash prefix (- Option)
+- Selected value appears inline with the label
+- Used when there are fewer than 6 options
+- Options are listed in order
 
 **Component Mapping**: RadioGroup (with RadioGroupItem children)
 
@@ -105,19 +117,35 @@ Subscribe to newsletter
 
 ### Select / Combobox
 
-**Pattern**: `*Label:* Selected Value`
+**Pattern**: `*Label:* Selected Value` followed by option list
 
 **Examples**:
 ```markdown
 *Country:* United States
+- United States
+- Canada
+- United Kingdom
+- Germany
+- France
+- Japan
+- Australia
+- Brazil
+
 *Language:* English
-*Theme:* Dark
+- English
+- Spanish
+- French
+- German
+- Chinese
+- Japanese
 ```
 
 **Rules**:
 - Same format as radio buttons
-- Label in asterisks, selected value as plain text
-- Empty selection: `*Label:*` (no value)
+- Label in asterisks, selected value inline after colon
+- All options listed with dash prefix
+- Used when there are 6 or more options
+- Empty selection: `*Label:*` (no value) followed by options
 
 **Component Mapping**: Select, Combobox
 

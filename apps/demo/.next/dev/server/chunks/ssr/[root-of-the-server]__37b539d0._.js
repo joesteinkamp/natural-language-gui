@@ -57,6 +57,8 @@ __turbopack_context__.s([
     ()=>RadioGroup,
     "RadioGroupItem",
     ()=>RadioGroupItem,
+    "ResizablePane",
+    ()=>ResizablePane,
     "Select",
     ()=>Select,
     "SelectContent",
@@ -79,6 +81,8 @@ __turbopack_context__.s([
     ()=>SelectValue,
     "Switch",
     ()=>Switch,
+    "SyncReconciler",
+    ()=>SyncReconciler,
     "Textarea",
     ()=>Textarea,
     "Toggle",
@@ -91,14 +95,28 @@ __turbopack_context__.s([
     ()=>buildAST,
     "buttonVariants",
     ()=>buttonVariants,
+    "clearParseCache",
+    ()=>clearParseCache,
     "cn",
     ()=>cn,
+    "createSyncReconciler",
+    ()=>createSyncReconciler,
+    "diffComponents",
+    ()=>diffComponents,
+    "diffMarkdown",
+    ()=>diffMarkdown,
     "extractValues",
     ()=>extractValues,
     "filterBlanks",
     ()=>filterBlanks,
     "generateMarkdownForElement",
     ()=>generateMarkdownForElement,
+    "generateMarkdownFromComponent",
+    ()=>generateMarkdownFromComponent,
+    "generateMarkdownFromComponents",
+    ()=>generateMarkdownFromComponents,
+    "generateMarkdownWithMapping",
+    ()=>generateMarkdownWithMapping,
     "getUnknownTokens",
     ()=>getUnknownTokens,
     "inferComponentType",
@@ -107,22 +125,38 @@ __turbopack_context__.s([
     ()=>inferGroupType,
     "instantiateComponents",
     ()=>instantiateComponents,
+    "isActivelyEditing",
+    ()=>isActivelyEditing,
     "isBooleanValue",
     ()=>isBooleanValue,
     "isRegularButton",
     ()=>isRegularButton,
     "mapASTToComponents",
     ()=>mapASTToComponents,
+    "normalizeMarkdown",
+    ()=>normalizeMarkdown,
     "parse",
     ()=>parse,
     "parseBooleanValue",
     ()=>parseBooleanValue,
     "parseToComponents",
     ()=>parseToComponents,
+    "parseWithCache",
+    ()=>parseWithCache,
+    "preserveCursor",
+    ()=>preserveCursor,
+    "restoreCursorPosition",
+    ()=>restoreCursorPosition,
+    "saveCursorPosition",
+    ()=>saveCursorPosition,
     "toggleVariants",
     ()=>toggleVariants,
     "tokenize",
     ()=>tokenize,
+    "updateMarkdownIncremental",
+    ()=>updateMarkdownIncremental,
+    "useBidirectionalSync",
+    ()=>useBidirectionalSync,
     "validateAST",
     ()=>validateAST
 ]);
@@ -1023,6 +1057,104 @@ var CommandItem = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$
     }, props));
 });
 CommandItem.displayName = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$cmdk$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Command"].Item.displayName;
+function ResizablePane({ left, right, initialSplit = 50, minWidth = 200, storageKey = "resizable-pane-split", className, orientation = "horizontal" }) {
+    const containerRef = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"](null);
+    const [isDragging, setIsDragging] = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"](false);
+    const [split, setSplit] = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"](()=>{
+        if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+        ;
+        return initialSplit;
+    });
+    __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"](()=>{
+        if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+        ;
+    }, [
+        split,
+        storageKey
+    ]);
+    const handleMouseMove = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"]((e)=>{
+        if (!isDragging || !containerRef.current) return;
+        const container = containerRef.current;
+        const rect = container.getBoundingClientRect();
+        let newSplit;
+        if (orientation === "horizontal") {
+            const offsetX = e.clientX - rect.left;
+            newSplit = offsetX / rect.width * 100;
+        } else {
+            const offsetY = e.clientY - rect.top;
+            newSplit = offsetY / rect.height * 100;
+        }
+        const dimension = orientation === "horizontal" ? rect.width : rect.height;
+        const minPercent = minWidth / dimension * 100;
+        const maxPercent = 100 - minPercent;
+        newSplit = Math.max(minPercent, Math.min(maxPercent, newSplit));
+        setSplit(newSplit);
+    }, [
+        isDragging,
+        minWidth,
+        orientation
+    ]);
+    const handleMouseUp = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"](()=>{
+        setIsDragging(false);
+    }, []);
+    __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"](()=>{
+        if (isDragging) {
+            document.addEventListener("mousemove", handleMouseMove);
+            document.addEventListener("mouseup", handleMouseUp);
+            document.body.style.cursor = orientation === "horizontal" ? "col-resize" : "row-resize";
+            document.body.style.userSelect = "none";
+            return ()=>{
+                document.removeEventListener("mousemove", handleMouseMove);
+                document.removeEventListener("mouseup", handleMouseUp);
+                document.body.style.cursor = "";
+                document.body.style.userSelect = "";
+            };
+        }
+    }, [
+        isDragging,
+        handleMouseMove,
+        handleMouseUp,
+        orientation
+    ]);
+    const handleDividerMouseDown = (e)=>{
+        e.preventDefault();
+        setIsDragging(true);
+    };
+    const isHorizontal = orientation === "horizontal";
+    return /* @__PURE__ */ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxs"])("div", {
+        ref: containerRef,
+        className: cn("flex w-full h-full", isHorizontal ? "flex-row" : "flex-col", className),
+        children: [
+            /* @__PURE__ */ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsx"])("div", {
+                className: "overflow-auto",
+                style: {
+                    [isHorizontal ? "width" : "height"]: `${split}%`,
+                    minWidth: isHorizontal ? minWidth : void 0,
+                    minHeight: !isHorizontal ? minWidth : void 0
+                },
+                children: left
+            }),
+            /* @__PURE__ */ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsx"])("div", {
+                className: cn("bg-slate-800 hover:bg-slate-700 transition-colors flex-shrink-0 group", isHorizontal ? "w-1 cursor-col-resize hover:w-1.5" : "h-1 cursor-row-resize hover:h-1.5", isDragging && (isHorizontal ? "bg-blue-500" : "bg-blue-500")),
+                onMouseDown: handleDividerMouseDown,
+                children: /* @__PURE__ */ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsx"])("div", {
+                    className: cn("flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity", isHorizontal ? "h-full" : "w-full"),
+                    children: /* @__PURE__ */ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsx"])("div", {
+                        className: cn("bg-slate-600 rounded-full", isHorizontal ? "w-1 h-8" : "w-8 h-1")
+                    })
+                })
+            }),
+            /* @__PURE__ */ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsx"])("div", {
+                className: "overflow-auto flex-1",
+                style: {
+                    minWidth: isHorizontal ? minWidth : void 0,
+                    minHeight: !isHorizontal ? minWidth : void 0
+                },
+                children: right
+            })
+        ]
+    });
+}
 // src/parser/tokenizer.ts
 var PATTERNS = {
     // *Label:* value or *Label [type]:* value
@@ -1994,6 +2126,55 @@ function parseToComponents(markdown) {
         hasErrors: ast.errors.some((e)=>e.severity === "error")
     };
 }
+var parseCache = /* @__PURE__ */ new Map();
+var CACHE_TTL = 5e3;
+var MAX_CACHE_SIZE = 100;
+function hashMarkdown(markdown) {
+    let hash = 0;
+    for(let i = 0; i < markdown.length; i++){
+        const char = markdown.charCodeAt(i);
+        hash = (hash << 5) - hash + char;
+        hash = hash & hash;
+    }
+    return hash.toString(36);
+}
+function cleanCache() {
+    const now = Date.now();
+    for (const [key, entry] of parseCache.entries()){
+        if (now - entry.timestamp > CACHE_TTL) {
+            parseCache.delete(key);
+        }
+    }
+    if (parseCache.size > MAX_CACHE_SIZE) {
+        const entries = Array.from(parseCache.entries());
+        entries.sort((a, b)=>a[1].timestamp - b[1].timestamp);
+        const toRemove = entries.slice(0, parseCache.size - MAX_CACHE_SIZE);
+        toRemove.forEach(([key])=>parseCache.delete(key));
+    }
+}
+function parseWithCache(markdown, options = {}) {
+    const { skipCache = false } = options;
+    if (skipCache) {
+        return parseToComponents(markdown);
+    }
+    const cacheKey = hashMarkdown(markdown);
+    const cached = parseCache.get(cacheKey);
+    if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+        return cached.result;
+    }
+    const result = parseToComponents(markdown);
+    parseCache.set(cacheKey, {
+        result,
+        timestamp: Date.now()
+    });
+    if (parseCache.size > MAX_CACHE_SIZE) {
+        cleanCache();
+    }
+    return result;
+}
+function clearParseCache() {
+    parseCache.clear();
+}
 var generators = {
     /**
    * Input and Textarea components
@@ -2115,6 +2296,634 @@ function generateMarkdownForElement(element, label) {
 }
 function isRegularButton(element) {
     return !!(element && element.tagName === "BUTTON" && element.getAttribute("role") !== "checkbox" && element.getAttribute("role") !== "radio" && element.getAttribute("role") !== "combobox" && element.getAttribute("role") !== "switch" && element.getAttribute("aria-pressed") === null);
+}
+function generateMarkdownFromComponent(component) {
+    const label = component.props["nli-markdown"] || component.props.label || "";
+    switch(component.type){
+        case "input":
+        case "textarea":
+            {
+                const value = component.props.defaultValue || component.props.value || "";
+                return `*${label}:* ${value}`;
+            }
+        case "date":
+            {
+                const dateValue = component.props["data-date-value"] || "";
+                if (dateValue) {
+                    try {
+                        const date = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$date$2d$fns$2f$parseISO$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseISO"])(dateValue);
+                        if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$date$2d$fns$2f$isValid$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["isValid"])(date)) {
+                            return `*${label}:* ${(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$date$2d$fns$2f$format$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["format"])(date, "MMMM dd, yyyy")}`;
+                        }
+                    } catch (e) {}
+                }
+                return `*${label}:* ${dateValue}`;
+            }
+        case "daterange":
+            {
+                const from = component.props["data-date-from"] || "";
+                const to = component.props["data-date-to"] || "";
+                if (from && to) {
+                    try {
+                        const fromDate = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$date$2d$fns$2f$parseISO$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseISO"])(from);
+                        const toDate = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$date$2d$fns$2f$parseISO$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseISO"])(to);
+                        if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$date$2d$fns$2f$isValid$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["isValid"])(fromDate) && (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$date$2d$fns$2f$isValid$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["isValid"])(toDate)) {
+                            return `*${label} Date Range:* ${(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$date$2d$fns$2f$format$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["format"])(fromDate, "MMMM dd, yyyy")} - ${(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$date$2d$fns$2f$format$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["format"])(toDate, "MMMM dd, yyyy")}`;
+                        }
+                    } catch (e) {}
+                }
+                return `*${label}:* ${from} - ${to}`;
+            }
+        case "checkbox":
+            {
+                const checked = component.props.defaultChecked || component.props.checked || false;
+                return checked ? label : "";
+            }
+        case "switch":
+            {
+                const checked = component.props.defaultChecked || component.props.checked || false;
+                return `*${label}:* ${checked ? "yes" : "no"}`;
+            }
+        case "button":
+            return `[${label}]`;
+        case "select":
+        case "combobox":
+            {
+                const value = component.props.value || component.props.defaultValue || "";
+                return `*${label}:* ${value}`;
+            }
+        case "radiogroup":
+        case "checkboxgroup":
+        case "togglegroup":
+            {
+                let markdown = `*${label}:*
+`;
+                if (component.children) {
+                    component.children.forEach((child)=>{
+                        const childMarkdown = generateMarkdownFromComponent(child);
+                        if (childMarkdown) {
+                            markdown += `- ${childMarkdown}
+`;
+                        }
+                    });
+                }
+                return markdown;
+            }
+        default:
+            return label;
+    }
+}
+function generateMarkdownFromComponents(components) {
+    let markdown = "";
+    for (const component of components){
+        const componentMarkdown = generateMarkdownFromComponent(component);
+        if (!componentMarkdown) continue;
+        if (component.children) {
+            if (markdown) markdown += "\n";
+            markdown += componentMarkdown;
+        } else {
+            if (markdown) markdown += "\n";
+            markdown += componentMarkdown;
+        }
+    }
+    return markdown.trim();
+}
+function generateMarkdownWithMapping(components) {
+    const mapping = [];
+    const lines = [];
+    components.forEach((component)=>{
+        const startLine = lines.length;
+        const componentMarkdown = generateMarkdownFromComponent(component);
+        if (componentMarkdown) {
+            const componentLines = componentMarkdown.split("\n");
+            lines.push(...componentLines);
+            mapping.push({
+                componentKey: component.key,
+                startLine,
+                endLine: lines.length - 1,
+                markdown: componentMarkdown
+            });
+        }
+    });
+    return {
+        markdown: lines.join("\n"),
+        mapping
+    };
+}
+function updateMarkdownIncremental(previousMapping, changedComponents, allComponents) {
+    return generateMarkdownWithMapping(allComponents);
+}
+// src/lib/sync-reconciler.ts
+var SyncReconciler = class {
+    constructor(options){
+        this.options = options;
+        this.syncLock = false;
+        this.updateQueue = [];
+        this.lastProcessedMarkdownSeq = -1;
+        this.lastProcessedGuiSeq = -1;
+        this.currentComponents = [];
+        this.currentMarkdown = "";
+        this.updateCount = 0;
+        this.updateWindowStart = Date.now();
+        this.MAX_UPDATES_PER_SECOND = 10;
+    }
+    /**
+   * Set current state (used for initialization)
+   */ setState(components, markdown) {
+        this.currentComponents = components;
+        this.currentMarkdown = markdown;
+    }
+    /**
+   * Reconcile an update from either markdown or GUI
+   */ reconcileUpdate(origin, content, sequence) {
+        var _a, _b, _c, _d;
+        if (this.isUpdateRateLimitExceeded()) {
+            console.warn("[SyncReconciler] Update rate limit exceeded, pausing sync");
+            return {
+                shouldUpdateComponents: false,
+                shouldUpdateMarkdown: false,
+                error: new Error("Update rate limit exceeded")
+            };
+        }
+        if (this.syncLock) {
+            this.updateQueue.push({
+                origin,
+                content,
+                sequence,
+                timestamp: Date.now()
+            });
+            return {
+                shouldUpdateComponents: false,
+                shouldUpdateMarkdown: false
+            };
+        }
+        this.syncLock = true;
+        (_b = (_a = this.options).onSyncStatusChange) == null ? void 0 : _b.call(_a, "syncing");
+        try {
+            const result = this.processUpdate(origin, content, sequence);
+            (_d = (_c = this.options).onSyncStatusChange) == null ? void 0 : _d.call(_c, result.error ? "error" : "idle");
+            return result;
+        } finally{
+            this.syncLock = false;
+            this.processQueue();
+        }
+    }
+    /**
+   * Process a single update
+   */ processUpdate(origin, content, sequence) {
+        if (origin === "markdown") {
+            return this.processMarkdownUpdate(content, sequence);
+        } else if (origin === "gui") {
+            return this.processGuiUpdate(content, sequence);
+        }
+        return {
+            shouldUpdateComponents: false,
+            shouldUpdateMarkdown: false
+        };
+    }
+    /**
+   * Process an update from markdown editor
+   */ processMarkdownUpdate(markdown, sequence) {
+        var _a, _b;
+        if (sequence <= this.lastProcessedMarkdownSeq) {
+            return {
+                shouldUpdateComponents: false,
+                shouldUpdateMarkdown: false
+            };
+        }
+        const markdownDiff = this.options.diffMarkdown(this.currentMarkdown, markdown);
+        if (!markdownDiff.hasChanges) {
+            this.lastProcessedMarkdownSeq = sequence;
+            return {
+                shouldUpdateComponents: false,
+                shouldUpdateMarkdown: false
+            };
+        }
+        try {
+            const parseResult = this.options.parseToComponents(markdown);
+            if (parseResult.errors.length > 0) {
+                (_b = (_a = this.options).onParseErrors) == null ? void 0 : _b.call(_a, parseResult.errors);
+            }
+            const componentDiff = this.options.diffComponents(this.currentComponents, parseResult.components);
+            if (componentDiff.hasChanges) {
+                this.currentComponents = parseResult.components;
+                this.currentMarkdown = markdown;
+                this.lastProcessedMarkdownSeq = sequence;
+                this.trackUpdate();
+                return {
+                    shouldUpdateComponents: true,
+                    shouldUpdateMarkdown: false,
+                    components: parseResult.components
+                };
+            }
+            this.currentMarkdown = markdown;
+            this.lastProcessedMarkdownSeq = sequence;
+            return {
+                shouldUpdateComponents: false,
+                shouldUpdateMarkdown: false
+            };
+        } catch (error) {
+            console.error("[SyncReconciler] Parse error:", error);
+            return {
+                shouldUpdateComponents: false,
+                shouldUpdateMarkdown: false,
+                error
+            };
+        }
+    }
+    /**
+   * Process an update from GUI interaction
+   */ processGuiUpdate(components, sequence) {
+        if (sequence <= this.lastProcessedGuiSeq) {
+            return {
+                shouldUpdateComponents: false,
+                shouldUpdateMarkdown: false
+            };
+        }
+        const componentDiff = this.options.diffComponents(this.currentComponents, components);
+        if (!componentDiff.hasChanges) {
+            this.lastProcessedGuiSeq = sequence;
+            return {
+                shouldUpdateComponents: false,
+                shouldUpdateMarkdown: false
+            };
+        }
+        try {
+            const newMarkdown = this.options.generateMarkdown(components);
+            const markdownDiff = this.options.diffMarkdown(this.currentMarkdown, newMarkdown);
+            if (markdownDiff.hasChanges) {
+                this.currentComponents = components;
+                this.currentMarkdown = newMarkdown;
+                this.lastProcessedGuiSeq = sequence;
+                this.trackUpdate();
+                return {
+                    shouldUpdateComponents: false,
+                    shouldUpdateMarkdown: true,
+                    markdown: newMarkdown
+                };
+            }
+            this.currentComponents = components;
+            this.lastProcessedGuiSeq = sequence;
+            return {
+                shouldUpdateComponents: false,
+                shouldUpdateMarkdown: false
+            };
+        } catch (error) {
+            console.error("[SyncReconciler] Generate error:", error);
+            return {
+                shouldUpdateComponents: false,
+                shouldUpdateMarkdown: false,
+                error
+            };
+        }
+    }
+    /**
+   * Process queued updates
+   */ processQueue() {
+        if (this.updateQueue.length === 0) return;
+        const update = this.updateQueue.shift();
+        if (update) {
+            this.reconcileUpdate(update.origin, update.content, update.sequence);
+        }
+    }
+    /**
+   * Track update rate for circuit breaker
+   */ trackUpdate() {
+        this.updateCount++;
+        const now = Date.now();
+        if (now - this.updateWindowStart > 1e3) {
+            this.updateCount = 1;
+            this.updateWindowStart = now;
+        }
+    }
+    /**
+   * Check if update rate limit is exceeded
+   */ isUpdateRateLimitExceeded() {
+        const now = Date.now();
+        if (now - this.updateWindowStart > 1e3) {
+            this.updateCount = 0;
+            this.updateWindowStart = now;
+            return false;
+        }
+        return this.updateCount >= this.MAX_UPDATES_PER_SECOND;
+    }
+    /**
+   * Get current reconciler state
+   */ getState() {
+        return {
+            components: this.currentComponents,
+            markdown: this.currentMarkdown,
+            lastMarkdownSeq: this.lastProcessedMarkdownSeq,
+            lastGuiSeq: this.lastProcessedGuiSeq,
+            queueLength: this.updateQueue.length,
+            isLocked: this.syncLock
+        };
+    }
+    /**
+   * Reset reconciler state
+   */ reset() {
+        this.syncLock = false;
+        this.updateQueue = [];
+        this.lastProcessedMarkdownSeq = -1;
+        this.lastProcessedGuiSeq = -1;
+        this.updateCount = 0;
+        this.updateWindowStart = Date.now();
+    }
+};
+function createSyncReconciler(options) {
+    return new SyncReconciler(options);
+}
+// src/lib/component-differ.ts
+function diffComponents(oldComponents, newComponents) {
+    const diff = {
+        hasChanges: false,
+        added: [],
+        removed: [],
+        modified: []
+    };
+    if (oldComponents.length !== newComponents.length) {
+        diff.hasChanges = true;
+    }
+    const oldMap = /* @__PURE__ */ new Map();
+    const newMap = /* @__PURE__ */ new Map();
+    oldComponents.forEach((comp)=>oldMap.set(comp.key, comp));
+    newComponents.forEach((comp)=>newMap.set(comp.key, comp));
+    for (const [key, component] of oldMap){
+        if (!newMap.has(key)) {
+            diff.removed.push(component);
+            diff.hasChanges = true;
+        }
+    }
+    for (const [key, newComponent] of newMap){
+        const oldComponent = oldMap.get(key);
+        if (!oldComponent) {
+            diff.added.push(newComponent);
+            diff.hasChanges = true;
+        } else {
+            if (!areComponentsEqual(oldComponent, newComponent)) {
+                diff.modified.push({
+                    oldComponent,
+                    newComponent
+                });
+                diff.hasChanges = true;
+            }
+        }
+    }
+    return diff;
+}
+function areComponentsEqual(a, b) {
+    if (a.type !== b.type) return false;
+    if (a.key !== b.key) return false;
+    if (!arePropsEqual(a.props, b.props)) return false;
+    if (!areChildrenEqual(a.children, b.children)) return false;
+    return true;
+}
+function arePropsEqual(a, b) {
+    const aKeys = Object.keys(a).sort();
+    const bKeys = Object.keys(b).sort();
+    if (aKeys.length !== bKeys.length) return false;
+    if (!arraysEqual(aKeys, bKeys)) return false;
+    for (const key of aKeys){
+        const aVal = a[key];
+        const bVal = b[key];
+        if (typeof aVal !== typeof bVal) return false;
+        if (typeof aVal === "object" && aVal !== null) {
+            if (!deepEqual(aVal, bVal)) return false;
+        } else {
+            if (aVal !== bVal) return false;
+        }
+    }
+    return true;
+}
+function areChildrenEqual(a, b) {
+    if (!a && !b) return true;
+    if (!a || !b) return false;
+    if (a.length !== b.length) return false;
+    for(let i = 0; i < a.length; i++){
+        if (!areComponentsEqual(a[i], b[i])) return false;
+    }
+    return true;
+}
+function deepEqual(a, b) {
+    if (a === b) return true;
+    if (typeof a !== "object" || typeof b !== "object") {
+        return false;
+    }
+    if (a === null || b === null) {
+        return a === b;
+    }
+    if (Array.isArray(a) && Array.isArray(b)) {
+        if (a.length !== b.length) return false;
+        for(let i = 0; i < a.length; i++){
+            if (!deepEqual(a[i], b[i])) return false;
+        }
+        return true;
+    }
+    const aKeys = Object.keys(a).sort();
+    const bKeys = Object.keys(b).sort();
+    if (aKeys.length !== bKeys.length) return false;
+    if (!arraysEqual(aKeys, bKeys)) return false;
+    for (const key of aKeys){
+        if (!deepEqual(a[key], b[key])) return false;
+    }
+    return true;
+}
+function arraysEqual(a, b) {
+    if (a.length !== b.length) return false;
+    for(let i = 0; i < a.length; i++){
+        if (a[i] !== b[i]) return false;
+    }
+    return true;
+}
+// src/lib/markdown-differ.ts
+function normalizeMarkdown(markdown) {
+    return markdown.split("\n").map((line)=>line.trimEnd()).join("\n").trimEnd();
+}
+function diffMarkdown(oldMarkdown, newMarkdown, options = {}) {
+    const { normalize = true, detailed = false } = options;
+    const oldNormalized = normalize ? normalizeMarkdown(oldMarkdown) : oldMarkdown;
+    const newNormalized = normalize ? normalizeMarkdown(newMarkdown) : newMarkdown;
+    if (oldNormalized === newNormalized) {
+        return {
+            hasChanges: false,
+            addedLines: [],
+            removedLines: [],
+            modifiedLines: []
+        };
+    }
+    if (!detailed) {
+        return {
+            hasChanges: true,
+            addedLines: [],
+            removedLines: [],
+            modifiedLines: []
+        };
+    }
+    return diffLines(oldNormalized, newNormalized);
+}
+function diffLines(oldMarkdown, newMarkdown) {
+    const oldLines = oldMarkdown.split("\n");
+    const newLines = newMarkdown.split("\n");
+    const diff = {
+        hasChanges: true,
+        addedLines: [],
+        removedLines: [],
+        modifiedLines: []
+    };
+    const maxLength = Math.max(oldLines.length, newLines.length);
+    for(let i = 0; i < maxLength; i++){
+        const oldLine = oldLines[i];
+        const newLine = newLines[i];
+        if (oldLine === void 0) {
+            diff.addedLines.push(i);
+        } else if (newLine === void 0) {
+            diff.removedLines.push(i);
+        } else if (oldLine !== newLine) {
+            diff.modifiedLines.push({
+                lineNumber: i,
+                oldContent: oldLine,
+                newContent: newLine
+            });
+        }
+    }
+    return diff;
+}
+// src/hooks/useBidirectionalSync.ts
+function useBidirectionalSync(options) {
+    const { initialMarkdown = "", initialComponents = [], generateMarkdown, markdownDebounce = 300, guiDebounce = 50, onSyncError, onParseErrors } = options;
+    const [components, setComponents] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(initialComponents);
+    const [markdown, setMarkdown] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(initialMarkdown);
+    const [lastUpdateOrigin, setLastUpdateOrigin] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("init");
+    const [guiSequence, setGuiSequence] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
+    const [markdownSequence, setMarkdownSequence] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
+    const [syncStatus, setSyncStatus] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("idle");
+    const [parseErrors, setParseErrors] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    const markdownTimeoutRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const guiTimeoutRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const reconcilerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(createSyncReconciler({
+        parseToComponents: parseWithCache,
+        generateMarkdown,
+        diffComponents,
+        diffMarkdown,
+        onSyncStatusChange: setSyncStatus,
+        onParseErrors: (errors)=>{
+            setParseErrors(errors);
+            onParseErrors == null ? void 0 : onParseErrors(errors);
+        }
+    }));
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        reconcilerRef.current.setState(initialComponents, initialMarkdown);
+    }, []);
+    const updateMarkdown = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])((newMarkdown)=>{
+        if (markdownTimeoutRef.current) {
+            clearTimeout(markdownTimeoutRef.current);
+        }
+        setMarkdown(newMarkdown);
+        setLastUpdateOrigin("markdown");
+        markdownTimeoutRef.current = setTimeout(()=>{
+            const newSequence = markdownSequence + 1;
+            setMarkdownSequence(newSequence);
+            const result = reconcilerRef.current.reconcileUpdate("markdown", newMarkdown, newSequence);
+            if (result.error) {
+                onSyncError == null ? void 0 : onSyncError(result.error);
+            }
+            if (result.shouldUpdateComponents && result.components) {
+                setComponents(result.components);
+            }
+        }, markdownDebounce);
+    }, [
+        markdownSequence,
+        markdownDebounce,
+        onSyncError
+    ]);
+    const updateComponents = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])((newComponents)=>{
+        if (guiTimeoutRef.current) {
+            clearTimeout(guiTimeoutRef.current);
+        }
+        setComponents(newComponents);
+        setLastUpdateOrigin("gui");
+        guiTimeoutRef.current = setTimeout(()=>{
+            const newSequence = guiSequence + 1;
+            setGuiSequence(newSequence);
+            const result = reconcilerRef.current.reconcileUpdate("gui", newComponents, newSequence);
+            if (result.error) {
+                onSyncError == null ? void 0 : onSyncError(result.error);
+            }
+            if (result.shouldUpdateMarkdown && result.markdown) {
+                setMarkdown(result.markdown);
+            }
+        }, guiDebounce);
+    }, [
+        guiSequence,
+        guiDebounce,
+        onSyncError
+    ]);
+    const reset = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])(()=>{
+        setComponents(initialComponents);
+        setMarkdown(initialMarkdown);
+        setLastUpdateOrigin("init");
+        setGuiSequence(0);
+        setMarkdownSequence(0);
+        setSyncStatus("idle");
+        setParseErrors([]);
+        reconcilerRef.current.reset();
+        reconcilerRef.current.setState(initialComponents, initialMarkdown);
+    }, [
+        initialComponents,
+        initialMarkdown
+    ]);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        return ()=>{
+            if (markdownTimeoutRef.current) {
+                clearTimeout(markdownTimeoutRef.current);
+            }
+            if (guiTimeoutRef.current) {
+                clearTimeout(guiTimeoutRef.current);
+            }
+        };
+    }, []);
+    return {
+        components,
+        markdown,
+        lastUpdateOrigin,
+        guiSequence,
+        markdownSequence,
+        syncStatus,
+        parseErrors,
+        updateMarkdown,
+        updateComponents,
+        reset
+    };
+}
+// src/lib/cursor-manager.ts
+function saveCursorPosition(textareaRef) {
+    const textarea = textareaRef.current;
+    if (!textarea) return null;
+    return {
+        start: textarea.selectionStart,
+        end: textarea.selectionEnd
+    };
+}
+function restoreCursorPosition(textareaRef, position) {
+    if (!position) return;
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+    requestAnimationFrame(()=>{
+        try {
+            textarea.setSelectionRange(position.start, position.end);
+        } catch (error) {
+            console.debug("Failed to restore cursor position:", error);
+        }
+    });
+}
+function preserveCursor(textareaRef, updateFn) {
+    const position = saveCursorPosition(textareaRef);
+    updateFn();
+    restoreCursorPosition(textareaRef, position);
+}
+function isActivelyEditing(element) {
+    if (!element) return false;
+    return document.activeElement === element && (element.tagName === "INPUT" || element.tagName === "TEXTAREA" || element.getAttribute("contenteditable") === "true");
 }
 ;
  //# sourceMappingURL=index.mjs.map

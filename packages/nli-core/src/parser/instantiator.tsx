@@ -48,54 +48,132 @@ const COMPONENTS = {
 /**
  * Render a single mapped component
  */
-function renderComponent(mapped: MappedComponent): React.ReactElement | null {
+function renderComponent(
+  mapped: MappedComponent,
+  onComponentChange?: (label: string, value: string, type: string) => void
+): React.ReactElement | null {
   const { type, props, children, key } = mapped
+  const label = props['nli-markdown']
+
+  // Create onChange handler for this component
+  const handleChange = (value: any) => {
+    if (onComponentChange && label) {
+      console.log('[instantiator] handleChange:', { label, value, type })
+      // For arrays (combobox, checkboxgroup), convert to comma-separated string
+      const stringValue = Array.isArray(value) ? value.join(',') : String(value)
+      onComponentChange(label, stringValue, type)
+    }
+  }
 
   switch (type) {
-    case 'input':
-      return <Input key={key} {...props} />
+    case 'input': {
+      const { onChange: _unused, ...restProps } = props
+      return (
+        <Input
+          key={key}
+          {...restProps}
+          onChange={(e) => {
+            handleChange(e.target.value)
+            props.onChange?.(e)
+          }}
+        />
+      )
+    }
 
-    case 'textarea':
-      return <Textarea key={key} {...props} />
+    case 'textarea': {
+      const { onChange: _unused, ...restProps } = props
+      return (
+        <Textarea
+          key={key}
+          {...restProps}
+          onChange={(e) => {
+            handleChange(e.target.value)
+            props.onChange?.(e)
+          }}
+        />
+      )
+    }
 
-    case 'checkbox':
+    case 'checkbox': {
+      const { onCheckedChange: _unused, ...restProps } = props
       return (
         <div key={key} className="flex items-center space-x-2">
-          <Checkbox {...props} />
+          <Checkbox
+            {...restProps}
+            onCheckedChange={(checked) => {
+              handleChange(checked)
+              props.onCheckedChange?.(checked)
+            }}
+          />
           <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-            {props['nli-markdown']}
+            {label}
           </label>
         </div>
       )
+    }
 
-    case 'switch':
+    case 'switch': {
+      const { onCheckedChange: _unused, ...restProps } = props
       return (
         <div key={key} className="flex items-center space-x-2">
-          <Switch {...props} />
+          <Switch
+            {...restProps}
+            onCheckedChange={(checked) => {
+              handleChange(checked ? 'yes' : 'no')
+              props.onCheckedChange?.(checked)
+            }}
+          />
           <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-            {props['nli-markdown']}
+            {label}
           </label>
         </div>
       )
+    }
 
     case 'button':
       return (
         <Button key={key} {...props}>
-          {props['nli-markdown']}
+          {label}
         </Button>
       )
 
     case 'date':
-      return <DatePickerComponent key={key} {...props} />
+      return (
+        <DatePickerComponent
+          key={key}
+          {...props}
+          onChange={(value: string) => {
+            handleChange(value)
+            props.onChange?.(value)
+          }}
+        />
+      )
 
     case 'daterange':
-      return <DateRangePickerComponent key={key} {...props} />
+      return (
+        <DateRangePickerComponent
+          key={key}
+          {...props}
+          onChange={(value: string) => {
+            handleChange(value)
+            props.onChange?.(value)
+          }}
+        />
+      )
 
-    case 'radiogroup':
+    case 'radiogroup': {
+      const { onValueChange: _unused, ...restProps } = props
       return (
         <div key={key} className="space-y-2">
           <label className="text-sm font-medium">{props['nli-markdown']}</label>
-          <RadioGroup defaultValue={props.defaultValue} {...props}>
+          <RadioGroup
+            {...restProps}
+            defaultValue={props.defaultValue}
+            onValueChange={(value) => {
+              handleChange(value)
+              props.onValueChange?.(value)
+            }}
+          >
             {children?.map((child) => (
               <div key={child.key} className="flex items-center space-x-2">
                 <RadioGroupItem value={child.props.value} {...child.props} />
@@ -107,12 +185,21 @@ function renderComponent(mapped: MappedComponent): React.ReactElement | null {
           </RadioGroup>
         </div>
       )
+    }
 
-    case 'select':
+    case 'select': {
+      const { onValueChange: _unused, ...restProps } = props
       return (
         <div key={key} className="space-y-2">
           <label className="text-sm font-medium">{props['nli-markdown']}</label>
-          <Select defaultValue={props.defaultValue} {...props}>
+          <Select
+            {...restProps}
+            defaultValue={props.defaultValue}
+            onValueChange={(value) => {
+              handleChange(value)
+              props.onValueChange?.(value)
+            }}
+          >
             <SelectTrigger>
               <SelectValue placeholder={`Select ${props['nli-markdown']}`} />
             </SelectTrigger>
@@ -126,20 +213,39 @@ function renderComponent(mapped: MappedComponent): React.ReactElement | null {
           </Select>
         </div>
       )
+    }
 
-    case 'combobox':
+    case 'combobox': {
+      const { onChange: _unused, ...restProps } = props
       return (
         <div key={key} className="space-y-2">
           <label className="text-sm font-medium">{props['nli-markdown']}</label>
-          <ComboBox options={props.options || []} {...props} />
+          <ComboBox
+            {...restProps}
+            options={props.options || []}
+            onChange={(value: string[]) => {
+              handleChange(value)
+              props.onChange?.(value)
+            }}
+          />
         </div>
       )
+    }
 
-    case 'togglegroup':
+    case 'togglegroup': {
+      const { onValueChange: _unused, ...restProps } = props
       return (
         <div key={key} className="space-y-2" nli-group-label={props['nli-markdown']}>
           <label className="text-sm font-medium">{props['nli-markdown']}</label>
-          <ToggleGroup type="multiple" defaultValue={props.defaultValue} {...props}>
+          <ToggleGroup
+            {...restProps}
+            type="multiple"
+            defaultValue={props.defaultValue}
+            onValueChange={(value) => {
+              handleChange(value)
+              props.onValueChange?.(value)
+            }}
+          >
             {children?.map((child) => (
               <ToggleGroupItem key={child.key} value={child.props.value} {...child.props}>
                 {child.props.value}
@@ -148,12 +254,21 @@ function renderComponent(mapped: MappedComponent): React.ReactElement | null {
           </ToggleGroup>
         </div>
       )
+    }
 
-    case 'checkboxgroup':
+    case 'checkboxgroup': {
+      const { onValueChange: _unused, ...restProps } = props
       return (
         <div key={key} className="space-y-2" nli-group-label={props['nli-markdown']}>
           <label className="text-sm font-medium">{props['nli-markdown']}</label>
-          <CheckboxGroup defaultValue={props.defaultValue} {...props}>
+          <CheckboxGroup
+            {...restProps}
+            defaultValue={props.defaultValue}
+            onValueChange={(value) => {
+              handleChange(value)
+              props.onValueChange?.(value)
+            }}
+          >
             {children?.map((child) => (
               <div key={child.key} className="flex items-center space-x-2">
                 <CheckboxGroupItem value={child.props.value} {...child.props} />
@@ -165,6 +280,7 @@ function renderComponent(mapped: MappedComponent): React.ReactElement | null {
           </CheckboxGroup>
         </div>
       )
+    }
 
     default:
       return null
@@ -190,17 +306,18 @@ function safeParseDate(value: string | undefined): Date | undefined {
 
 /**
  * Date Picker Component (using Popover + Calendar)
+ * Controlled component - receives value from props, calls onChange
  */
 function DatePickerComponent(props: any) {
   const dateValue = props['data-date-value']
-  const [date, setDate] = React.useState<Date | undefined>(
-    safeParseDate(dateValue)
-  )
+  const date = safeParseDate(dateValue)
 
-  // Update internal state if props change (handled by key in parent usually, but good practice)
-  React.useEffect(() => {
-    setDate(safeParseDate(dateValue))
-  }, [dateValue])
+  const handleDateChange = (newDate: Date | undefined) => {
+    if (props.onChange && newDate) {
+      // Format date for markdown
+      props.onChange(format(newDate, 'MMMM dd, yyyy'))
+    }
+  }
 
   return (
     <div className="space-y-2">
@@ -224,7 +341,7 @@ function DatePickerComponent(props: any) {
           <Calendar
             mode="single"
             selected={date}
-            onSelect={setDate}
+            onSelect={handleDateChange}
             initialFocus
           />
         </PopoverContent>
@@ -235,23 +352,24 @@ function DatePickerComponent(props: any) {
 
 /**
  * Date Range Picker Component (using Popover + Calendar)
+ * Controlled component - receives value from props, calls onChange
  */
 function DateRangePickerComponent(props: any) {
   const fromValue = props['data-date-from']
   const toValue = props['data-date-to']
 
-  const [dateRange, setDateRange] = React.useState<{ from?: Date; to?: Date }>({
+  const dateRange = {
     from: safeParseDate(fromValue),
     to: safeParseDate(toValue),
-  })
+  }
 
-  // Update internal state if props change
-  React.useEffect(() => {
-    setDateRange({
-      from: safeParseDate(fromValue),
-      to: safeParseDate(toValue),
-    })
-  }, [fromValue, toValue])
+  const handleDateRangeChange = (newRange: { from?: Date; to?: Date } | undefined) => {
+    if (props.onChange && newRange?.from && newRange?.to) {
+      // Format date range for markdown
+      const formattedRange = `${format(newRange.from, 'MMMM dd, yyyy')} - ${format(newRange.to, 'MMMM dd, yyyy')}`
+      props.onChange(formattedRange)
+    }
+  }
 
   return (
     <div className="space-y-2">
@@ -286,7 +404,7 @@ function DateRangePickerComponent(props: any) {
           <Calendar
             mode="range"
             selected={dateRange as any}
-            onSelect={setDateRange as any}
+            onSelect={handleDateRangeChange as any}
             numberOfMonths={2}
             initialFocus
           />
@@ -303,9 +421,12 @@ function DateRangePickerComponent(props: any) {
  * @returns Array of rendered React elements
  */
 export function instantiateComponents(
-  components: MappedComponent[]
+  components: MappedComponent[],
+  onComponentChange?: (label: string, value: string, type: string) => void
 ): React.ReactElement[] {
-  return components.map((component) => renderComponent(component)).filter(Boolean) as React.ReactElement[]
+  return components
+    .map((component) => renderComponent(component, onComponentChange))
+    .filter(Boolean) as React.ReactElement[]
 }
 
 /**

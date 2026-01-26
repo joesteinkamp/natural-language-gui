@@ -60,12 +60,12 @@ export function buildAST(tokens: Token[]): AST {
       continue
     }
 
-    // Handle standalone checkboxes (plain text)
+    // Handle standalone checkboxes
     if (token.type === 'CHECKBOX') {
       nodes.push({
         type: 'checkbox',
-        label: token.value || '',
-        value: 'true', // Checked (since it appears in output)
+        label: token.label || token.value || '',
+        value: token.value || 'true', // Use parsed value (true/false) or default to true for legacy
         metadata: {
           lineNumber: token.lineNumber,
           inferredType: false,
@@ -91,6 +91,23 @@ export function buildAST(tokens: Token[]): AST {
     // Handle standalone fields
     if (token.type === 'FIELD') {
       const value = token.value || ''
+
+      // Look ahead: check if this field is followed by GROUP_ITEM tokens
+      // If so, this is a RadioGroup or Select with options
+      const nextToken = tokens[i + 1]
+      if (nextToken && nextToken.type === 'GROUP_ITEM') {
+        // This is a RadioGroup/Select - process as a group
+        const groupNode = processFieldWithOptions(tokens, i, errors)
+        if (groupNode) {
+          nodes.push(groupNode)
+          i = groupNode.metadata?.lastProcessedLine || i + 1
+        } else {
+          i++
+        }
+        continue
+      }
+
+      // Regular field without options
       const context: InferenceContext = {
         hasChildren: false,
       }
@@ -128,6 +145,77 @@ export function buildAST(tokens: Token[]): AST {
 }
 
 /**
+ * Process a field with options (RadioGroup/Select pattern) into a single AST node
+ * Pattern: *Label:* SelectedValue
+ *          - Option 1
+ *          - Option 2
+ */
+function processFieldWithOptions(
+  tokens: Token[],
+  startIndex: number,
+  errors: ParseError[]
+): ASTNode | null {
+  const fieldToken = tokens[startIndex]
+
+  if (!fieldToken.label) {
+    errors.push({
+      line: fieldToken.lineNumber,
+      message: `Field missing label: "${fieldToken.line}"`,
+      severity: 'error',
+    })
+    return null
+  }
+
+  const selectedValue = fieldToken.value || ''
+  const options: string[] = []
+  let i = startIndex + 1
+
+  // Collect all group items following the field (GROUP_ITEM tokens)
+  while (i < tokens.length && tokens[i].type === 'GROUP_ITEM') {
+    const item = tokens[i]
+    const itemText = item.value || ''
+
+    // For RadioGroup/Select, we expect plain text options (- Option 1)
+    options.push(itemText)
+    i++
+  }
+
+  // If no options found, treat as regular field (shouldn't happen since we checked)
+  if (options.length === 0) {
+    return null
+  }
+
+  // Determine component type based on option count
+  // < 6 options = RadioGroup, >= 6 options = Select
+  const componentType = options.length < 6 ? 'radiogroup' : 'select'
+
+  // Build children array
+  const children: ASTNode[] = options.map((option, index) => ({
+    type: 'radio',
+    label: option,
+    value: option === selectedValue ? 'true' : 'false',
+    metadata: {
+      lineNumber: tokens[startIndex + 1 + index]?.lineNumber || fieldToken.lineNumber,
+      inferredType: true,
+    },
+  }))
+
+  const groupNode: ASTNode = {
+    type: componentType,
+    label: fieldToken.label,
+    value: selectedValue,
+    children,
+    metadata: {
+      lineNumber: fieldToken.lineNumber,
+      inferredType: !fieldToken.explicitType,
+      lastProcessedLine: i,
+    },
+  }
+
+  return groupNode
+}
+
+/**
  * Process a group (header + items) into a single AST node
  */
 function processGroup(
@@ -149,11 +237,26 @@ function processGroup(
   const children: ASTNode[] = []
   let i = startIndex + 1
 
-  // Collect all group items following the header
-  while (i < tokens.length && tokens[i].type === 'GROUP_ITEM') {
+  // Collect all group items following the header (GROUP_ITEM or CHECKBOX tokens)
+  while (i < tokens.length && (tokens[i].type === 'GROUP_ITEM' || tokens[i].type === 'CHECKBOX')) {
     const item = tokens[i]
 
-    // Item text needs to be parsed to check if it's *Label:* value format
+    // If it's a CHECKBOX token, it's already parsed with checked state
+    if (item.type === 'CHECKBOX') {
+      children.push({
+        type: 'checkbox',
+        label: item.label || item.value || '',
+        value: item.value || 'true', // Use parsed checked state
+        metadata: {
+          lineNumber: item.lineNumber,
+          inferredType: true,
+        },
+      })
+      i++
+      continue
+    }
+
+    // Otherwise, it's a legacy GROUP_ITEM token
     const itemText = item.value || ''
 
     // Try to parse as *Label:* value
@@ -171,11 +274,11 @@ function processGroup(
         },
       })
     } else {
-      // Plain text (checkbox/radio item in group)
+      // Plain text (legacy checkbox/radio item in group - treated as checked)
       children.push({
         type: 'checkbox',
         label: itemText,
-        value: 'true', // Checked/selected (since it appears)
+        value: 'true', // Checked/selected (legacy behavior)
         metadata: {
           lineNumber: item.lineNumber,
           inferredType: true,
@@ -234,7 +337,7 @@ export function validateAST(ast: AST): ParseError[] {
   const labels = new Set<string>()
   const checkDuplicates = (nodes: ASTNode[]) => {
     nodes.forEach((node) => {
-      if (node.label) {
+      if (node.label && node.type !== 'button') {
         if (labels.has(node.label)) {
           errors.push({
             line: node.metadata?.lineNumber || 0,

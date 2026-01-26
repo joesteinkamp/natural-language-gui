@@ -112,24 +112,18 @@ function mapNodeToProps(node: ASTNode, index: number): MappedComponent {
       }
 
     case 'radiogroup':
-      // For radio groups, only one item should be selected
-      // If all children have value='true', default to first item selected
-      const allSelected = node.children?.every(child => child.value === 'true')
-      
-      // Find the explicitly selected item (if not all are selected)
-      const selectedItem = !allSelected 
-        ? node.children?.find(child => child.value === 'true') 
-        : undefined
-
-      const defaultValue = allSelected && node.children?.[0] 
-        ? node.children[0].label 
-        : (selectedItem?.label || undefined)
+      // For radio groups, use node.value (from *Label:* SelectedValue) if available
+      // Otherwise fall back to finding the item with value='true' (legacy checkbox syntax)
+      const selectedRadioItem = node.children?.find(
+        (child) => child.value === 'true'
+      )
+      const radioDefaultValue = node.value || selectedRadioItem?.label || undefined
 
       return {
         type: 'radiogroup',
         props: {
           ...baseProps,
-          defaultValue,
+          defaultValue: radioDefaultValue,
         },
         children: node.children?.map((child, i) => ({
           type: 'radio' as ComponentType,
@@ -143,14 +137,15 @@ function mapNodeToProps(node: ASTNode, index: number): MappedComponent {
       }
 
     case 'select':
-      // For select, default to first option if all are marked as selected
-      const allSelectedInSelect = node.children?.every(child => child.value === 'true')
+      // For select, use node.value (from *Label:* SelectedValue) if available
+      // Otherwise fall back to first option
+      const selectDefaultValue = node.value || node.children?.[0]?.label || undefined
 
       return {
         type: 'select',
         props: {
           ...baseProps,
-          defaultValue: allSelectedInSelect && node.children?.[0] ? node.children[0].label : undefined,
+          defaultValue: selectDefaultValue,
         },
         children: node.children?.map((child, i) => ({
           type: 'select-item' as ComponentType,

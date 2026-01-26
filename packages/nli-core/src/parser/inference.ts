@@ -178,10 +178,13 @@ export function inferGroupType(
   }
 
   // Check if children are in *Label:* value format (not plain text)
-  // Plain text children will have value='true' (from checkbox creation)
+  // Checkbox-style children will have value='true' or 'false' (from [x]/[ ] syntax)
   // Formatted children will have actual values like 'yes', 'no', or other text
   const hasFormattedChildren = children.some(
-    (child) => child.value !== undefined && child.value !== 'true'
+    (child) =>
+      child.value !== undefined &&
+      child.value !== 'true' &&
+      child.value !== 'false'
   )
 
   if (hasFormattedChildren) {

@@ -18,13 +18,16 @@ const PATTERNS = {
   // *Label:* or *Label [type]:*
   GROUP_HEADER: /^\*([^*:]+?)(?:\s+\[([^\]]+)\])?:\*\s*$/,
 
-  // - item text or - *Item:* value or - *Item:* yes/no
+  // [x] item or [ ] item (checkbox-style with state)
+  CHECKBOX_ITEM: /^(\[[ xX]\])\s+(.+)$/,
+
+  // - item text or - *Item:* value or - *Item:* yes/no (legacy support)
   GROUP_ITEM: /^-\s(.+)$/,
 
-  // [Action] or [Action] [Another]
-  BUTTON: /^\[.+\]$/,
+  // [Action] or [Action] [Another] (must have content and no space after [)
+  BUTTON: /^\[[^\s\]].+\]$/,
 
-  // Plain text (checkbox)
+  // Plain text (checkbox) - no longer used, but kept for backward compatibility
   PLAIN_TEXT: /^[^*\-\[].*$/,
 
   // Blank line
@@ -60,6 +63,22 @@ function classifyLine(line: string, lineNumber: number): Token {
       type: 'BLANK',
       line: trimmed,
       lineNumber,
+    }
+  }
+
+  // Check for checkbox-style items BEFORE buttons: [x] item or [ ] item
+  const checkboxItemMatch = trimmed.match(PATTERNS.CHECKBOX_ITEM)
+  if (checkboxItemMatch) {
+    const checkboxState = checkboxItemMatch[1].trim()
+    const isChecked = checkboxState === '[x]' || checkboxState === '[X]'
+    const label = checkboxItemMatch[2].trim()
+
+    return {
+      type: 'CHECKBOX',
+      line: trimmed,
+      lineNumber,
+      label,
+      value: isChecked ? 'true' : 'false',
     }
   }
 
@@ -111,7 +130,7 @@ function classifyLine(line: string, lineNumber: number): Token {
     }
   }
 
-  // Check for group items: - item
+  // Check for group items: - item (legacy support)
   const itemMatch = trimmed.match(PATTERNS.GROUP_ITEM)
   if (itemMatch) {
     const itemText = itemMatch[1]
@@ -132,7 +151,7 @@ function classifyLine(line: string, lineNumber: number): Token {
       }
     }
 
-    // Plain text group item (checkbox)
+    // Plain text group item (checkbox) - treated as checked for backward compatibility
     return {
       type: 'GROUP_ITEM',
       line: trimmed,
@@ -141,17 +160,9 @@ function classifyLine(line: string, lineNumber: number): Token {
     }
   }
 
-  // Check for plain text (standalone checkbox)
-  if (PATTERNS.PLAIN_TEXT.test(trimmed)) {
-    return {
-      type: 'CHECKBOX',
-      line: trimmed,
-      lineNumber,
-      value: trimmed,
-    }
-  }
-
-  // Unknown format
+  // Check for plain text - only treat as UNKNOWN, not as checkbox
+  // Checkboxes MUST use [x] or [ ] syntax explicitly
+  // This prevents markdown headers and regular text from being treated as checkboxes
   return {
     type: 'UNKNOWN',
     line: trimmed,

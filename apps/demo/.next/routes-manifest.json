@@ -45,12 +45,6 @@
       "regex": "^/favicon\\.ico(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/favicon\\.ico(?:/)?$"
-    },
-    {
-      "page": "/translation-viewer",
-      "regex": "^/translation\\-viewer(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/translation\\-viewer(?:/)?$"
     }
   ],
   "dataRoutes": [],

@@ -1,10 +1,13 @@
 .container {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  padding: 4rem;
-  align-items: start;
+  height: 100vh;
+  overflow: hidden;
+  /* display: grid; removed to allow full width */
+  /* grid-template-columns: 1fr 1fr; removed */
+  /* gap: 4rem; removed */
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  /* align-items: start; removed */
   /* Force dark premium theme regardless of system preference for this viewer */
   background-color: #0a0a0a;
   color: #ededed;
@@ -18,10 +21,11 @@
 
 @media (max-width: 1024px) {
   .container {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    /* grid-template-columns: 1fr; removed */
+    /* gap: 2rem; removed */
     padding: 2rem;
   }
+
   
   .header {
     position: static;

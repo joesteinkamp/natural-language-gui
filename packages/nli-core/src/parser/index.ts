@@ -128,3 +128,101 @@ export function parseToComponents(markdown: string) {
     hasErrors: ast.errors.some((e) => e.severity === 'error'),
   }
 }
+
+/**
+ * Cache for parsed results
+ * Key: markdown content hash, Value: { result, timestamp }
+ */
+interface CacheEntry {
+  result: ReturnType<typeof parseToComponents>
+  timestamp: number
+}
+
+const parseCache = new Map<string, CacheEntry>()
+const CACHE_TTL = 5000 // 5 seconds
+const MAX_CACHE_SIZE = 100
+
+/**
+ * Simple hash function for markdown content
+ */
+function hashMarkdown(markdown: string): string {
+  let hash = 0
+  for (let i = 0; i < markdown.length; i++) {
+    const char = markdown.charCodeAt(i)
+    hash = (hash << 5) - hash + char
+    hash = hash & hash // Convert to 32-bit integer
+  }
+  return hash.toString(36)
+}
+
+/**
+ * Clean expired cache entries
+ */
+function cleanCache() {
+  const now = Date.now()
+  for (const [key, entry] of parseCache.entries()) {
+    if (now - entry.timestamp > CACHE_TTL) {
+      parseCache.delete(key)
+    }
+  }
+
+  // If still too large, remove oldest entries
+  if (parseCache.size > MAX_CACHE_SIZE) {
+    const entries = Array.from(parseCache.entries())
+    entries.sort((a, b) => a[1].timestamp - b[1].timestamp)
+    const toRemove = entries.slice(0, parseCache.size - MAX_CACHE_SIZE)
+    toRemove.forEach(([key]) => parseCache.delete(key))
+  }
+}
+
+/**
+ * Parse markdown with caching
+ *
+ * @param markdown - Raw markdown string
+ * @param options - Cache options
+ * @returns Cached or fresh parse result
+ */
+export function parseWithCache(
+  markdown: string,
+  options: {
+    /** Bypass cache (default: false) */
+    skipCache?: boolean
+  } = {}
+): ReturnType<typeof parseToComponents> {
+  const { skipCache = false } = options
+
+  // Skip cache if requested
+  if (skipCache) {
+    return parseToComponents(markdown)
+  }
+
+  // Generate cache key
+  const cacheKey = hashMarkdown(markdown)
+
+  // Check cache
+  const cached = parseCache.get(cacheKey)
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+    return cached.result
+  }
+
+  // Parse and cache
+  const result = parseToComponents(markdown)
+  parseCache.set(cacheKey, {
+    result,
+    timestamp: Date.now(),
+  })
+
+  // Clean cache periodically
+  if (parseCache.size > MAX_CACHE_SIZE) {
+    cleanCache()
+  }
+
+  return result
+}
+
+/**
+ * Clear parse cache (useful for testing or manual cache invalidation)
+ */
+export function clearParseCache() {
+  parseCache.clear()
+}

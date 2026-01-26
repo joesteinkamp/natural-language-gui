@@ -38,9 +38,13 @@ export type ComponentType =
   | 'date'
   | 'daterange'
   | 'radiogroup'
+  | 'radio'              // Radio button item within radiogroup
   | 'select'
+  | 'select-item'        // Select option item
   | 'togglegroup'
+  | 'toggle-item'        // Toggle item within togglegroup
   | 'checkboxgroup'
+  | 'checkbox-item'      // Checkbox item within checkboxgroup
   | 'combobox'
 
 /**
