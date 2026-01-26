@@ -303,3 +303,9 @@ I agree to the terms
 *Additional Comments:*
 [Submit Survey]
 ```
+
+## Next Steps
+
+- See [COMPONENT_AUTHORING.md](./COMPONENT_AUTHORING.md) for creating components
+- See [NLI_SPECIFICATION.md](./NLI_SPECIFICATION.md) for markdown format details
+- See [ARCHITECTURE.md](./ARCHITECTURE.md) for system design

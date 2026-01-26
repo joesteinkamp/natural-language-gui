@@ -42,6 +42,7 @@ function mapNodeToProps(node: ASTNode, index: number): MappedComponent {
           type: 'text',
           defaultValue: node.value || '',
           placeholder: node.label,
+          label: node.label,
         },
         key: generateKey(node, index),
       }
@@ -53,6 +54,7 @@ function mapNodeToProps(node: ASTNode, index: number): MappedComponent {
           ...baseProps,
           defaultValue: node.value || '',
           placeholder: node.label,
+          label: node.label,
         },
         key: generateKey(node, index),
       }

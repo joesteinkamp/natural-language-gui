@@ -155,11 +155,14 @@ var ButtonGroup = React14__namespace.forwardRef(
 ButtonGroup.displayName = "ButtonGroup";
 var Input = React14__namespace.forwardRef(
   (_a, ref) => {
-    var _b = _a, { className, type } = _b, props = __objRest(_b, ["className", "type"]);
-    return /* @__PURE__ */ jsxRuntime.jsx(
+    var _b = _a, { className, type, label, id } = _b, props = __objRest(_b, ["className", "type", "label", "id"]);
+    const generatedId = React14__namespace.useId();
+    const componentId = id || generatedId;
+    const input = /* @__PURE__ */ jsxRuntime.jsx(
       "input",
       __spreadValues({
         type,
+        id: componentId,
         className: cn(
           "flex h-10 w-full rounded-md border border-slate-800 bg-slate-900 px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm text-slate-200",
           className
@@ -167,6 +170,13 @@ var Input = React14__namespace.forwardRef(
         ref
       }, props)
     );
+    if (label) {
+      return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "grid w-full gap-1.5", children: [
+        /* @__PURE__ */ jsxRuntime.jsx("label", { className: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70", htmlFor: componentId, children: label }),
+        input
+      ] });
+    }
+    return input;
   }
 );
 Input.displayName = "Input";
@@ -1348,7 +1358,8 @@ function mapNodeToProps(node, index) {
         props: __spreadProps(__spreadValues({}, baseProps), {
           type: "text",
           defaultValue: node.value || "",
-          placeholder: node.label
+          placeholder: node.label,
+          label: node.label
         }),
         key: generateKey(node, index)
       };
@@ -1357,7 +1368,8 @@ function mapNodeToProps(node, index) {
         type: "textarea",
         props: __spreadProps(__spreadValues({}, baseProps), {
           defaultValue: node.value || "",
-          placeholder: node.label
+          placeholder: node.label,
+          label: node.label
         }),
         key: generateKey(node, index)
       };

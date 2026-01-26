@@ -322,15 +322,19 @@ export const componentRegistry: Record<string, RegistryEntry> = {
 
 
   "Input": {
-    component: (props: any) => (
-      <div className="grid w-full max-w-sm items-center gap-1.5">
-        <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" htmlFor="email">Project Goal</label>
-        <Input type="text" id="email" placeholder="Pitch a new deal" {...props} />
-      </div>
-    ),
+    component: ({ label, ...props }: any) => {
+      const id = React.useId()
+      return (
+        <div className="grid w-full gap-1.5">
+          <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" htmlFor={id}>{label}</label>
+          <Input type="text" id={id} {...props} />
+        </div>
+      )
+    },
     props: {
         "nli-markdown": "Project Goal",
-        defaultValue: "Pitch a new deal"
+        defaultValue: "Pitch a new deal",
+        label: "Project Goal"
     }
   },
 
@@ -424,7 +428,15 @@ export const componentRegistry: Record<string, RegistryEntry> = {
 
 
   "Textarea": {
-    component: Textarea,
+    component: ({ label, ...props }: any) => {
+      const id = React.useId()
+      return (
+        <div className="grid w-full gap-1.5">
+          <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" htmlFor={id}>{label}</label>
+          <Textarea id={id} {...props} />
+        </div>
+      )
+    },
     props: {
       placeholder: "Type your message here.",
       label: "Bio",

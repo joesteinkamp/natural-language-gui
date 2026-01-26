@@ -29,7 +29,9 @@ interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 declare const ButtonGroup: React.ForwardRefExoticComponent<ButtonGroupProps & React.RefAttributes<HTMLDivElement>>;
 
-declare const Input: React.ForwardRefExoticComponent<Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, "ref"> & React.RefAttributes<HTMLInputElement>>;
+declare const Input: React.ForwardRefExoticComponent<Omit<React.ClassAttributes<HTMLInputElement> & React.InputHTMLAttributes<HTMLInputElement> & {
+    label?: string;
+}, "ref"> & React.RefAttributes<HTMLInputElement>>;
 
 declare const Textarea: React.ForwardRefExoticComponent<Omit<React.ClassAttributes<HTMLTextAreaElement> & React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
     label?: string;
