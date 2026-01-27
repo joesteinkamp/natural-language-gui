@@ -168,7 +168,15 @@ export function ComponentViewerBidirectional({ children }: ComponentViewerBidire
 *Checkbox Group:*
 [x] Option X
 [ ] Option Y
-[x] Option Z`,
+[x] Option Z
+
+*Combobox Group:*
+[x] Option A1
+[ ] Option A2
+[x] Option A3
+[x] Option A4
+[ ] Option A5
+[x] Option A6`,
     },
   }
 
