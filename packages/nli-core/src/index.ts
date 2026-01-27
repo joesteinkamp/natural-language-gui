@@ -58,6 +58,8 @@ export {
   updateMarkdownIncremental,
 } from './lib/markdown-generators'
 
+export { cleanseMarkdown } from './lib/markdown-cleanser'
+
 // Bidirectional sync exports
 export { useBidirectionalSync } from './hooks/useBidirectionalSync'
 export type { UseBidirectionalSyncOptions, BidirectionalSyncState } from './hooks/useBidirectionalSync'

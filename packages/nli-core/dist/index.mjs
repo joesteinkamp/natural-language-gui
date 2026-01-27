@@ -1379,6 +1379,11 @@ function processGroup(tokens, startIndex, errors) {
   const children = [];
   let i = startIndex + 1;
   while (i < tokens.length && (tokens[i].type === "GROUP_ITEM" || tokens[i].type === "CHECKBOX")) {
+    const prevToken = tokens[i - 1];
+    const currentToken = tokens[i];
+    if (prevToken && currentToken.lineNumber > prevToken.lineNumber + 1) {
+      break;
+    }
     const item = tokens[i];
     if (item.type === "CHECKBOX") {
       children.push({
@@ -2422,6 +2427,108 @@ function updateMarkdownIncremental(previousMapping, changedComponents, allCompon
   return generateMarkdownWithMapping(allComponents);
 }
 
+// src/lib/markdown-cleanser.ts
+function cleanseMarkdown(markdown) {
+  const { components } = parseToComponents(markdown);
+  if (!components || components.length === 0) {
+    return markdown;
+  }
+  let cleansedMarkdown = "";
+  for (const component of components) {
+    const componentMarkdown = generateCleansedMarkdownForComponent(component);
+    if (componentMarkdown) {
+      if (cleansedMarkdown) cleansedMarkdown += "\n\n";
+      cleansedMarkdown += componentMarkdown;
+    }
+  }
+  return cleansedMarkdown;
+}
+function generateCleansedMarkdownForComponent(component) {
+  const label = component.props["nli-markdown"] || component.props.label || "";
+  switch (component.type) {
+    case "radiogroup":
+    case "select": {
+      const value = component.props.defaultValue || component.props.value || "";
+      return `*${label}:* ${value}`;
+    }
+    case "togglegroup": {
+      const selectedItems = [];
+      const groupValue = component.props.defaultValue || component.props.value || [];
+      if (component.children) {
+        component.children.forEach((child) => {
+          const childValue = child.props.value;
+          const childLabel = childValue;
+          let isSelected = false;
+          if (Array.isArray(groupValue) && groupValue.includes(childValue)) {
+            isSelected = true;
+          } else if (child.props.value === "yes" || child.props.value === "on" || child.props.checked === true) {
+            isSelected = true;
+          }
+          if (isSelected) {
+            selectedItems.push(childLabel);
+          }
+        });
+      }
+      if (selectedItems.length === 0) {
+        return `*${label}:*`;
+      }
+      return `*${label}:*
+${selectedItems.map((item) => `- ${item}`).join("\n")}`;
+    }
+    case "checkboxgroup": {
+      const selectedItems = [];
+      const groupValue = component.props.defaultValue || component.props.value;
+      if (component.children) {
+        component.children.forEach((child) => {
+          const childLabel = child.props["nli-markdown"] || child.props.label || child.props.value || "";
+          let isSelected = false;
+          if (child.props.checked || child.props.defaultChecked || child.props.value === "true") {
+            isSelected = true;
+          } else if (Array.isArray(groupValue) && groupValue.includes(child.props.value)) {
+            isSelected = true;
+          }
+          if (isSelected) {
+            selectedItems.push(childLabel);
+          }
+        });
+      }
+      if (selectedItems.length === 0) {
+        return `*${label}:*`;
+      }
+      return `*${label}:*
+${selectedItems.map((item) => `- ${item}`).join("\n")}`;
+    }
+    case "combobox": {
+      if (component.children && component.children.length > 0) {
+        const selectedItems = [];
+        const groupValue = component.props.defaultValue || component.props.value;
+        component.children.forEach((child) => {
+          const childLabel = child.props["nli-markdown"] || child.props.label || child.props.value || "";
+          let isSelected = false;
+          if (child.props.checked || child.props.defaultChecked || child.props.value === "true") {
+            isSelected = true;
+          } else if (Array.isArray(groupValue) && groupValue.includes(child.props.value)) {
+            isSelected = true;
+          }
+          if (isSelected) {
+            selectedItems.push(childLabel);
+          }
+        });
+        if (selectedItems.length === 0) {
+          return `*${label}:*`;
+        }
+        return `*${label}:*
+${selectedItems.map((item) => `- ${item}`).join("\n")}`;
+      }
+      const value = component.props.defaultValue || component.props.value || "";
+      return `*${label}:* ${Array.isArray(value) ? value.join(", ") : value}`;
+    }
+    // For other components, use standard generation or simple formatting
+    default:
+      return generateMarkdownFromComponent(component);
+  }
+}
+
 // src/lib/sync-reconciler.ts
 var SyncReconciler = class {
   constructor(options) {
@@ -3127,7 +3234,11 @@ function updateGroupLines(markdown, parsedLines, headerIndex, newValue, componen
     const line = parsedLines[i];
     const itemLabel = line.componentLabel || "";
     const isChecked = componentType === "radiogroup" || componentType === "select" ? itemLabel === newValue : selectedValues.includes(itemLabel);
-    markdownLines[i] = `[${isChecked ? "x" : " "}] ${itemLabel}`;
+    if (componentType === "togglegroup") {
+      markdownLines[i] = `- *${itemLabel}:* ${isChecked ? "yes" : "no"}`;
+    } else {
+      markdownLines[i] = `[${isChecked ? "x" : " "}] ${itemLabel}`;
+    }
   });
   return markdownLines.join("\n");
 }
@@ -3180,6 +3291,6 @@ function formatValueForMarkdown(value, type) {
   }
 }
 
-export { Button, Calendar, Checkbox, CheckboxGroup, CheckboxGroupItem, ComboBox, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, Input, InstantiatedForm, Popover, PopoverContent, PopoverTrigger, RadioGroup, RadioGroupItem, ResizablePane, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Switch, SyncReconciler, Textarea, Toggle, ToggleGroup, ToggleGroupItem, buildAST, buttonVariants, clearParseCache, cn, createSyncReconciler, diffComponents, diffMarkdown, extractValues, filterBlanks, formatValueForMarkdown, generateMarkdownForElement, generateMarkdownFromComponent, generateMarkdownFromComponents, generateMarkdownWithMapping, getUnknownTokens, inferComponentType, inferGroupType, instantiateComponents, isActivelyEditing, isBooleanValue, isRegularButton, mapASTToComponents, normalizeMarkdown, parse, parseBooleanValue, parseMarkdownLines, parseToComponents, parseWithCache, preserveCursor, restoreCursorPosition, saveCursorPosition, toggleVariants, tokenize, updateMarkdownIncremental, updateMarkdownLine, useBidirectionalSync, validateAST };
+export { Button, Calendar, Checkbox, CheckboxGroup, CheckboxGroupItem, ComboBox, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, Input, InstantiatedForm, Popover, PopoverContent, PopoverTrigger, RadioGroup, RadioGroupItem, ResizablePane, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Switch, SyncReconciler, Textarea, Toggle, ToggleGroup, ToggleGroupItem, buildAST, buttonVariants, cleanseMarkdown, clearParseCache, cn, createSyncReconciler, diffComponents, diffMarkdown, extractValues, filterBlanks, formatValueForMarkdown, generateMarkdownForElement, generateMarkdownFromComponent, generateMarkdownFromComponents, generateMarkdownWithMapping, getUnknownTokens, inferComponentType, inferGroupType, instantiateComponents, isActivelyEditing, isBooleanValue, isRegularButton, mapASTToComponents, normalizeMarkdown, parse, parseBooleanValue, parseMarkdownLines, parseToComponents, parseWithCache, preserveCursor, restoreCursorPosition, saveCursorPosition, toggleVariants, tokenize, updateMarkdownIncremental, updateMarkdownLine, useBidirectionalSync, validateAST };
 //# sourceMappingURL=index.mjs.map
 //# sourceMappingURL=index.mjs.map

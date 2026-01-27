@@ -239,6 +239,15 @@ function processGroup(
 
   // Collect all group items following the header (GROUP_ITEM or CHECKBOX tokens)
   while (i < tokens.length && (tokens[i].type === 'GROUP_ITEM' || tokens[i].type === 'CHECKBOX')) {
+    // Check for line gap (blank line)
+    // If the current item is more than 1 line away from the previous item/header, break the group
+    const prevToken = tokens[i - 1]
+    const currentToken = tokens[i]
+    
+    if (prevToken && currentToken.lineNumber > prevToken.lineNumber + 1) {
+      break
+    }
+
     const item = tokens[i]
 
     // If it's a CHECKBOX token, it's already parsed with checked state

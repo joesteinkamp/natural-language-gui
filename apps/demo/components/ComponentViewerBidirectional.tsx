@@ -16,6 +16,12 @@ import {
   saveCursorPosition,
   restoreCursorPosition,
   updateMarkdownLine,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  cleanseMarkdown,
 } from "@natural-language-gui/core"
 import type { ComponentType } from "@natural-language-gui/core"
 
@@ -84,6 +90,7 @@ export function ComponentViewerBidirectional({ children }: ComponentViewerBidire
   const previewRef = React.useRef<HTMLDivElement>(null)
   const [selectedPreset, setSelectedPreset] = React.useState<string>("")
   const [selectedComponent, setSelectedComponent] = React.useState<TopLevelComponentType>('input')
+  const [cleansedMarkdown, setCleansedMarkdown] = React.useState<string>("")
   const lastUpdateSourceRef = React.useRef<'markdown' | 'gui' | null>(null)
 
   // Preset examples
@@ -91,40 +98,60 @@ export function ComponentViewerBidirectional({ children }: ComponentViewerBidire
     login: {
       description: "Login Form",
       markdown: `*Email:* john@example.com
+
 *Password:* secret123
+
 *Remember me:* yes
+
 [Login]`,
     },
     profile: {
       description: "User Profile",
       markdown: `*Name:* John Doe
+
 *Email:* john@example.com
+
 *Bio:* Software developer
+
 *Birthday:* January 15, 1990
+
 *Notifications:* yes
+
 [Save Profile]`,
     },
     search: {
       description: "Search Filters",
       markdown: `*Search:* laptop
+
 *Category:* Electronics
+
 *Price Range:* January 01, 2024 - December 31, 2024
+
 *In Stock Only:* yes
+
 [Search]`,
     },
     all: {
       description: "All Components",
       markdown: `*Input:* Sample text
+
 *Textarea:* This is a longer text area that should exceed the sixty character limit to ensure it renders as a textarea component correctly.
+
 *Switch:* yes
+
 [x] Checkbox
+
 [Click Me]
+
 *Date:* January 15, 2024
+
 *Date Range:* January 01, 2024 - December 31, 2024
+
 *Radio Group:* Option 2
 - Option 1
 - Option 2
 - Option 3
+
 *Select:* Option C
 - Option A
 - Option B
@@ -132,10 +159,12 @@ export function ComponentViewerBidirectional({ children }: ComponentViewerBidire
 - Option D
 - Option E
 - Option F
+
 *Toggle Group:*
 - *Bold:* yes
 - *Italic:* no
 - *Underline:* yes
+
 *Checkbox Group:*
 [x] Option X
 [ ] Option Y
@@ -297,7 +326,31 @@ export function ComponentViewerBidirectional({ children }: ComponentViewerBidire
 
   return (
     <div className="flex flex-col gap-6 h-full flex-1 w-full relative">
-      <div className="absolute top-0 right-0 z-50">
+      <div className="absolute top-0 right-0 z-50 flex items-center gap-2 p-2">
+        <Dialog onOpenChange={(open) => {
+          if (open) {
+            setCleansedMarkdown(cleanseMarkdown(markdown))
+          }
+        }}>
+          <DialogTrigger asChild>
+            <Button variant="outline" size="sm" className="h-6 text-xs bg-slate-900/50 border-slate-700 hover:bg-slate-800 text-slate-300">
+              Clean Markdown
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Clean Markdown</DialogTitle>
+            </DialogHeader>
+            <div className="py-4">
+              <Textarea
+                value={cleansedMarkdown}
+                readOnly
+                className="min-h-[300px] font-mono text-sm resize-none bg-slate-950 border-slate-800 focus-visible:ring-0"
+              />
+            </div>
+          </DialogContent>
+        </Dialog>
+
         <div
           className={cn(
             "text-xs font-mono px-2 py-1 rounded flex items-center gap-1",

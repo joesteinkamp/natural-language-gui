@@ -446,6 +446,18 @@ declare function updateMarkdownIncremental(previousMapping: ComponentMarkdownMap
 };
 
 /**
+ * Cleans the markdown by removing unselected options and simplifying the output.
+ *
+ * Rules:
+ * - Radio Group / Select: Removes all options, keeps only "*Label:* Value"
+ * - Toggle Group: Keeps only options with "yes" value, formatted as bullet list
+ * - Checkbox Group: Keeps only checked options, formatted as bullet list
+ * - Combobox: If has children (multi-select), keeps only selected options as bullet list
+ * - Text/Textarea/Switch/Date: Kept as is
+ */
+declare function cleanseMarkdown(markdown: string): string;
+
+/**
  * Sync Reconciler
  * Orchestrates bidirectional updates with multi-layer loop prevention
  */
@@ -784,4 +796,4 @@ declare function updateMarkdownLine(markdown: string, componentLabel: string, ne
  */
 declare function formatValueForMarkdown(value: any, type: ComponentType): string;
 
-export { type AST, type ASTNode, type BidirectionalSyncState, Button, type ButtonProps, Calendar, type CalendarProps, Checkbox, CheckboxGroup, CheckboxGroupItem, ComboBox, type ComboBoxOption, type ComboBoxProps, type ComponentDiff, type ComponentType, type CursorPosition, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, type InferenceContext, Input, InstantiatedForm, type MappedComponent, type MarkdownDiff, type MarkdownLine, type ParseError, Popover, PopoverContent, PopoverTrigger, RadioGroup, RadioGroupItem, type ReconcilerOptions, ResizablePane, type ResizablePaneProps, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Switch, SyncReconciler, type SyncStatus, Textarea, Toggle, ToggleGroup, ToggleGroupItem, type Token, type TokenType, type UpdateOrigin, type UseBidirectionalSyncOptions, buildAST, buttonVariants, clearParseCache, cn, createSyncReconciler, diffComponents, diffMarkdown, extractValues, filterBlanks, formatValueForMarkdown, generateMarkdownForElement, generateMarkdownFromComponent, generateMarkdownFromComponents, generateMarkdownWithMapping, getUnknownTokens, inferComponentType, inferGroupType, instantiateComponents, isActivelyEditing, isBooleanValue, isRegularButton, mapASTToComponents, normalizeMarkdown, parse, parseBooleanValue, parseMarkdownLines, parseToComponents, parseWithCache, preserveCursor, restoreCursorPosition, saveCursorPosition, toggleVariants, tokenize, updateMarkdownIncremental, updateMarkdownLine, useBidirectionalSync, validateAST };
+export { type AST, type ASTNode, type BidirectionalSyncState, Button, type ButtonProps, Calendar, type CalendarProps, Checkbox, CheckboxGroup, CheckboxGroupItem, ComboBox, type ComboBoxOption, type ComboBoxProps, type ComponentDiff, type ComponentType, type CursorPosition, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, type InferenceContext, Input, InstantiatedForm, type MappedComponent, type MarkdownDiff, type MarkdownLine, type ParseError, Popover, PopoverContent, PopoverTrigger, RadioGroup, RadioGroupItem, type ReconcilerOptions, ResizablePane, type ResizablePaneProps, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Switch, SyncReconciler, type SyncStatus, Textarea, Toggle, ToggleGroup, ToggleGroupItem, type Token, type TokenType, type UpdateOrigin, type UseBidirectionalSyncOptions, buildAST, buttonVariants, cleanseMarkdown, clearParseCache, cn, createSyncReconciler, diffComponents, diffMarkdown, extractValues, filterBlanks, formatValueForMarkdown, generateMarkdownForElement, generateMarkdownFromComponent, generateMarkdownFromComponents, generateMarkdownWithMapping, getUnknownTokens, inferComponentType, inferGroupType, instantiateComponents, isActivelyEditing, isBooleanValue, isRegularButton, mapASTToComponents, normalizeMarkdown, parse, parseBooleanValue, parseMarkdownLines, parseToComponents, parseWithCache, preserveCursor, restoreCursorPosition, saveCursorPosition, toggleVariants, tokenize, updateMarkdownIncremental, updateMarkdownLine, useBidirectionalSync, validateAST };

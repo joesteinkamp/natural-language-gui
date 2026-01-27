@@ -11,16 +11,16 @@
 [34mCLI[39m Cleaning output folder
 [34mCJS[39m Build start
 [34mESM[39m Build start
-dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "dist/index.mjs" was ignored.
 dist/index.js (1:0): Module level directives cause errors when bundled, "use client" in "dist/index.js" was ignored.
+dist/index.mjs (1:0): Module level directives cause errors when bundled, "use client" in "dist/index.mjs" was ignored.
 DTS Build start
-[32mCJS[39m [1mdist/index.js     [22m[32m115.81 KB[39m
-[32mCJS[39m [1mdist/index.js.map [22m[32m248.13 KB[39m
-[32mCJS[39m ⚡️ Build success in 237ms
-[32mESM[39m [1mdist/index.mjs     [22m[32m109.61 KB[39m
-[32mESM[39m [1mdist/index.mjs.map [22m[32m247.52 KB[39m
-[32mESM[39m ⚡️ Build success in 237ms
-DTS ⚡️ Build success in 1352ms
-DTS dist/index.d.ts  28.38 KB
-DTS dist/index.d.mts 28.38 KB
+[32mCJS[39m [1mdist/index.js     [22m[32m119.93 KB[39m
+[32mCJS[39m [1mdist/index.js.map [22m[32m258.82 KB[39m
+[32mCJS[39m ⚡️ Build success in 228ms
+[32mESM[39m [1mdist/index.mjs     [22m[32m113.70 KB[39m
+[32mESM[39m [1mdist/index.mjs.map [22m[32m258.21 KB[39m
+[32mESM[39m ⚡️ Build success in 229ms
+DTS ⚡️ Build success in 1396ms
+DTS dist/index.d.ts  28.91 KB
+DTS dist/index.d.mts 28.91 KB
 ⠙[1G[0K

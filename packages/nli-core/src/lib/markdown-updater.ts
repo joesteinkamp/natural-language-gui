@@ -264,8 +264,12 @@ function updateGroupLines(
         ? itemLabel === newValue // Single selection
         : selectedValues.includes(itemLabel) // Multi-selection
 
-    // Update line with checkbox syntax
-    markdownLines[i] = `[${isChecked ? 'x' : ' '}] ${itemLabel}`
+    // Update line based on component type
+    if (componentType === 'togglegroup') {
+      markdownLines[i] = `- *${itemLabel}:* ${isChecked ? 'yes' : 'no'}`
+    } else {
+      markdownLines[i] = `[${isChecked ? 'x' : ' '}] ${itemLabel}`
+    }
   })
 
   return markdownLines.join('\n')
