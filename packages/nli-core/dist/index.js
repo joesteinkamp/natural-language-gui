@@ -1,6 +1,6 @@
 'use strict';
 
-var React13 = require('react');
+var React15 = require('react');
 var reactSlot = require('@radix-ui/react-slot');
 var classVarianceAuthority = require('class-variance-authority');
 var clsx = require('clsx');
@@ -37,7 +37,7 @@ function _interopNamespace(e) {
   return Object.freeze(n);
 }
 
-var React13__namespace = /*#__PURE__*/_interopNamespace(React13);
+var React15__namespace = /*#__PURE__*/_interopNamespace(React15);
 var SwitchPrimitives__namespace = /*#__PURE__*/_interopNamespace(SwitchPrimitives);
 var TogglePrimitive__namespace = /*#__PURE__*/_interopNamespace(TogglePrimitive);
 var ToggleGroupPrimitive__namespace = /*#__PURE__*/_interopNamespace(ToggleGroupPrimitive);
@@ -106,7 +106,7 @@ var buttonVariants = classVarianceAuthority.cva(
     }
   }
 );
-var Button = React13__namespace.forwardRef(
+var Button = React15__namespace.forwardRef(
   (_a, ref) => {
     var _b = _a, { className, variant, size, asChild = false, label } = _b, props = __objRest(_b, ["className", "variant", "size", "asChild", "label"]);
     const Comp = asChild ? reactSlot.Slot : "button";
@@ -121,10 +121,10 @@ var Button = React13__namespace.forwardRef(
   }
 );
 Button.displayName = "Button";
-var Input = React13__namespace.forwardRef(
+var Input = React15__namespace.forwardRef(
   (_a, ref) => {
     var _b = _a, { className, type, label, id } = _b, props = __objRest(_b, ["className", "type", "label", "id"]);
-    const generatedId = React13__namespace.useId();
+    const generatedId = React15__namespace.useId();
     const componentId = id || generatedId;
     const input = /* @__PURE__ */ jsxRuntime.jsx(
       "input",
@@ -148,9 +148,9 @@ var Input = React13__namespace.forwardRef(
   }
 );
 Input.displayName = "Input";
-var Textarea = React13__namespace.forwardRef((_a, ref) => {
+var Textarea = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className, label, id } = _b, props = __objRest(_b, ["className", "label", "id"]);
-  const generatedId = React13__namespace.useId();
+  const generatedId = React15__namespace.useId();
   const componentId = id || generatedId;
   const textarea = /* @__PURE__ */ jsxRuntime.jsx(
     "textarea",
@@ -174,7 +174,7 @@ var Textarea = React13__namespace.forwardRef((_a, ref) => {
   return textarea;
 });
 Textarea.displayName = "Textarea";
-var Switch = React13__namespace.forwardRef((_a, ref) => {
+var Switch = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsxRuntime.jsx(
     SwitchPrimitives__namespace.Root,
@@ -217,7 +217,7 @@ var toggleVariants = classVarianceAuthority.cva(
     }
   }
 );
-var Toggle = React13__namespace.forwardRef((_a, ref) => {
+var Toggle = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className, variant, size } = _b, props = __objRest(_b, ["className", "variant", "size"]);
   return /* @__PURE__ */ jsxRuntime.jsx(
     TogglePrimitive__namespace.Root,
@@ -230,11 +230,11 @@ var Toggle = React13__namespace.forwardRef((_a, ref) => {
   );
 });
 Toggle.displayName = TogglePrimitive__namespace.Root.displayName;
-var ToggleGroupContext = React13__namespace.createContext({
+var ToggleGroupContext = React15__namespace.createContext({
   size: "default",
   variant: "default"
 });
-var ToggleGroup = React13__namespace.forwardRef((_a, ref) => {
+var ToggleGroup = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className, variant, size, children } = _b, props = __objRest(_b, ["className", "variant", "size", "children"]);
   return /* @__PURE__ */ jsxRuntime.jsx(
     ToggleGroupPrimitive__namespace.Root,
@@ -247,9 +247,9 @@ var ToggleGroup = React13__namespace.forwardRef((_a, ref) => {
   );
 });
 ToggleGroup.displayName = ToggleGroupPrimitive__namespace.Root.displayName;
-var ToggleGroupItem = React13__namespace.forwardRef((_a, ref) => {
+var ToggleGroupItem = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className, children, variant, size } = _b, props = __objRest(_b, ["className", "children", "variant", "size"]);
-  const context = React13__namespace.useContext(ToggleGroupContext);
+  const context = React15__namespace.useContext(ToggleGroupContext);
   return /* @__PURE__ */ jsxRuntime.jsx(
     ToggleGroupPrimitive__namespace.Item,
     __spreadProps(__spreadValues({
@@ -280,9 +280,9 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   return target;
 }
 var _excluded$T = ["color"];
-var CheckIcon = /* @__PURE__ */ React13.forwardRef(function(_ref, forwardedRef) {
+var CheckIcon = /* @__PURE__ */ React15.forwardRef(function(_ref, forwardedRef) {
   var _ref$color = _ref.color, color = _ref$color === void 0 ? "currentColor" : _ref$color, props = _objectWithoutPropertiesLoose(_ref, _excluded$T);
-  return React13.createElement("svg", Object.assign({
+  return React15.createElement("svg", Object.assign({
     width: "15",
     height: "15",
     viewBox: "0 0 15 15",
@@ -290,7 +290,7 @@ var CheckIcon = /* @__PURE__ */ React13.forwardRef(function(_ref, forwardedRef) 
     xmlns: "http://www.w3.org/2000/svg"
   }, props, {
     ref: forwardedRef
-  }), React13.createElement("path", {
+  }), React15.createElement("path", {
     d: "M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z",
     fill: color,
     fillRule: "evenodd",
@@ -298,9 +298,9 @@ var CheckIcon = /* @__PURE__ */ React13.forwardRef(function(_ref, forwardedRef) 
   }));
 });
 var _excluded$1r = ["color"];
-var Cross2Icon = /* @__PURE__ */ React13.forwardRef(function(_ref, forwardedRef) {
+var Cross2Icon = /* @__PURE__ */ React15.forwardRef(function(_ref, forwardedRef) {
   var _ref$color = _ref.color, color = _ref$color === void 0 ? "currentColor" : _ref$color, props = _objectWithoutPropertiesLoose(_ref, _excluded$1r);
-  return React13.createElement("svg", Object.assign({
+  return React15.createElement("svg", Object.assign({
     width: "15",
     height: "15",
     viewBox: "0 0 15 15",
@@ -308,14 +308,14 @@ var Cross2Icon = /* @__PURE__ */ React13.forwardRef(function(_ref, forwardedRef)
     xmlns: "http://www.w3.org/2000/svg"
   }, props, {
     ref: forwardedRef
-  }), React13.createElement("path", {
+  }), React15.createElement("path", {
     d: "M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z",
     fill: color,
     fillRule: "evenodd",
     clipRule: "evenodd"
   }));
 });
-var Checkbox = React13__namespace.forwardRef((_a, ref) => {
+var Checkbox = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsxRuntime.jsx(
     CheckboxPrimitive__namespace.Root,
@@ -337,13 +337,13 @@ var Checkbox = React13__namespace.forwardRef((_a, ref) => {
   );
 });
 Checkbox.displayName = CheckboxPrimitive__namespace.Root.displayName;
-var CheckboxGroupContext = React13__namespace.createContext(void 0);
-var CheckboxGroup = React13__namespace.forwardRef((_a, ref) => {
+var CheckboxGroupContext = React15__namespace.createContext(void 0);
+var CheckboxGroup = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className, value, defaultValue, onValueChange, children } = _b, props = __objRest(_b, ["className", "value", "defaultValue", "onValueChange", "children"]);
-  const [internalValue, setInternalValue] = React13__namespace.useState(defaultValue || []);
+  const [internalValue, setInternalValue] = React15__namespace.useState(defaultValue || []);
   const controlled = value !== void 0;
   const currentValue = controlled ? value : internalValue;
-  const handleValueChange = React13__namespace.useCallback(
+  const handleValueChange = React15__namespace.useCallback(
     (newValue) => {
       if (!controlled) {
         setInternalValue(newValue);
@@ -364,9 +364,9 @@ var CheckboxGroup = React13__namespace.forwardRef((_a, ref) => {
   );
 });
 CheckboxGroup.displayName = "CheckboxGroup";
-var CheckboxGroupItem = React13__namespace.forwardRef((_a, ref) => {
+var CheckboxGroupItem = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className, value } = _b, props = __objRest(_b, ["className", "value"]);
-  const context = React13__namespace.useContext(CheckboxGroupContext);
+  const context = React15__namespace.useContext(CheckboxGroupContext);
   if (!context) {
     throw new Error("CheckboxGroupItem must be used within a CheckboxGroup");
   }
@@ -388,7 +388,7 @@ var CheckboxGroupItem = React13__namespace.forwardRef((_a, ref) => {
   );
 });
 CheckboxGroupItem.displayName = "CheckboxGroupItem";
-var RadioGroup = React13__namespace.forwardRef((_a, ref) => {
+var RadioGroup = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsxRuntime.jsx(
     RadioGroupPrimitive__namespace.Root,
@@ -400,7 +400,7 @@ var RadioGroup = React13__namespace.forwardRef((_a, ref) => {
   );
 });
 RadioGroup.displayName = RadioGroupPrimitive__namespace.Root.displayName;
-var RadioGroupItem = React13__namespace.forwardRef((_a, ref) => {
+var RadioGroupItem = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsxRuntime.jsx(
     RadioGroupPrimitive__namespace.Item,
@@ -419,7 +419,7 @@ RadioGroupItem.displayName = RadioGroupPrimitive__namespace.Item.displayName;
 var Select = SelectPrimitive__namespace.Root;
 var SelectGroup = SelectPrimitive__namespace.Group;
 var SelectValue = SelectPrimitive__namespace.Value;
-var SelectTrigger = React13__namespace.forwardRef((_a, ref) => {
+var SelectTrigger = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className, children } = _b, props = __objRest(_b, ["className", "children"]);
   return /* @__PURE__ */ jsxRuntime.jsxs(
     SelectPrimitive__namespace.Trigger,
@@ -438,7 +438,7 @@ var SelectTrigger = React13__namespace.forwardRef((_a, ref) => {
   );
 });
 SelectTrigger.displayName = SelectPrimitive__namespace.Trigger.displayName;
-var SelectScrollUpButton = React13__namespace.forwardRef((_a, ref) => {
+var SelectScrollUpButton = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsxRuntime.jsx(
     SelectPrimitive__namespace.ScrollUpButton,
@@ -454,7 +454,7 @@ var SelectScrollUpButton = React13__namespace.forwardRef((_a, ref) => {
   );
 });
 SelectScrollUpButton.displayName = SelectPrimitive__namespace.ScrollUpButton.displayName;
-var SelectScrollDownButton = React13__namespace.forwardRef((_a, ref) => {
+var SelectScrollDownButton = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsxRuntime.jsx(
     SelectPrimitive__namespace.ScrollDownButton,
@@ -470,7 +470,7 @@ var SelectScrollDownButton = React13__namespace.forwardRef((_a, ref) => {
   );
 });
 SelectScrollDownButton.displayName = SelectPrimitive__namespace.ScrollDownButton.displayName;
-var SelectContent = React13__namespace.forwardRef((_a, ref) => {
+var SelectContent = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className, children, position = "popper" } = _b, props = __objRest(_b, ["className", "children", "position"]);
   return /* @__PURE__ */ jsxRuntime.jsx(SelectPrimitive__namespace.Portal, { children: /* @__PURE__ */ jsxRuntime.jsxs(
     SelectPrimitive__namespace.Content,
@@ -501,7 +501,7 @@ var SelectContent = React13__namespace.forwardRef((_a, ref) => {
   ) });
 });
 SelectContent.displayName = SelectPrimitive__namespace.Content.displayName;
-var SelectLabel = React13__namespace.forwardRef((_a, ref) => {
+var SelectLabel = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsxRuntime.jsx(
     SelectPrimitive__namespace.Label,
@@ -512,7 +512,7 @@ var SelectLabel = React13__namespace.forwardRef((_a, ref) => {
   );
 });
 SelectLabel.displayName = SelectPrimitive__namespace.Label.displayName;
-var SelectItem = React13__namespace.forwardRef((_a, ref) => {
+var SelectItem = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className, children } = _b, props = __objRest(_b, ["className", "children"]);
   return /* @__PURE__ */ jsxRuntime.jsxs(
     SelectPrimitive__namespace.Item,
@@ -531,7 +531,7 @@ var SelectItem = React13__namespace.forwardRef((_a, ref) => {
   );
 });
 SelectItem.displayName = SelectPrimitive__namespace.Item.displayName;
-var SelectSeparator = React13__namespace.forwardRef((_a, ref) => {
+var SelectSeparator = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsxRuntime.jsx(
     SelectPrimitive__namespace.Separator,
@@ -600,7 +600,7 @@ function Calendar(_a) {
 Calendar.displayName = "Calendar";
 var Popover = PopoverPrimitive__namespace.Root;
 var PopoverTrigger = PopoverPrimitive__namespace.Trigger;
-var PopoverContent = React13__namespace.forwardRef((_a, ref) => {
+var PopoverContent = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className, align = "center", sideOffset = 4 } = _b, props = __objRest(_b, ["className", "align", "sideOffset"]);
   return /* @__PURE__ */ jsxRuntime.jsx(PopoverPrimitive__namespace.Portal, { children: /* @__PURE__ */ jsxRuntime.jsx(
     PopoverPrimitive__namespace.Content,
@@ -620,7 +620,7 @@ var Dialog = DialogPrimitive__namespace.Root;
 var DialogTrigger = DialogPrimitive__namespace.Trigger;
 var DialogPortal = DialogPrimitive__namespace.Portal;
 var DialogClose = DialogPrimitive__namespace.Close;
-var DialogOverlay = React13__namespace.forwardRef((_a, ref) => {
+var DialogOverlay = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsxRuntime.jsx(
     DialogPrimitive__namespace.Overlay,
@@ -634,7 +634,7 @@ var DialogOverlay = React13__namespace.forwardRef((_a, ref) => {
   );
 });
 DialogOverlay.displayName = DialogPrimitive__namespace.Overlay.displayName;
-var DialogContent = React13__namespace.forwardRef((_a, ref) => {
+var DialogContent = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className, children } = _b, props = __objRest(_b, ["className", "children"]);
   return /* @__PURE__ */ jsxRuntime.jsxs(DialogPortal, { children: [
     /* @__PURE__ */ jsxRuntime.jsx(DialogOverlay, {}),
@@ -693,7 +693,7 @@ var DialogFooter = (_a) => {
   );
 };
 DialogFooter.displayName = "DialogFooter";
-var DialogTitle = React13__namespace.forwardRef((_a, ref) => {
+var DialogTitle = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsxRuntime.jsx(
     DialogPrimitive__namespace.Title,
@@ -707,7 +707,7 @@ var DialogTitle = React13__namespace.forwardRef((_a, ref) => {
   );
 });
 DialogTitle.displayName = DialogPrimitive__namespace.Title.displayName;
-var DialogDescription = React13__namespace.forwardRef((_a, ref) => {
+var DialogDescription = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsxRuntime.jsx(
     DialogPrimitive__namespace.Description,
@@ -726,10 +726,10 @@ function ComboBox({
   placeholder = "Select options...",
   "nli-markdown": nliMarkdown
 }) {
-  const [open, setOpen] = React13__namespace.useState(false);
-  const [selectedValues, setSelectedValues] = React13__namespace.useState(value);
-  const triggerRef = React13__namespace.useRef(null);
-  React13__namespace.useEffect(() => {
+  const [open, setOpen] = React15__namespace.useState(false);
+  const [selectedValues, setSelectedValues] = React15__namespace.useState(value);
+  const triggerRef = React15__namespace.useRef(null);
+  React15__namespace.useEffect(() => {
     setSelectedValues(value);
   }, [value]);
   const handleSelect = (currentValue) => {
@@ -796,7 +796,7 @@ function ComboBox({
     ] }) })
   ] });
 }
-var Command = React13__namespace.forwardRef((_a, ref) => {
+var Command = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsxRuntime.jsx(
     cmdk.Command,
@@ -810,7 +810,7 @@ var Command = React13__namespace.forwardRef((_a, ref) => {
   );
 });
 Command.displayName = cmdk.Command.displayName;
-var CommandInput = React13__namespace.forwardRef((_a, ref) => {
+var CommandInput = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex items-center border-b px-3", "cmdk-input-wrapper": "", children: [
     /* @__PURE__ */ jsxRuntime.jsx(lucideReact.Search, { className: "mr-2 h-4 w-4 shrink-0 opacity-50" }),
@@ -827,7 +827,7 @@ var CommandInput = React13__namespace.forwardRef((_a, ref) => {
   ] });
 });
 CommandInput.displayName = cmdk.Command.Input.displayName;
-var CommandList = React13__namespace.forwardRef((_a, ref) => {
+var CommandList = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsxRuntime.jsx(
     cmdk.Command.List,
@@ -838,7 +838,7 @@ var CommandList = React13__namespace.forwardRef((_a, ref) => {
   );
 });
 CommandList.displayName = cmdk.Command.List.displayName;
-var CommandEmpty = React13__namespace.forwardRef((props, ref) => /* @__PURE__ */ jsxRuntime.jsx(
+var CommandEmpty = React15__namespace.forwardRef((props, ref) => /* @__PURE__ */ jsxRuntime.jsx(
   cmdk.Command.Empty,
   __spreadValues({
     ref,
@@ -846,7 +846,7 @@ var CommandEmpty = React13__namespace.forwardRef((props, ref) => /* @__PURE__ */
   }, props)
 ));
 CommandEmpty.displayName = cmdk.Command.Empty.displayName;
-var CommandGroup = React13__namespace.forwardRef((_a, ref) => {
+var CommandGroup = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsxRuntime.jsx(
     cmdk.Command.Group,
@@ -860,7 +860,7 @@ var CommandGroup = React13__namespace.forwardRef((_a, ref) => {
   );
 });
 CommandGroup.displayName = cmdk.Command.Group.displayName;
-var CommandItem = React13__namespace.forwardRef((_a, ref) => {
+var CommandItem = React15__namespace.forwardRef((_a, ref) => {
   var _b = _a, { className } = _b, props = __objRest(_b, ["className"]);
   return /* @__PURE__ */ jsxRuntime.jsx(
     cmdk.Command.Item,
@@ -883,11 +883,11 @@ function ResizablePane({
   className,
   orientation = "horizontal"
 }) {
-  const containerRef = React13__namespace.useRef(null);
-  const [isDragging, setIsDragging] = React13__namespace.useState(false);
-  const [split, setSplit] = React13__namespace.useState(initialSplit);
-  const [isLoaded, setIsLoaded] = React13__namespace.useState(false);
-  React13__namespace.useEffect(() => {
+  const containerRef = React15__namespace.useRef(null);
+  const [isDragging, setIsDragging] = React15__namespace.useState(false);
+  const [split, setSplit] = React15__namespace.useState(initialSplit);
+  const [isLoaded, setIsLoaded] = React15__namespace.useState(false);
+  React15__namespace.useEffect(() => {
     if (typeof window !== "undefined" && storageKey) {
       const saved = localStorage.getItem(storageKey);
       if (saved) {
@@ -899,12 +899,12 @@ function ResizablePane({
     }
     setIsLoaded(true);
   }, [storageKey]);
-  React13__namespace.useEffect(() => {
+  React15__namespace.useEffect(() => {
     if (isLoaded && typeof window !== "undefined" && storageKey) {
       localStorage.setItem(storageKey, split.toString());
     }
   }, [split, storageKey, isLoaded]);
-  const handleMouseMove = React13__namespace.useCallback(
+  const handleMouseMove = React15__namespace.useCallback(
     (e) => {
       if (!isDragging || !containerRef.current) return;
       const container = containerRef.current;
@@ -925,10 +925,10 @@ function ResizablePane({
     },
     [isDragging, minWidth, orientation]
   );
-  const handleMouseUp = React13__namespace.useCallback(() => {
+  const handleMouseUp = React15__namespace.useCallback(() => {
     setIsDragging(false);
   }, []);
-  React13__namespace.useEffect(() => {
+  React15__namespace.useEffect(() => {
     if (isDragging) {
       document.addEventListener("mousemove", handleMouseMove);
       document.addEventListener("mouseup", handleMouseUp);
@@ -1758,205 +1758,14 @@ function extractValues(components) {
   });
   return values;
 }
-function renderComponent(mapped, onComponentChange) {
-  const { type, props, children, key } = mapped;
-  const label = props["nli-markdown"];
-  const handleChange = (value) => {
+function createChangeHandler(mapped, onComponentChange) {
+  const label = mapped.props["nli-markdown"];
+  return (value) => {
     if (onComponentChange && label) {
-      console.log("[instantiator] handleChange:", { label, value, type });
       const stringValue = Array.isArray(value) ? value.join(",") : String(value);
-      onComponentChange(label, stringValue, type);
+      onComponentChange(label, stringValue, mapped.type);
     }
   };
-  switch (type) {
-    case "input": {
-      const _a = props, { onChange: _unused } = _a, restProps = __objRest(_a, ["onChange"]);
-      return /* @__PURE__ */ jsxRuntime.jsx(
-        Input,
-        __spreadProps(__spreadValues({}, restProps), {
-          onChange: (e) => {
-            var _a2;
-            handleChange(e.target.value);
-            (_a2 = props.onChange) == null ? void 0 : _a2.call(props, e);
-          }
-        }),
-        key
-      );
-    }
-    case "textarea": {
-      const _b = props, { onChange: _unused } = _b, restProps = __objRest(_b, ["onChange"]);
-      return /* @__PURE__ */ jsxRuntime.jsx(
-        Textarea,
-        __spreadProps(__spreadValues({}, restProps), {
-          onChange: (e) => {
-            var _a2;
-            handleChange(e.target.value);
-            (_a2 = props.onChange) == null ? void 0 : _a2.call(props, e);
-          }
-        }),
-        key
-      );
-    }
-    case "checkbox": {
-      const _c = props, { onCheckedChange: _unused } = _c, restProps = __objRest(_c, ["onCheckedChange"]);
-      return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex items-center space-x-2", children: [
-        /* @__PURE__ */ jsxRuntime.jsx(
-          Checkbox,
-          __spreadProps(__spreadValues({}, restProps), {
-            onCheckedChange: (checked) => {
-              var _a2;
-              handleChange(checked);
-              (_a2 = props.onCheckedChange) == null ? void 0 : _a2.call(props, checked);
-            }
-          })
-        ),
-        /* @__PURE__ */ jsxRuntime.jsx("label", { className: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70", children: label })
-      ] }, key);
-    }
-    case "switch": {
-      const _d = props, { onCheckedChange: _unused } = _d, restProps = __objRest(_d, ["onCheckedChange"]);
-      return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex items-center space-x-2", children: [
-        /* @__PURE__ */ jsxRuntime.jsx(
-          Switch,
-          __spreadProps(__spreadValues({}, restProps), {
-            onCheckedChange: (checked) => {
-              var _a2;
-              handleChange(checked ? "yes" : "no");
-              (_a2 = props.onCheckedChange) == null ? void 0 : _a2.call(props, checked);
-            }
-          })
-        ),
-        /* @__PURE__ */ jsxRuntime.jsx("label", { className: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70", children: label })
-      ] }, key);
-    }
-    case "button":
-      return /* @__PURE__ */ jsxRuntime.jsx(Button, __spreadProps(__spreadValues({}, props), { children: label }), key);
-    case "date":
-      return /* @__PURE__ */ jsxRuntime.jsx(
-        DatePickerComponent,
-        __spreadProps(__spreadValues({}, props), {
-          onChange: (value) => {
-            var _a2;
-            handleChange(value);
-            (_a2 = props.onChange) == null ? void 0 : _a2.call(props, value);
-          }
-        }),
-        key
-      );
-    case "daterange":
-      return /* @__PURE__ */ jsxRuntime.jsx(
-        DateRangePickerComponent,
-        __spreadProps(__spreadValues({}, props), {
-          onChange: (value) => {
-            var _a2;
-            handleChange(value);
-            (_a2 = props.onChange) == null ? void 0 : _a2.call(props, value);
-          }
-        }),
-        key
-      );
-    case "radiogroup": {
-      const _e = props, { onValueChange: _unused } = _e, restProps = __objRest(_e, ["onValueChange"]);
-      return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "space-y-2", children: [
-        /* @__PURE__ */ jsxRuntime.jsx("label", { className: "text-sm font-medium", children: props["nli-markdown"] }),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          RadioGroup,
-          __spreadProps(__spreadValues({}, restProps), {
-            defaultValue: props.defaultValue,
-            onValueChange: (value) => {
-              var _a2;
-              handleChange(value);
-              (_a2 = props.onValueChange) == null ? void 0 : _a2.call(props, value);
-            },
-            children: children == null ? void 0 : children.map((child) => /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex items-center space-x-2", children: [
-              /* @__PURE__ */ jsxRuntime.jsx(RadioGroupItem, __spreadValues({ value: child.props.value }, child.props)),
-              /* @__PURE__ */ jsxRuntime.jsx("label", { className: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70", children: child.props["nli-markdown"] })
-            ] }, child.key))
-          })
-        )
-      ] }, key);
-    }
-    case "select": {
-      const _f = props, { onValueChange: _unused } = _f, restProps = __objRest(_f, ["onValueChange"]);
-      return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "space-y-2", children: [
-        /* @__PURE__ */ jsxRuntime.jsx("label", { className: "text-sm font-medium", children: props["nli-markdown"] }),
-        /* @__PURE__ */ jsxRuntime.jsxs(
-          Select,
-          __spreadProps(__spreadValues({}, restProps), {
-            defaultValue: props.defaultValue,
-            onValueChange: (value) => {
-              var _a2;
-              handleChange(value);
-              (_a2 = props.onValueChange) == null ? void 0 : _a2.call(props, value);
-            },
-            children: [
-              /* @__PURE__ */ jsxRuntime.jsx(SelectTrigger, { children: /* @__PURE__ */ jsxRuntime.jsx(SelectValue, { placeholder: `Select ${props["nli-markdown"]}` }) }),
-              /* @__PURE__ */ jsxRuntime.jsx(SelectContent, { children: children == null ? void 0 : children.map((child) => /* @__PURE__ */ jsxRuntime.jsx(SelectItem, __spreadProps(__spreadValues({ value: child.props.value }, child.props), { children: child.props["nli-markdown"] }), child.key)) })
-            ]
-          })
-        )
-      ] }, key);
-    }
-    case "combobox": {
-      const _g = props, { onChange: _unused } = _g, restProps = __objRest(_g, ["onChange"]);
-      return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "space-y-2", children: [
-        /* @__PURE__ */ jsxRuntime.jsx("label", { className: "text-sm font-medium", children: props["nli-markdown"] }),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          ComboBox,
-          __spreadProps(__spreadValues({}, restProps), {
-            options: props.options || [],
-            onChange: (value) => {
-              var _a2;
-              handleChange(value);
-              (_a2 = props.onChange) == null ? void 0 : _a2.call(props, value);
-            }
-          })
-        )
-      ] }, key);
-    }
-    case "togglegroup": {
-      const _h = props, { onValueChange: _unused } = _h, restProps = __objRest(_h, ["onValueChange"]);
-      return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "space-y-2", "nli-group-label": props["nli-markdown"], children: [
-        /* @__PURE__ */ jsxRuntime.jsx("label", { className: "text-sm font-medium", children: props["nli-markdown"] }),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          ToggleGroup,
-          __spreadProps(__spreadValues({}, restProps), {
-            type: "multiple",
-            defaultValue: props.defaultValue,
-            onValueChange: (value) => {
-              var _a2;
-              handleChange(value);
-              (_a2 = props.onValueChange) == null ? void 0 : _a2.call(props, value);
-            },
-            children: children == null ? void 0 : children.map((child) => /* @__PURE__ */ jsxRuntime.jsx(ToggleGroupItem, __spreadProps(__spreadValues({ value: child.props.value }, child.props), { children: child.props.value }), child.key))
-          })
-        )
-      ] }, key);
-    }
-    case "checkboxgroup": {
-      const _i = props, { onValueChange: _unused } = _i, restProps = __objRest(_i, ["onValueChange"]);
-      return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "space-y-2", "nli-group-label": props["nli-markdown"], children: [
-        /* @__PURE__ */ jsxRuntime.jsx("label", { className: "text-sm font-medium", children: props["nli-markdown"] }),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          CheckboxGroup,
-          __spreadProps(__spreadValues({}, restProps), {
-            defaultValue: props.defaultValue,
-            onValueChange: (value) => {
-              var _a2;
-              handleChange(value);
-              (_a2 = props.onValueChange) == null ? void 0 : _a2.call(props, value);
-            },
-            children: children == null ? void 0 : children.map((child) => /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex items-center space-x-2", children: [
-              /* @__PURE__ */ jsxRuntime.jsx(CheckboxGroupItem, __spreadValues({ value: child.props.value }, child.props)),
-              /* @__PURE__ */ jsxRuntime.jsx("label", { className: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70", children: child.props["nli-markdown"] })
-            ] }, child.key))
-          })
-        )
-      ] }, key);
-    }
-    default:
-      return null;
-  }
 }
 function safeParseDate(value) {
   if (!value) return void 0;
@@ -1966,6 +1775,251 @@ function safeParseDate(value) {
   if (dateFns.isValid(date)) return date;
   return void 0;
 }
+var inputRenderer = (mapped, onComponentChange) => {
+  const handleChange = createChangeHandler(mapped, onComponentChange);
+  const _a = mapped.props, { onChange: _unused } = _a, restProps = __objRest(_a, ["onChange"]);
+  return React15__namespace.createElement(Input, __spreadProps(__spreadValues({
+    key: mapped.key
+  }, restProps), {
+    onChange: (e) => {
+      var _a2, _b;
+      handleChange(e.target.value);
+      (_b = (_a2 = mapped.props).onChange) == null ? void 0 : _b.call(_a2, e);
+    }
+  }));
+};
+var textareaRenderer = (mapped, onComponentChange) => {
+  const handleChange = createChangeHandler(mapped, onComponentChange);
+  const _a = mapped.props, { onChange: _unused } = _a, restProps = __objRest(_a, ["onChange"]);
+  return React15__namespace.createElement(Textarea, __spreadProps(__spreadValues({
+    key: mapped.key
+  }, restProps), {
+    onChange: (e) => {
+      var _a2, _b;
+      handleChange(e.target.value);
+      (_b = (_a2 = mapped.props).onChange) == null ? void 0 : _b.call(_a2, e);
+    }
+  }));
+};
+var checkboxRenderer = (mapped, onComponentChange) => {
+  const handleChange = createChangeHandler(mapped, onComponentChange);
+  const label = mapped.props["nli-markdown"];
+  const _a = mapped.props, { onCheckedChange: _unused } = _a, restProps = __objRest(_a, ["onCheckedChange"]);
+  return React15__namespace.createElement(
+    "div",
+    { key: mapped.key, className: "flex items-center space-x-2" },
+    React15__namespace.createElement(Checkbox, __spreadProps(__spreadValues({}, restProps), {
+      onCheckedChange: (checked) => {
+        var _a2, _b;
+        handleChange(checked);
+        (_b = (_a2 = mapped.props).onCheckedChange) == null ? void 0 : _b.call(_a2, checked);
+      }
+    })),
+    React15__namespace.createElement(
+      "label",
+      { className: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" },
+      label
+    )
+  );
+};
+var switchRenderer = (mapped, onComponentChange) => {
+  const handleChange = createChangeHandler(mapped, onComponentChange);
+  const label = mapped.props["nli-markdown"];
+  const _a = mapped.props, { onCheckedChange: _unused } = _a, restProps = __objRest(_a, ["onCheckedChange"]);
+  return React15__namespace.createElement(
+    "div",
+    { key: mapped.key, className: "flex items-center space-x-2" },
+    React15__namespace.createElement(Switch, __spreadProps(__spreadValues({}, restProps), {
+      onCheckedChange: (checked) => {
+        var _a2, _b;
+        handleChange(checked ? "yes" : "no");
+        (_b = (_a2 = mapped.props).onCheckedChange) == null ? void 0 : _b.call(_a2, checked);
+      }
+    })),
+    React15__namespace.createElement(
+      "label",
+      { className: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" },
+      label
+    )
+  );
+};
+var buttonRenderer = (mapped) => {
+  const label = mapped.props["nli-markdown"];
+  return React15__namespace.createElement(Button, __spreadValues({ key: mapped.key }, mapped.props), label);
+};
+var dateRenderer = (mapped, onComponentChange) => {
+  const handleChange = createChangeHandler(mapped, onComponentChange);
+  return React15__namespace.createElement(DatePickerComponent, __spreadProps(__spreadValues({
+    key: mapped.key
+  }, mapped.props), {
+    onChange: (value) => {
+      var _a, _b;
+      handleChange(value);
+      (_b = (_a = mapped.props).onChange) == null ? void 0 : _b.call(_a, value);
+    }
+  }));
+};
+var daterangeRenderer = (mapped, onComponentChange) => {
+  const handleChange = createChangeHandler(mapped, onComponentChange);
+  return React15__namespace.createElement(DateRangePickerComponent, __spreadProps(__spreadValues({
+    key: mapped.key
+  }, mapped.props), {
+    onChange: (value) => {
+      var _a, _b;
+      handleChange(value);
+      (_b = (_a = mapped.props).onChange) == null ? void 0 : _b.call(_a, value);
+    }
+  }));
+};
+var radiogroupRenderer = (mapped, onComponentChange) => {
+  var _b;
+  const handleChange = createChangeHandler(mapped, onComponentChange);
+  const _a = mapped.props, { onValueChange: _unused } = _a, restProps = __objRest(_a, ["onValueChange"]);
+  return React15__namespace.createElement(
+    "div",
+    { key: mapped.key, className: "space-y-2" },
+    React15__namespace.createElement("label", { className: "text-sm font-medium" }, mapped.props["nli-markdown"]),
+    React15__namespace.createElement(
+      RadioGroup,
+      __spreadProps(__spreadValues({}, restProps), {
+        defaultValue: mapped.props.defaultValue,
+        onValueChange: (value) => {
+          var _a2, _b2;
+          handleChange(value);
+          (_b2 = (_a2 = mapped.props).onValueChange) == null ? void 0 : _b2.call(_a2, value);
+        }
+      }),
+      (_b = mapped.children) == null ? void 0 : _b.map(
+        (child) => React15__namespace.createElement(
+          "div",
+          { key: child.key, className: "flex items-center space-x-2" },
+          React15__namespace.createElement(RadioGroupItem, __spreadValues({ value: child.props.value }, child.props)),
+          React15__namespace.createElement(
+            "label",
+            { className: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" },
+            child.props["nli-markdown"]
+          )
+        )
+      )
+    )
+  );
+};
+var selectRenderer = (mapped, onComponentChange) => {
+  var _b;
+  const handleChange = createChangeHandler(mapped, onComponentChange);
+  const _a = mapped.props, { onValueChange: _unused } = _a, restProps = __objRest(_a, ["onValueChange"]);
+  return React15__namespace.createElement(
+    "div",
+    { key: mapped.key, className: "space-y-2" },
+    React15__namespace.createElement("label", { className: "text-sm font-medium" }, mapped.props["nli-markdown"]),
+    React15__namespace.createElement(
+      Select,
+      __spreadProps(__spreadValues({}, restProps), {
+        defaultValue: mapped.props.defaultValue,
+        onValueChange: (value) => {
+          var _a2, _b2;
+          handleChange(value);
+          (_b2 = (_a2 = mapped.props).onValueChange) == null ? void 0 : _b2.call(_a2, value);
+        }
+      }),
+      React15__namespace.createElement(
+        SelectTrigger,
+        null,
+        React15__namespace.createElement(SelectValue, { placeholder: `Select ${mapped.props["nli-markdown"]}` })
+      ),
+      React15__namespace.createElement(
+        SelectContent,
+        null,
+        (_b = mapped.children) == null ? void 0 : _b.map(
+          (child) => React15__namespace.createElement(
+            SelectItem,
+            __spreadValues({ key: child.key, value: child.props.value }, child.props),
+            child.props["nli-markdown"]
+          )
+        )
+      )
+    )
+  );
+};
+var comboboxRenderer = (mapped, onComponentChange) => {
+  const handleChange = createChangeHandler(mapped, onComponentChange);
+  const _a = mapped.props, { onChange: _unused } = _a, restProps = __objRest(_a, ["onChange"]);
+  return React15__namespace.createElement(
+    "div",
+    { key: mapped.key, className: "space-y-2" },
+    React15__namespace.createElement("label", { className: "text-sm font-medium" }, mapped.props["nli-markdown"]),
+    React15__namespace.createElement(ComboBox, __spreadProps(__spreadValues({}, restProps), {
+      options: mapped.props.options || [],
+      onChange: (value) => {
+        var _a2, _b;
+        handleChange(value);
+        (_b = (_a2 = mapped.props).onChange) == null ? void 0 : _b.call(_a2, value);
+      }
+    }))
+  );
+};
+var togglegroupRenderer = (mapped, onComponentChange) => {
+  var _b;
+  const handleChange = createChangeHandler(mapped, onComponentChange);
+  const _a = mapped.props, { onValueChange: _unused } = _a, restProps = __objRest(_a, ["onValueChange"]);
+  return React15__namespace.createElement(
+    "div",
+    { key: mapped.key, className: "space-y-2", "nli-group-label": mapped.props["nli-markdown"] },
+    React15__namespace.createElement("label", { className: "text-sm font-medium" }, mapped.props["nli-markdown"]),
+    React15__namespace.createElement(
+      ToggleGroup,
+      __spreadProps(__spreadValues({}, restProps), {
+        type: "multiple",
+        defaultValue: mapped.props.defaultValue,
+        onValueChange: (value) => {
+          var _a2, _b2;
+          handleChange(value);
+          (_b2 = (_a2 = mapped.props).onValueChange) == null ? void 0 : _b2.call(_a2, value);
+        }
+      }),
+      (_b = mapped.children) == null ? void 0 : _b.map(
+        (child) => React15__namespace.createElement(
+          ToggleGroupItem,
+          __spreadValues({ key: child.key, value: child.props.value }, child.props),
+          child.props.value
+        )
+      )
+    )
+  );
+};
+var checkboxgroupRenderer = (mapped, onComponentChange) => {
+  var _b;
+  const handleChange = createChangeHandler(mapped, onComponentChange);
+  const _a = mapped.props, { onValueChange: _unused } = _a, restProps = __objRest(_a, ["onValueChange"]);
+  return React15__namespace.createElement(
+    "div",
+    { key: mapped.key, className: "space-y-2", "nli-group-label": mapped.props["nli-markdown"] },
+    React15__namespace.createElement("label", { className: "text-sm font-medium" }, mapped.props["nli-markdown"]),
+    React15__namespace.createElement(
+      CheckboxGroup,
+      __spreadProps(__spreadValues({}, restProps), {
+        defaultValue: mapped.props.defaultValue,
+        onValueChange: (value) => {
+          var _a2, _b2;
+          handleChange(value);
+          (_b2 = (_a2 = mapped.props).onValueChange) == null ? void 0 : _b2.call(_a2, value);
+        }
+      }),
+      (_b = mapped.children) == null ? void 0 : _b.map(
+        (child) => React15__namespace.createElement(
+          "div",
+          { key: child.key, className: "flex items-center space-x-2" },
+          React15__namespace.createElement(CheckboxGroupItem, __spreadValues({ value: child.props.value }, child.props)),
+          React15__namespace.createElement(
+            "label",
+            { className: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" },
+            child.props["nli-markdown"]
+          )
+        )
+      )
+    )
+  );
+};
 function DatePickerComponent(props) {
   const dateValue = props["data-date-value"];
   const date = safeParseDate(dateValue);
@@ -1974,36 +2028,40 @@ function DatePickerComponent(props) {
       props.onChange(dateFns.format(newDate, "MMMM dd, yyyy"));
     }
   };
-  return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "space-y-2", children: [
-    /* @__PURE__ */ jsxRuntime.jsx("label", { className: "text-sm font-medium", children: props["nli-markdown"] }),
-    /* @__PURE__ */ jsxRuntime.jsxs(Popover, { children: [
-      /* @__PURE__ */ jsxRuntime.jsx(PopoverTrigger, { asChild: true, children: /* @__PURE__ */ jsxRuntime.jsxs(
-        Button,
-        __spreadProps(__spreadValues({
-          variant: "outline",
-          className: cn(
-            "w-full justify-start text-left font-normal",
-            !date && "text-muted-foreground"
-          )
-        }, props), {
-          "data-date-value": date ? dateFns.format(date, "yyyy-MM-dd") : "",
-          children: [
-            /* @__PURE__ */ jsxRuntime.jsx(lucideReact.CalendarIcon, { className: "mr-2 h-4 w-4" }),
-            date ? dateFns.format(date, "MMMM dd, yyyy") : /* @__PURE__ */ jsxRuntime.jsx("span", { children: "Pick a date" })
-          ]
-        })
-      ) }),
-      /* @__PURE__ */ jsxRuntime.jsx(PopoverContent, { className: "w-auto p-0", children: /* @__PURE__ */ jsxRuntime.jsx(
-        Calendar,
-        {
+  return React15__namespace.createElement(
+    "div",
+    { className: "space-y-2" },
+    React15__namespace.createElement("label", { className: "text-sm font-medium" }, props["nli-markdown"]),
+    React15__namespace.createElement(
+      Popover,
+      null,
+      React15__namespace.createElement(
+        PopoverTrigger,
+        { asChild: true },
+        React15__namespace.createElement(
+          Button,
+          __spreadProps(__spreadValues({
+            variant: "outline",
+            className: cn("w-full justify-start text-left font-normal", !date && "text-muted-foreground")
+          }, props), {
+            "data-date-value": date ? dateFns.format(date, "yyyy-MM-dd") : ""
+          }),
+          React15__namespace.createElement(lucideReact.CalendarIcon, { className: "mr-2 h-4 w-4" }),
+          date ? dateFns.format(date, "MMMM dd, yyyy") : React15__namespace.createElement("span", null, "Pick a date")
+        )
+      ),
+      React15__namespace.createElement(
+        PopoverContent,
+        { className: "w-auto p-0" },
+        React15__namespace.createElement(Calendar, {
           mode: "single",
           selected: date,
           onSelect: handleDateChange,
           initialFocus: true
-        }
-      ) })
-    ] })
-  ] });
+        })
+      )
+    )
+  );
 }
 function DateRangePickerComponent(props) {
   const fromValue = props["data-date-from"];
@@ -2018,51 +2076,88 @@ function DateRangePickerComponent(props) {
       props.onChange(formattedRange);
     }
   };
-  return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "space-y-2", children: [
-    /* @__PURE__ */ jsxRuntime.jsx("label", { className: "text-sm font-medium", children: props["nli-markdown"] }),
-    /* @__PURE__ */ jsxRuntime.jsxs(Popover, { children: [
-      /* @__PURE__ */ jsxRuntime.jsx(PopoverTrigger, { asChild: true, children: /* @__PURE__ */ jsxRuntime.jsxs(
-        Button,
-        __spreadProps(__spreadValues({
-          variant: "outline",
-          className: cn(
-            "w-full justify-start text-left font-normal",
-            !dateRange.from && "text-muted-foreground"
-          )
-        }, props), {
-          "data-date-from": dateRange.from ? dateFns.format(dateRange.from, "yyyy-MM-dd") : "",
-          "data-date-to": dateRange.to ? dateFns.format(dateRange.to, "yyyy-MM-dd") : "",
-          children: [
-            /* @__PURE__ */ jsxRuntime.jsx(lucideReact.CalendarIcon, { className: "mr-2 h-4 w-4" }),
-            dateRange.from ? dateRange.to ? /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-              dateFns.format(dateRange.from, "MMM dd, yyyy"),
-              " - ",
-              dateFns.format(dateRange.to, "MMM dd, yyyy")
-            ] }) : dateFns.format(dateRange.from, "MMM dd, yyyy") : /* @__PURE__ */ jsxRuntime.jsx("span", { children: "Pick a date range" })
-          ]
-        })
-      ) }),
-      /* @__PURE__ */ jsxRuntime.jsx(PopoverContent, { className: "w-auto p-0", align: "start", children: /* @__PURE__ */ jsxRuntime.jsx(
-        Calendar,
-        {
+  return React15__namespace.createElement(
+    "div",
+    { className: "space-y-2" },
+    React15__namespace.createElement("label", { className: "text-sm font-medium" }, props["nli-markdown"]),
+    React15__namespace.createElement(
+      Popover,
+      null,
+      React15__namespace.createElement(
+        PopoverTrigger,
+        { asChild: true },
+        React15__namespace.createElement(
+          Button,
+          __spreadProps(__spreadValues({
+            variant: "outline",
+            className: cn("w-full justify-start text-left font-normal", !dateRange.from && "text-muted-foreground")
+          }, props), {
+            "data-date-from": dateRange.from ? dateFns.format(dateRange.from, "yyyy-MM-dd") : "",
+            "data-date-to": dateRange.to ? dateFns.format(dateRange.to, "yyyy-MM-dd") : ""
+          }),
+          React15__namespace.createElement(lucideReact.CalendarIcon, { className: "mr-2 h-4 w-4" }),
+          dateRange.from ? dateRange.to ? `${dateFns.format(dateRange.from, "MMM dd, yyyy")} - ${dateFns.format(dateRange.to, "MMM dd, yyyy")}` : dateFns.format(dateRange.from, "MMM dd, yyyy") : React15__namespace.createElement("span", null, "Pick a date range")
+        )
+      ),
+      React15__namespace.createElement(
+        PopoverContent,
+        { className: "w-auto p-0", align: "start" },
+        React15__namespace.createElement(Calendar, {
           mode: "range",
           selected: dateRange,
           onSelect: handleDateRangeChange,
           numberOfMonths: 2,
           initialFocus: true
-        }
-      ) })
-    ] })
-  ] });
+        })
+      )
+    )
+  );
 }
-function instantiateComponents(components, onComponentChange) {
-  return components.map((component) => renderComponent(component, onComponentChange)).filter(Boolean);
+var defaultRegistry = {
+  input: inputRenderer,
+  textarea: textareaRenderer,
+  checkbox: checkboxRenderer,
+  switch: switchRenderer,
+  button: buttonRenderer,
+  date: dateRenderer,
+  daterange: daterangeRenderer,
+  radiogroup: radiogroupRenderer,
+  select: selectRenderer,
+  combobox: comboboxRenderer,
+  togglegroup: togglegroupRenderer,
+  checkboxgroup: checkboxgroupRenderer
+};
+var NLIRegistryContext = React15__namespace.createContext(void 0);
+function NLIProvider({
+  registry,
+  children
+}) {
+  return React15__namespace.createElement(
+    NLIRegistryContext.Provider,
+    { value: registry },
+    children
+  );
+}
+function useComponentRegistry() {
+  return React15__namespace.useContext(NLIRegistryContext);
+}
+function renderComponent(mapped, onComponentChange, registry) {
+  const mergedRegistry = registry ? __spreadValues(__spreadValues({}, defaultRegistry), registry) : defaultRegistry;
+  const renderer = mergedRegistry[mapped.type];
+  if (!renderer) return null;
+  return renderer(mapped, onComponentChange);
+}
+function instantiateComponents(components, onComponentChange, registry) {
+  return components.map((component) => renderComponent(component, onComponentChange, registry)).filter(Boolean);
 }
 function InstantiatedForm({
   components,
-  className
+  className,
+  registry: registryProp
 }) {
-  const elements = instantiateComponents(components);
+  const contextRegistry = useComponentRegistry();
+  const registry = registryProp != null ? registryProp : contextRegistry;
+  const elements = instantiateComponents(components, void 0, registry);
   return /* @__PURE__ */ jsxRuntime.jsx("div", { className: cn("space-y-4", className), children: elements });
 }
 
@@ -2966,16 +3061,16 @@ function useBidirectionalSync(options) {
     onSyncError,
     onParseErrors
   } = options;
-  const [components, setComponents] = React13.useState(initialComponents);
-  const [markdown, setMarkdown] = React13.useState(initialMarkdown);
-  const [lastUpdateOrigin, setLastUpdateOrigin] = React13.useState("init");
-  const [guiSequence, setGuiSequence] = React13.useState(0);
-  const [markdownSequence, setMarkdownSequence] = React13.useState(0);
-  const [syncStatus, setSyncStatus] = React13.useState("idle");
-  const [parseErrors, setParseErrors] = React13.useState([]);
-  const markdownTimeoutRef = React13.useRef(null);
-  const guiTimeoutRef = React13.useRef(null);
-  const reconcilerRef = React13.useRef(
+  const [components, setComponents] = React15.useState(initialComponents);
+  const [markdown, setMarkdown] = React15.useState(initialMarkdown);
+  const [lastUpdateOrigin, setLastUpdateOrigin] = React15.useState("init");
+  const [guiSequence, setGuiSequence] = React15.useState(0);
+  const [markdownSequence, setMarkdownSequence] = React15.useState(0);
+  const [syncStatus, setSyncStatus] = React15.useState("idle");
+  const [parseErrors, setParseErrors] = React15.useState([]);
+  const markdownTimeoutRef = React15.useRef(null);
+  const guiTimeoutRef = React15.useRef(null);
+  const reconcilerRef = React15.useRef(
     createSyncReconciler({
       parseToComponents: parseWithCache,
       generateMarkdown,
@@ -2988,10 +3083,10 @@ function useBidirectionalSync(options) {
       }
     })
   );
-  React13.useEffect(() => {
+  React15.useEffect(() => {
     reconcilerRef.current.setState(initialComponents, initialMarkdown);
   }, []);
-  const updateMarkdown = React13.useCallback(
+  const updateMarkdown = React15.useCallback(
     (newMarkdown) => {
       if (markdownTimeoutRef.current) {
         clearTimeout(markdownTimeoutRef.current);
@@ -3016,7 +3111,7 @@ function useBidirectionalSync(options) {
     },
     [markdownSequence, markdownDebounce, onSyncError]
   );
-  const updateComponents = React13.useCallback(
+  const updateComponents = React15.useCallback(
     (newComponents) => {
       if (guiTimeoutRef.current) {
         clearTimeout(guiTimeoutRef.current);
@@ -3041,7 +3136,7 @@ function useBidirectionalSync(options) {
     },
     [guiSequence, guiDebounce, onSyncError]
   );
-  const reset = React13.useCallback(() => {
+  const reset = React15.useCallback(() => {
     setComponents(initialComponents);
     setMarkdown(initialMarkdown);
     setLastUpdateOrigin("init");
@@ -3052,7 +3147,7 @@ function useBidirectionalSync(options) {
     reconcilerRef.current.reset();
     reconcilerRef.current.setState(initialComponents, initialMarkdown);
   }, [initialComponents, initialMarkdown]);
-  React13.useEffect(() => {
+  React15.useEffect(() => {
     return () => {
       if (markdownTimeoutRef.current) {
         clearTimeout(markdownTimeoutRef.current);
@@ -3320,6 +3415,16 @@ function formatValueForMarkdown(value, type) {
   }
 }
 
+// src/registry/component-registry.ts
+function createInstantiator(registry) {
+  return (components, onComponentChange) => {
+    return components.map((mapped) => {
+      const renderer = registry[mapped.type];
+      return renderer ? renderer(mapped, onComponentChange) : null;
+    }).filter(Boolean);
+  };
+}
+
 exports.Button = Button;
 exports.Calendar = Calendar;
 exports.Checkbox = Checkbox;
@@ -3338,6 +3443,7 @@ exports.DialogTitle = DialogTitle;
 exports.DialogTrigger = DialogTrigger;
 exports.Input = Input;
 exports.InstantiatedForm = InstantiatedForm;
+exports.NLIProvider = NLIProvider;
 exports.Popover = Popover;
 exports.PopoverContent = PopoverContent;
 exports.PopoverTrigger = PopoverTrigger;
@@ -3365,7 +3471,9 @@ exports.buttonVariants = buttonVariants;
 exports.cleanseMarkdown = cleanseMarkdown;
 exports.clearParseCache = clearParseCache;
 exports.cn = cn;
+exports.createInstantiator = createInstantiator;
 exports.createSyncReconciler = createSyncReconciler;
+exports.defaultRegistry = defaultRegistry;
 exports.diffComponents = diffComponents;
 exports.diffMarkdown = diffMarkdown;
 exports.extractValues = extractValues;
@@ -3397,6 +3505,7 @@ exports.tokenize = tokenize;
 exports.updateMarkdownIncremental = updateMarkdownIncremental;
 exports.updateMarkdownLine = updateMarkdownLine;
 exports.useBidirectionalSync = useBidirectionalSync;
+exports.useComponentRegistry = useComponentRegistry;
 exports.validateAST = validateAST;
 //# sourceMappingURL=index.js.map
 //# sourceMappingURL=index.js.map

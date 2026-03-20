@@ -314,22 +314,53 @@ declare function buildAST(tokens: Token[]): AST;
 declare function validateAST(ast: AST): ParseError[];
 
 /**
+ * Component Registry
+ * Enables pluggable design systems by mapping component types to renderer functions.
+ */
+
+/**
+ * A function that renders a MappedComponent into a React element.
+ * This is the contract custom design system components must satisfy.
+ *
+ * @param mapped - The parsed component descriptor (type, props, children, key)
+ * @param onComponentChange - Optional callback for reporting state changes back to markdown
+ */
+type ComponentRenderer = (mapped: MappedComponent, onComponentChange?: (label: string, value: string, type: string) => void) => React.ReactElement | null;
+/**
+ * Registry mapping component types to their renderer functions.
+ * Users provide partial registries; missing entries fall back to defaults.
+ */
+type ComponentRegistry = Partial<Record<ComponentType, ComponentRenderer>>;
+/**
+ * Create a standalone instantiator function from a registry.
+ * Use this when you want zero dependency on the default Radix components
+ * (enables full tree-shaking of Radix UI).
+ *
+ * @param registry - A complete or partial component registry
+ * @returns A function that converts MappedComponent arrays to React elements
+ */
+declare function createInstantiator(registry: ComponentRegistry): (components: MappedComponent[], onComponentChange?: (label: string, value: string, type: string) => void) => React.ReactElement[];
+
+/**
  * Render an array of mapped components
  *
  * @param components - Array of mapped components from AST
+ * @param onComponentChange - Optional callback for state changes
+ * @param registry - Optional custom component registry (partial overrides merge with defaults)
  * @returns Array of rendered React elements
  */
-declare function instantiateComponents(components: MappedComponent[], onComponentChange?: (label: string, value: string, type: string) => void): React.ReactElement[];
+declare function instantiateComponents(components: MappedComponent[], onComponentChange?: (label: string, value: string, type: string) => void, registry?: ComponentRegistry): React.ReactElement[];
 /**
  * Render components with a wrapper
  *
  * @param components - Array of mapped components
  * @param className - Optional className for wrapper
- * @returns Wrapped React element
+ * @param registry - Optional custom component registry (overrides NLIProvider context)
  */
-declare function InstantiatedForm({ components, className, }: {
+declare function InstantiatedForm({ components, className, registry: registryProp, }: {
     components: MappedComponent[];
     className?: string;
+    registry?: ComponentRegistry;
 }): react_jsx_runtime.JSX.Element;
 
 /**
@@ -796,4 +827,34 @@ declare function updateMarkdownLine(markdown: string, componentLabel: string, ne
  */
 declare function formatValueForMarkdown(value: any, type: ComponentType): string;
 
-export { type AST, type ASTNode, type BidirectionalSyncState, Button, type ButtonProps, Calendar, type CalendarProps, Checkbox, CheckboxGroup, CheckboxGroupItem, ComboBox, type ComboBoxOption, type ComboBoxProps, type ComponentDiff, type ComponentType, type CursorPosition, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, type InferenceContext, Input, InstantiatedForm, type MappedComponent, type MarkdownDiff, type MarkdownLine, type ParseError, Popover, PopoverContent, PopoverTrigger, RadioGroup, RadioGroupItem, type ReconcilerOptions, ResizablePane, type ResizablePaneProps, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Switch, SyncReconciler, type SyncStatus, Textarea, Toggle, ToggleGroup, ToggleGroupItem, type Token, type TokenType, type UpdateOrigin, type UseBidirectionalSyncOptions, buildAST, buttonVariants, cleanseMarkdown, clearParseCache, cn, createSyncReconciler, diffComponents, diffMarkdown, extractValues, filterBlanks, formatValueForMarkdown, generateMarkdownForElement, generateMarkdownFromComponent, generateMarkdownFromComponents, generateMarkdownWithMapping, getUnknownTokens, inferComponentType, inferGroupType, instantiateComponents, isActivelyEditing, isBooleanValue, isRegularButton, mapASTToComponents, normalizeMarkdown, parse, parseBooleanValue, parseMarkdownLines, parseToComponents, parseWithCache, preserveCursor, restoreCursorPosition, saveCursorPosition, toggleVariants, tokenize, updateMarkdownIncremental, updateMarkdownLine, useBidirectionalSync, validateAST };
+/**
+ * Default Component Registry
+ * Provides Radix UI + Tailwind renderers for all NLI component types.
+ * This is the default design system used when no custom registry is provided.
+ */
+
+declare const defaultRegistry: ComponentRegistry;
+
+/**
+ * Provider that sets a custom component registry for all NLI components in the tree.
+ * Components rendered by InstantiatedForm will use this registry,
+ * falling back to the default Radix registry for any unregistered types.
+ *
+ * @example
+ * ```tsx
+ * <NLIProvider registry={{ button: myButtonRenderer, input: myInputRenderer }}>
+ *   <InstantiatedForm components={components} />
+ * </NLIProvider>
+ * ```
+ */
+declare function NLIProvider({ registry, children, }: {
+    registry: ComponentRegistry;
+    children: React.ReactNode;
+}): React.FunctionComponentElement<React.ProviderProps<Partial<Record<ComponentType, ComponentRenderer>> | undefined>>;
+/**
+ * Hook to access the component registry from NLIProvider context.
+ * Returns undefined if no provider is present.
+ */
+declare function useComponentRegistry(): ComponentRegistry | undefined;
+
+export { type AST, type ASTNode, type BidirectionalSyncState, Button, type ButtonProps, Calendar, type CalendarProps, Checkbox, CheckboxGroup, CheckboxGroupItem, ComboBox, type ComboBoxOption, type ComboBoxProps, type ComponentDiff, type ComponentRegistry, type ComponentRenderer, type ComponentType, type CursorPosition, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, type InferenceContext, Input, InstantiatedForm, type MappedComponent, type MarkdownDiff, type MarkdownLine, NLIProvider, type ParseError, Popover, PopoverContent, PopoverTrigger, RadioGroup, RadioGroupItem, type ReconcilerOptions, ResizablePane, type ResizablePaneProps, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, Switch, SyncReconciler, type SyncStatus, Textarea, Toggle, ToggleGroup, ToggleGroupItem, type Token, type TokenType, type UpdateOrigin, type UseBidirectionalSyncOptions, buildAST, buttonVariants, cleanseMarkdown, clearParseCache, cn, createInstantiator, createSyncReconciler, defaultRegistry, diffComponents, diffMarkdown, extractValues, filterBlanks, formatValueForMarkdown, generateMarkdownForElement, generateMarkdownFromComponent, generateMarkdownFromComponents, generateMarkdownWithMapping, getUnknownTokens, inferComponentType, inferGroupType, instantiateComponents, isActivelyEditing, isBooleanValue, isRegularButton, mapASTToComponents, normalizeMarkdown, parse, parseBooleanValue, parseMarkdownLines, parseToComponents, parseWithCache, preserveCursor, restoreCursorPosition, saveCursorPosition, toggleVariants, tokenize, updateMarkdownIncremental, updateMarkdownLine, useBidirectionalSync, useComponentRegistry, validateAST };
