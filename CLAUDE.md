@@ -23,6 +23,10 @@ natural-language-gui/
 │       └── src/
 │           ├── index.ts         # Main exports
 │           ├── components/ui/   # NLI-enabled UI components (14 components)
+│           ├── registry/        # Pluggable design system support
+│           │   ├── component-registry.ts  # Types + createInstantiator factory
+│           │   ├── default-registry.ts    # Default Radix UI renderers
+│           │   └── NLIProvider.tsx         # React context provider
 │           ├── parser/          # Markdown → Component pipeline
 │           │   ├── tokenizer.ts
 │           │   ├── ast-builder.ts
@@ -57,7 +61,7 @@ natural-language-gui/
 
 - **Framework**: Next.js 16 with React 19
 - **Language**: TypeScript 5 (strict mode)
-- **Components**: Radix UI primitives
+- **Components**: Radix UI primitives (default, pluggable via Component Registry)
 - **Styling**: Tailwind CSS 3.4 with HSL variables
 - **Build**: Turbo (monorepo orchestration), tsup (library bundling)
 - **Code Quality**: ESLint (Next.js config), Prettier
@@ -95,6 +99,14 @@ npm run parser:bidirectional  # Round-trip conversion tests
 ### 3. Parser Layer (`packages/nli-core/src/parser/`)
 - Pipeline: Tokenizer → AST Builder → Type Inference → Component Mapper → Instantiator
 - Converts markdown back to React component tree.
+- The instantiator uses a **pluggable Component Registry** — custom design systems can be swapped in.
+
+### 4. Component Registry (`packages/nli-core/src/registry/`)
+- Maps `ComponentType` → `ComponentRenderer` functions.
+- Default registry provides Radix UI + Tailwind renderers.
+- Users override individual components or provide a full custom set.
+- `createInstantiator(registry)` — factory for zero-Radix-dependency bundles.
+- `NLIProvider` — React context to set registry at app root.
 
 ### Bidirectional Sync (`hooks/useBidirectionalSync.ts`, `lib/sync-reconciler.ts`)
 - Manages GUI ↔ Markdown synchronization.
@@ -131,15 +143,42 @@ The canonical format spec is `docs/NLI_SPECIFICATION.md`. Key patterns:
 4. **Always check `docs/ARCHITECTURE.md`** before making architectural decisions
 5. **Always use `nli-markdown`** as the attribute name — never invent alternatives
 
-## Adding a New Component
+## Adding a New Component (Default Registry)
 
 1. Create component in `packages/nli-core/src/components/ui/` — forward `...props` to DOM element
 2. Export from `packages/nli-core/src/index.ts`
-3. Add markdown generation pattern to `packages/nli-core/src/lib/markdown-generators.ts`
-4. Add parser support in `packages/nli-core/src/parser/`
-5. Document pattern in `docs/NLI_SPECIFICATION.md`
-6. Add examples to `docs/EXAMPLES_GUI.md`
-7. Test bidirectional conversion
+3. Add a renderer function in `packages/nli-core/src/registry/default-registry.ts`
+4. Register it in the `defaultRegistry` object in the same file
+5. Add markdown generation pattern to `packages/nli-core/src/lib/markdown-generators.ts`
+6. Add parser support in `packages/nli-core/src/parser/`
+7. Document pattern in `docs/NLI_SPECIFICATION.md`
+8. Add examples to `docs/EXAMPLES_GUI.md`
+9. Test bidirectional conversion
+
+## Using a Custom Design System
+
+Users can plug in their own components via the `ComponentRegistry`:
+
+```typescript
+import { instantiateComponents, type ComponentRegistry } from '@natural-language-gui/core'
+
+// Override specific components — unregistered types fall back to defaults
+const myRegistry: ComponentRegistry = {
+  button: (mapped, onChange) => <MyButton key={mapped.key} ... />,
+  input: (mapped, onChange) => <MyInput key={mapped.key} ... />,
+}
+
+const elements = instantiateComponents(components, handleChange, myRegistry)
+
+// Or use NLIProvider for app-wide registry
+<NLIProvider registry={myRegistry}>
+  <InstantiatedForm components={components} />
+</NLIProvider>
+
+// For zero Radix dependency (full tree-shaking)
+import { createInstantiator } from '@natural-language-gui/core'
+const instantiate = createInstantiator(myFullRegistry)
+```
 
 ## Radix UI State Conventions
 

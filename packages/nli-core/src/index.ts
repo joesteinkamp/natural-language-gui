@@ -102,3 +102,9 @@ export type {
 export type {
   MappedComponent,
 } from './parser/component-mapper'
+
+// Registry exports (pluggable design system support)
+export type { ComponentRegistry, ComponentRenderer } from './registry/component-registry'
+export { createInstantiator } from './registry/component-registry'
+export { defaultRegistry } from './registry/default-registry'
+export { NLIProvider, useComponentRegistry } from './registry/NLIProvider'
